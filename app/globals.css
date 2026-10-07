@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------
+   Design tokens → clases de Tailwind
+   --------------------------------------------------------------- */
+@theme {
+  /* Paleta de marca: bg-*, text-*, border-*, fill-*, etc. */
+  --color-brand-blue: #01b6ce;
+  --color-brand-darkblue: #283750;
+  --color-brand-pink: #c8aff0;
+  --color-brand-darkpink: #682760;
+  --color-brand-orange: #fa551e;
+  --color-brand-darkorange: #4e0119;
+  --color-brand-green: #b4dc19;
+  --color-brand-darkgreen: #1c4e3d;
+}
+
+@theme inline {
+  /* font-display → H1 / identidad */
+  --font-display: var(--font-newblack), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* font-sans → body / UI / presentaciones (default) */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* font-serif → acentos editoriales */
+  --font-serif: var(--font-eb-garamond), ui-serif, Georgia, serif;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+  }
+}
