@@ -13,6 +13,8 @@
   --color-brand-darkorange: #4e0119;
   --color-brand-green: #b4dc19;
   --color-brand-darkgreen: #1c4e3d;
+  /* Neutro oscuro: fondo de las pantallas de sección */
+  --color-brand-black: #212121;
 }
 
 @theme inline {

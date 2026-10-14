@@ -1,13 +1,6 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-// Desde dónde entra cada recuadro: completamente fuera de pantalla
-const TILE_FROM: Record<string, gsap.TweenVars> = {
-  top: { y: "-100vh" },
-  bottom: { y: "100vh" },
-  left: { x: "-100vw" },
-  right: { x: "100vw" },
-};
+import { TILE_FROM } from "@/animations/tiles";
 
 // Momentos del timeline (1 unidad ≈ 100% del alto de pantalla de scroll)
 // Cada tanda de recuadros: cuándo empieza a entrar y cuándo llega a su lugar.
