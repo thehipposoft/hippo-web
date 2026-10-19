@@ -16,7 +16,7 @@ const TILES: { slug: SectionSlug; from: string; wave: number; className: string 
   { slug: "branding-design", from: "left", wave: 0, className: "col-start-2 row-span-2 row-start-2 bg-brand-pink text-brand-darkpink" },
   { slug: "web-development", from: "right", wave: 0, className: "col-start-4 row-span-2 row-start-1 bg-brand-orange text-brand-darkorange" },
   { slug: "hippo-lab", from: "top", wave: 1, className: "col-span-2 col-start-2 row-start-1 bg-brand-darkpink text-brand-pink" },
-  { slug: "automation", from: "bottom", wave: 1, className: "col-span-2 col-start-3 row-start-3 bg-brand-green text-brand-darkgreen" },
+  { slug: "systems-ia", from: "bottom", wave: 1, className: "col-span-2 col-start-3 row-start-3 bg-brand-green text-brand-darkgreen" },
   { slug: "contact", from: "left", wave: 2, className: "col-start-1 row-span-2 row-start-1 bg-brand-darkblue text-white" },
   { slug: "about", from: "right", wave: 2, className: "col-start-5 row-span-2 row-start-2 bg-brand-darkorange text-brand-orange" },
   { slug: "brochure", from: "top", wave: 3, className: "col-start-5 row-start-1 bg-brand-darkgreen text-brand-green" },
@@ -47,7 +47,7 @@ export default function SectionTiles({ className = "", onTileClick }: SectionTil
             data-start-tile
             data-from={tile.from}
             data-wave={tile.wave}
-            className={`pointer-events-none rounded-xl border border-transparent p-[clamp(1rem,2vw,1.75rem)] font-display text-[clamp(1.25rem,2.6vw,2.5rem)] font-bold leading-tight tracking-wide ${tile.className}`}
+            className={`pointer-events-none rounded-xl border border-transparent p-[clamp(1rem,2vw,1.75rem)] font-display text-[clamp(1.25rem,2.6vw,2.5rem)] font-bold leading-tight ${tile.className}`}
           >
             {/* Título + copia oscura para el hover (ver animations/start/tileHover.ts) */}
             <span className="relative -my-[0.2em] block overflow-hidden py-[0.2em]">

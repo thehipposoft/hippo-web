@@ -22,6 +22,8 @@ export default function SectionMenu({ section }: SectionMenuProps) {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
+  // Contexto del timeline del menú: al revertirlo vuelven los estilos originales (botón, recuadros, capa)
+  const menuCtxRef = useRef<gsap.Context | null>(null);
   const [open, setOpen] = useState(false);
 
   const { handleTileClick, overlay } = useTileTransition(() => buttonRef.current);
@@ -30,7 +32,11 @@ export default function SectionMenu({ section }: SectionMenuProps) {
     const removeTileHover = createTileHover(menu);
     return () => {
       removeTileHover();
-      tlRef.current?.kill();
+      // La página puede quedar oculta (no desmontada) al navegar: el menú vuelve a su estado cerrado
+      menuCtxRef.current?.revert();
+      menuCtxRef.current = null;
+      tlRef.current = null;
+      setOpen(false);
     };
   }, menuRef);
 
@@ -40,10 +46,12 @@ export default function SectionMenu({ section }: SectionMenuProps) {
     if (!menu || !button) return;
     // Se mide de nuevo solo con el menú completamente cerrado (puede haber cambiado el viewport)
     if (!tlRef.current || tlRef.current.progress() === 0) {
-      tlRef.current?.kill();
-      tlRef.current = createMenuToggle({ menu, button });
+      menuCtxRef.current?.revert();
+      menuCtxRef.current = gsap.context(() => {
+        tlRef.current = createMenuToggle({ menu, button });
+      });
     }
-    tlRef.current.timeScale(1).play();
+    tlRef.current?.timeScale(1).play();
     setOpen(true);
   };
 
@@ -96,9 +104,14 @@ export default function SectionMenu({ section }: SectionMenuProps) {
         aria-expanded={open}
         onClick={open ? closeMenu : openMenu}
         data-hero-menu
-        className="fixed left-0 top-[calc(50%_-_1.75rem)] z-[60] flex size-14 origin-top-left cursor-pointer items-center justify-center rounded-r-lg bg-brand-blue"
+        className="group fixed left-0 top-[calc(50%_-_1.75rem)] z-[60] flex size-14 origin-top-left cursor-pointer items-center justify-center rounded-r-lg bg-brand-blue transition-colors duration-300 ease-out hover:bg-brand-darkblue focus-visible:bg-brand-darkblue"
       >
-        <span data-hero-menu-icon aria-hidden className="flex w-6 flex-col gap-1.5">
+        {/* Hover: fondo y escala por CSS; GSAP anima la posición del botón y las líneas, no estas propiedades */}
+        <span
+          data-hero-menu-icon
+          aria-hidden
+          className="flex w-6 flex-col gap-1.5 transition-[scale] duration-300 ease-out group-hover:scale-[1.15] group-focus-visible:scale-[1.15]"
+        >
           <span data-hero-menu-line className="h-0.5 rounded-full bg-white" />
           <span data-hero-menu-line className="h-0.5 rounded-full bg-white" />
           <span data-hero-menu-line className="h-0.5 rounded-full bg-white" />

@@ -1,7 +1,8 @@
 import LogofolioLayout from "./LogofolioLayout";
+import { GRID_CONTENT_INSET, GRID_LINE_LEFT, GRID_LINE_RIGHT } from "@/lib/sectionGrid";
 
-// Líneas de fondo, alineadas con las de <SectionHero /> (left-14 y 94.5%)
-const LINES = ["left-14", "left-[94.5%]"] as const;
+// Líneas de fondo: continúan las verticales de las pantallas anteriores
+const LINES = [GRID_LINE_LEFT, GRID_LINE_RIGHT];
 
 /** Branding & Design · logofolio: logos de marcas que diseñamos. */
 export default function LogofolioComp() {
@@ -12,7 +13,7 @@ export default function LogofolioComp() {
       ))}
 
       <h2 className="sr-only">Logofolio</h2>
-      <div className="absolute inset-y-0 left-14 right-[5.5%] flex items-center justify-center">
+      <div className={`absolute inset-y-0 ${GRID_CONTENT_INSET} flex items-center justify-center`}>
         <div className="w-[min(60vw,72rem)]">
           <LogofolioLayout />
         </div>

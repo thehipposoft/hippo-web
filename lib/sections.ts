@@ -4,7 +4,7 @@ export const SECTIONS = [
   { slug: "branding-design", title: "Branding & Design", heroTitle: "Branding\n& Design" },
   { slug: "web-development", title: "Web Development", heroTitle: "Web\nDevelopment" },
   { slug: "hippo-lab", title: "Hippo Lab", heroTitle: "Hippo Lab" },
-  { slug: "automation", title: "Automation", heroTitle: "Automation" },
+  { slug: "systems-ia", title: "Systems & IA", heroTitle: "Systems\n& IA" },
   { slug: "contact", title: "Contact", heroTitle: "Contact" },
   { slug: "about", title: "About Us", heroTitle: "About Us" },
   { slug: "brochure", title: "Brochure", heroTitle: "Brochure" },

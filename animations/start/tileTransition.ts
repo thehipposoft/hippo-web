@@ -13,8 +13,10 @@ type TileTransitionOptions = {
 
 /**
  * Transición recuadro → pantalla de sección.
- * El <SectionHero /> de la capa ya está maquetado en su estado final; acá se lo lleva
+ * La pantalla de la capa (<SectionScreen />) ya está maquetada en su estado final; acá se la lleva
  * a la posición del recuadro (fondo recortado, título y botón) y se anima hasta su lugar.
+ * Partes opcionales: [data-hero-title] (viaja desde el recuadro), [data-hero-lines] (se dibujan)
+ * y [data-hero-content] (aparece con fade al final, p. ej. Contact).
  * Debe llamarse dentro de un gsap.context() con scope en la capa.
  */
 export function createTileTransition({ overlay, tile, box, onComplete }: TileTransitionOptions) {
@@ -23,13 +25,14 @@ export function createTileTransition({ overlay, tile, box, onComplete }: TileTra
   const title = overlay.querySelector<HTMLElement>("[data-hero-title]");
   const menu = overlay.querySelector<HTMLElement>("[data-hero-menu]");
   const menuIcon = overlay.querySelector<HTMLElement>("[data-hero-menu-icon]");
+  const content = overlay.querySelector<HTMLElement>("[data-hero-content]");
   const tileTitle = tile.querySelector<HTMLElement>("[data-start-tile-title-hover]");
 
   const tl = gsap.timeline({
     defaults: { duration: 1, ease: "power3.inOut" },
     onComplete,
   });
-  if (!panel || !title || !menu || !tileTitle) return tl.call(onComplete);
+  if (!panel || !menu) return tl.call(onComplete);
 
   const view = overlay.getBoundingClientRect();
   const tileStyles = getComputedStyle(tile);
@@ -42,28 +45,42 @@ export function createTileTransition({ overlay, tile, box, onComplete }: TileTra
   const fromBg = tileStyles.backgroundColor;
   const toBg = getComputedStyle(panel).backgroundColor;
 
-  // Título: arranca encima del título del recuadro (mismo tamaño y posición del primer renglón)
-  const srcStyles = getComputedStyle(tileTitle);
-  const dstStyles = getComputedStyle(title);
-  const srcFont = parseFloat(srcStyles.fontSize);
-  const dstFont = parseFloat(dstStyles.fontSize);
-  const scale = srcFont / dstFont;
-  const srcRect = tileTitle.getBoundingClientRect();
-  const dstRect = title.getBoundingClientRect();
-  const srcHalfLeading = (parseFloat(srcStyles.lineHeight) - srcFont) / 2;
-  const dstHalfLeading = (parseFloat(dstStyles.lineHeight) - dstFont) / 2;
-  const srcTop = srcRect.top + parseFloat(srcStyles.paddingTop) + srcHalfLeading;
-  const titleFrom = {
-    x: srcRect.left - dstRect.left,
-    y: srcTop - (dstRect.top + dstHalfLeading * scale),
-    scale,
-    color: srcStyles.color,
-  };
-  const titleTo = { x: 0, y: 0, scale: 1, color: dstStyles.color };
+  tl.set(overlay, { autoAlpha: 1 }, 0).fromTo(
+    panel,
+    { clipPath: fromClip, backgroundColor: fromBg },
+    { clipPath: toClip, backgroundColor: toBg },
+    0,
+  );
 
-  tl.set(overlay, { autoAlpha: 1 }, 0)
-    .fromTo(panel, { clipPath: fromClip, backgroundColor: fromBg }, { clipPath: toClip, backgroundColor: toBg }, 0)
-    .fromTo(title, titleFrom, { ...titleTo, duration: 1.1 }, 0);
+  // Título: arranca encima del título del recuadro (mismo tamaño y posición del primer renglón)
+  if (title && tileTitle) {
+    const srcStyles = getComputedStyle(tileTitle);
+    const dstStyles = getComputedStyle(title);
+    const srcFont = parseFloat(srcStyles.fontSize);
+    const dstFont = parseFloat(dstStyles.fontSize);
+    const scale = srcFont / dstFont;
+    const srcRect = tileTitle.getBoundingClientRect();
+    const dstRect = title.getBoundingClientRect();
+    const srcHalfLeading = (parseFloat(srcStyles.lineHeight) - srcFont) / 2;
+    const dstHalfLeading = (parseFloat(dstStyles.lineHeight) - dstFont) / 2;
+    const srcTop = srcRect.top + parseFloat(srcStyles.paddingTop) + srcHalfLeading;
+    tl.fromTo(
+      title,
+      {
+        x: srcRect.left - dstRect.left,
+        y: srcTop - (dstRect.top + dstHalfLeading * scale),
+        scale,
+        color: srcStyles.color,
+      },
+      { x: 0, y: 0, scale: 1, color: dstStyles.color, duration: 1.1 },
+      0,
+    );
+  }
+
+  // Contenido de la pantalla: aparece cuando el fondo terminó de abrirse
+  if (content) {
+    tl.fromTo(content, { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0.75);
+  }
 
   // Las líneas se dibujan mientras termina de abrirse el fondo
   if (lines) tl.add(createHeroLinesDraw(lines).timeScale(1.6), 0.4);

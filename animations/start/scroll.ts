@@ -7,7 +7,7 @@ import { TILE_FROM } from "@/animations/tiles";
 // Las dos primeras entran desfasadas pero llegan juntas.
 const WAVES = [
   { at: 1, arrive: 2.2 }, // Branding & Design, Web Development
-  { at: 1.3, arrive: 2.2 }, // Hippo Lab, Automation
+  { at: 1.3, arrive: 2.2 }, // Hippo Lab, Systems & IA
   { at: 2.6, arrive: 3.6 }, // Contact, About Us
   { at: 2.85, arrive: 3.85 }, // Brochure, Portfolio
 ];

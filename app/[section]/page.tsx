@@ -1,14 +1,22 @@
 import type { ComponentType } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import SectionHero from "@/components/SectionHero";
+import SectionScreen from "@/components/SectionScreen";
 import BrandingStatement from "@/components/sections/branding/BrandingStatement";
 import LogofolioComp from "@/components/sections/Logofolio";
+import PortfolioGrid from "@/components/sections/portfolio/PortfolioGrid";
+import PortfolioStatement from "@/components/sections/portfolio/PortfolioStatement";
+import SystemsStatement from "@/components/sections/systems-ia/SystemsStatement";
+import WebDevStatement from "@/components/sections/web-development/WebDevStatement";
+import WebDevSteps from "@/components/sections/web-development/WebDevSteps";
 import { SECTIONS, getSection, type SectionSlug } from "@/lib/sections";
 
 // Contenido propio de cada sección, en orden, debajo de la pantalla de entrada
 const SECTION_CONTENT: Partial<Record<SectionSlug, ComponentType[]>> = {
   "branding-design": [BrandingStatement, LogofolioComp],
+  portfolio: [PortfolioStatement, PortfolioGrid],
+  "web-development": [WebDevStatement, WebDevSteps],
+  "systems-ia": [SystemsStatement],
 };
 
 export const instant = false;
@@ -31,7 +39,7 @@ export default async function SectionPage({ params }: PageProps<"/[section]">) {
 
   return (
     <main>
-      <SectionHero key={data.slug} section={data} />
+      <SectionScreen key={data.slug} section={data} />
       {content.map((Content, i) => (
         <Content key={i} />
       ))}

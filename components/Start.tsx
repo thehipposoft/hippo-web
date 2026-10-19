@@ -71,7 +71,7 @@ export default function Start() {
         >
           <span aria-hidden data-start-fill className="absolute inset-0 bg-(--start-fill) opacity-0" />
 
-          <div data-start-copy className="relative pl-[calc(var(--start-box)*0.015)] font-display font-bold tracking-wide text-brand-darkblue">
+          <div data-start-copy className="relative pl-[calc(var(--start-box)*0.015)] font-display font-bold text-brand-darkblue">
             <h1
               data-start-text
               className="text-[max(0.875rem,calc(var(--start-box)*0.045))] leading-[1.45]"
@@ -95,7 +95,7 @@ export default function Start() {
 
           <p
             data-start-copy-alt
-            className="invisible absolute inset-x-0 top-0 px-[calc(var(--start-box)*0.065)] pt-[calc(var(--start-box)*0.07)] font-display text-[max(0.875rem,calc(var(--start-box)*0.06))] font-bold leading-[1.45] tracking-wide text-(--start-ink-filled) opacity-0"
+            className="invisible absolute inset-x-0 top-0 px-[calc(var(--start-box)*0.065)] pt-[calc(var(--start-box)*0.07)] font-display text-[max(0.875rem,calc(var(--start-box)*0.06))] font-bold leading-[1.45] text-(--start-ink-filled) opacity-0"
           >
             From identity to digital experiences, from websites to automation, we create the systems
             that help businesses connect, evolve, and work better.

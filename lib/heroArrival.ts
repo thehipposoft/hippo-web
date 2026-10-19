@@ -1,5 +1,6 @@
 // Aviso entre la transición recuadro → sección y la página de destino:
-// la transición ya dibujó las líneas del <SectionHero />, así que la página no repite la animación.
+// la transición ya mostró la pantalla de llegada (líneas de <SectionHero />, contenido de Contact),
+// así que la página no repite su animación de entrada.
 let pending = false;
 
 export function markHeroArrival() {

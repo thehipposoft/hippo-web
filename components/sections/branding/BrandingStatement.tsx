@@ -6,11 +6,12 @@ import { createBrandingStatement } from "@/animations/branding/statement";
 import { createCharRoll } from "@/animations/charRoll";
 import RollText from "@/components/RollText";
 import { useGsap } from "@/lib/useGsap";
+import { GRID_LINE_LEFT, GRID_LINE_RIGHT } from "@/lib/sectionGrid";
 
-// Líneas de fondo, alineadas con las de <SectionHero /> (left-14 y 94.5%)
+// Líneas de fondo: las verticales continúan las de <SectionHero />
 const LINES = [
-  "inset-y-0 left-14 w-px",
-  "inset-y-0 left-[94.5%] w-px",
+  `inset-y-0 ${GRID_LINE_LEFT} w-px`,
+  `inset-y-0 ${GRID_LINE_RIGHT} w-px`,
   "inset-x-0 top-[15%] h-px",
   "inset-x-0 top-[85%] h-px",
 ] as const;
@@ -62,7 +63,7 @@ export default function BrandingStatement() {
       ))}
 
       <div className="absolute inset-y-[15%] left-[7.5%] right-[12%] flex items-center">
-        <p className="font-display text-[clamp(1.75rem,5vw,5.5rem)] font-bold leading-[0.8] text-white tracking-tight">
+        <p className="font-display text-statement font-bold leading-[0.8] text-white tracking-tight">
           <RollText
             lines={STATEMENT}
             decorate={{

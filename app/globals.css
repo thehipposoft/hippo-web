@@ -15,6 +15,9 @@
   --color-brand-darkgreen: #1c4e3d;
   /* Neutro oscuro: fondo de las pantallas de sección */
   --color-brand-black: #212121;
+
+  /* Tamaño de las frases de sección (statements): text-statement */
+  --text-statement: clamp(2rem, 6vw, 5.5rem);
 }
 
 @theme inline {

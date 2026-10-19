@@ -3,7 +3,7 @@
 import { useRef, useState, type MouseEvent } from "react";
 import { useRouter } from "next/navigation";
 import { createTileTransition } from "@/animations/start/tileTransition";
-import SectionHero from "@/components/SectionHero";
+import SectionScreen from "@/components/SectionScreen";
 import { markHeroArrival } from "@/lib/heroArrival";
 import { getSectionHref, type Section } from "@/lib/sections";
 import { useGsap } from "@/lib/useGsap";
@@ -19,6 +19,8 @@ export function useTileTransition(getBox: () => HTMLElement | null) {
   const router = useRouter();
   const overlayRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState<ActiveTile | null>(null);
+  // true una vez que la transición terminó y se pidió la navegación
+  const navigatedRef = useRef(false);
 
   useGsap(
     (overlay) => {
@@ -28,11 +30,21 @@ export function useTileTransition(getBox: () => HTMLElement | null) {
         tile: active.tile,
         box: getBox(),
         onComplete: () => {
+          navigatedRef.current = true;
           markHeroArrival();
           router.push(getSectionHref(active.section.slug));
         },
       });
-      return () => tl.kill();
+      return () => {
+        tl.kill();
+        // Con cacheComponents, Next no desmonta la página que dejamos: la oculta en un <Activity>
+        // conservando su estado y, al volver a mostrarla, re-ejecuta los efectos. Si la transición
+        // ya navegó, se descarta para que no vuelva a correr (y a navegar) al regresar a esta página.
+        if (navigatedRef.current) {
+          navigatedRef.current = false;
+          setActive(null);
+        }
+      };
     },
     overlayRef,
     [active],
@@ -52,7 +64,7 @@ export function useTileTransition(getBox: () => HTMLElement | null) {
 
   const overlay = active ? (
     <div ref={overlayRef} className="invisible fixed inset-0 z-[70]">
-      <SectionHero section={active.section} intro={false} />
+      <SectionScreen section={active.section} intro={false} />
     </div>
   ) : null;
 
