@@ -2,10 +2,17 @@ import type { ComponentType } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import SectionScreen from "@/components/SectionScreen";
+import AboutStatement from "@/components/sections/about/AboutStatement";
+import AboutTimeline from "@/components/sections/about/AboutTimeline";
+import AboutWheel from "@/components/sections/about/AboutWheel";
 import BrandingStatement from "@/components/sections/branding/BrandingStatement";
+import BrochureCta from "@/components/sections/brochure/BrochureCta";
+import BrochureDetails from "@/components/sections/brochure/BrochureDetails";
+import BrochureServices from "@/components/sections/brochure/BrochureServices";
 import LogofolioComp from "@/components/sections/Logofolio";
 import PortfolioGrid from "@/components/sections/portfolio/PortfolioGrid";
 import PortfolioStatement from "@/components/sections/portfolio/PortfolioStatement";
+import SystemsFolder from "@/components/sections/systems-ia/SystemsFolder";
 import SystemsStatement from "@/components/sections/systems-ia/SystemsStatement";
 import WebDevStatement from "@/components/sections/web-development/WebDevStatement";
 import WebDevSteps from "@/components/sections/web-development/WebDevSteps";
@@ -16,7 +23,9 @@ const SECTION_CONTENT: Partial<Record<SectionSlug, ComponentType[]>> = {
   "branding-design": [BrandingStatement, LogofolioComp],
   portfolio: [PortfolioStatement, PortfolioGrid],
   "web-development": [WebDevStatement, WebDevSteps],
-  "systems-ia": [SystemsStatement],
+  "systems-ia": [SystemsStatement, SystemsFolder],
+  about: [AboutTimeline, AboutWheel, AboutStatement],
+  brochure: [BrochureServices, BrochureDetails, BrochureCta],
 };
 
 export const instant = false;
@@ -28,7 +37,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/[section]">): Promise<Metadata> {
   const { section } = await params;
   const data = getSection(section);
-  return { title: data ? `${data.title} · HippoSoft` : "HippoSoft" };
+  return { title: data ? `${data.title} · Hippo` : "Hippo" };
 }
 
 export default async function SectionPage({ params }: PageProps<"/[section]">) {

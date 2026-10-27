@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { useBlobClip } from "@/lib/useBlobClip";
 import Image from "next/image";
 import { createPortfolioGridEntrance } from "@/animations/portfolio/grid";
 import { useGsap } from "@/lib/useGsap";
@@ -9,6 +10,55 @@ import { GRID_CONTENT_PADDING, GRID_LINE_LEFT, GRID_LINE_RIGHT } from "@/lib/sec
 
 // Líneas de fondo: continúan las verticales de las pantallas anteriores
 const LINES = [GRID_LINE_LEFT, GRID_LINE_RIGHT];
+
+type PortfolioItem = (typeof PORTFOLIO_DATA)[number]["data"];
+
+/**
+ * Imagen de la card con recorte "blob" (lib/useBlobClip.ts): solo la capa visual (imagen + overlay)
+ * va recortada; el logo y el "+" quedan afuera para que el borde no los corte.
+ * La capa se agranda 6% por lado (-inset-[6%], ver OVERFLOW en animations/blob.ts): en reposo el
+ * recorte coincide con la card y tiene margen para estirarse hacia el cursor.
+ */
+function PortfolioCardLink({ data, seed }: { data: PortfolioItem; seed: number }) {
+  const layerRef = useRef<HTMLDivElement>(null);
+  const { clipId, pathRef, initialPath } = useBlobClip(layerRef, { seed });
+
+  return (
+    <a href={data.href} target="_blank" rel="noreferrer" className="group relative block aspect-[450/420] w-full">
+      <svg aria-hidden width="0" height="0" className="absolute">
+        <defs>
+          <clipPath id={clipId} clipPathUnits="objectBoundingBox">
+            <path ref={pathRef} d={initialPath} />
+          </clipPath>
+        </defs>
+      </svg>
+
+      {/* clip-path inline: el id es dinámico (useId), no se puede expresar como clase */}
+      <div ref={layerRef} className="absolute -inset-[6%]" style={{ clipPath: `url(#${clipId})` }}>
+        <Image
+          src={data.mockGrid}
+          alt={`${data.name} background`}
+          fill
+          sizes="(max-width: 768px) 90vw, (max-width: 1024px) 45vw, 28vw"
+          className={`object-cover ${"objectPosition" in data ? data.objectPosition : ""}`}
+        />
+        <span className="absolute inset-0 z-10 flex items-center justify-center bg-black/40 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100">
+          <span className="px-8 py-3 text-2xl font-medium uppercase tracking-[0.2em] text-white">Discover</span>
+        </span>
+      </div>
+
+      {"logo_content" in data && <span className="absolute bottom-4 left-4">{data.logo_content}</span>}
+      <svg
+        aria-hidden
+        viewBox="0 0 40 40"
+        fill="none"
+        className="absolute bottom-4 right-4 z-10 hidden size-11 text-black transition duration-500 group-hover:rotate-180 group-hover:scale-110 group-hover:text-white lg:block"
+      >
+        <path d="M1.25 20H38.75M20 1.25V38.75" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="3 3" />
+      </svg>
+    </a>
+  );
+}
 
 /** Portfolio · grilla de proyectos. */
 export default function PortfolioGrid() {
@@ -28,35 +78,10 @@ export default function PortfolioGrid() {
 
       <div className={GRID_CONTENT_PADDING}>
         <ul className="mx-auto grid w-[min(90%,78rem)] grid-cols-1 gap-8 py-24 md:grid-cols-2 lg:grid-cols-3">
-          {PORTFOLIO_DATA.map(({ slug, data }) => (
+          {PORTFOLIO_DATA.map(({ slug, data }, index) => (
             <li key={slug} data-portfolio-item className="flex flex-col gap-4">
               {/* TODO: llevar a la ficha /portfolio/[slug] cuando exista; por ahora abre el sitio del proyecto */}
-              <a
-                href={data.href}
-                target="_blank"
-                rel="noreferrer"
-                className="group relative block aspect-[450/420] w-full overflow-hidden"
-              >
-                <Image
-                  src={data.mockGrid}
-                  alt={`${data.name} background`}
-                  fill
-                  sizes="(max-width: 768px) 80vw, (max-width: 1024px) 40vw, 25vw"
-                  className={`object-cover ${"objectPosition" in data ? data.objectPosition : ""}`}
-                />
-                <span className="absolute inset-0 z-10 flex items-center justify-center bg-black/40 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100">
-                  <span className="px-8 py-3 text-2xl font-medium uppercase tracking-[0.2em] text-white">Discover</span>
-                </span>
-                {"logo_content" in data && <span className="absolute bottom-4 left-4">{data.logo_content}</span>}
-                <svg
-                  aria-hidden
-                  viewBox="0 0 40 40"
-                  fill="none"
-                  className="absolute bottom-4 right-4 z-10 hidden size-11 text-black transition duration-500 group-hover:rotate-180 group-hover:scale-110 group-hover:text-white lg:block"
-                >
-                  <path d="M1.25 20H38.75M20 1.25V38.75" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="3 3" />
-                </svg>
-              </a>
+              <PortfolioCardLink data={data} seed={index} />
 
               <div className="flex flex-col">
                 <h3 className="font-display text-xl font-bold">{data.name}</h3>

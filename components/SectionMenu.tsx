@@ -6,6 +6,7 @@ import { createMenuToggle } from "@/animations/menu";
 import { createTileHover } from "@/animations/start/tileHover";
 import SectionTiles, { SECTION_TILES_VARS } from "@/components/SectionTiles";
 import type { Section } from "@/lib/sections";
+import { getLenis } from "@/lib/lenis";
 import { useGsap } from "@/lib/useGsap";
 import { useTileTransition } from "@/lib/useTileTransition";
 
@@ -36,6 +37,7 @@ export default function SectionMenu({ section }: SectionMenuProps) {
       menuCtxRef.current?.revert();
       menuCtxRef.current = null;
       tlRef.current = null;
+      getLenis()?.start();
       setOpen(false);
     };
   }, menuRef);
@@ -52,11 +54,13 @@ export default function SectionMenu({ section }: SectionMenuProps) {
       });
     }
     tlRef.current?.timeScale(1).play();
+    getLenis()?.stop(); // la página no se desplaza detrás del menú
     setOpen(true);
   };
 
   const closeMenu = () => {
     tlRef.current?.timeScale(1.2).reverse();
+    getLenis()?.start();
     setOpen(false);
   };
 

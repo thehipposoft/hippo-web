@@ -2,22 +2,14 @@
 
 import { useRef } from "react";
 import { gsap } from "gsap";
+import LightGridLines from "@/components/LightGridLines";
 import SectionMenu from "@/components/SectionMenu";
 import ContactForm, { CONTACT_EMAIL } from "@/components/sections/contact/ContactForm";
 import { takeHeroArrival } from "@/lib/heroArrival";
 import type { Section } from "@/lib/sections";
-import { GRID_LINE_LEFT, GRID_LINE_RIGHT } from "@/lib/sectionGrid";
 import { useGsap } from "@/lib/useGsap";
 
 const PHONE = "+61 414 286 242";
-
-// Líneas de fondo: las verticales continúan las del resto del sitio
-const LINES = [
-  `inset-y-0 ${GRID_LINE_LEFT} w-px`,
-  `inset-y-0 ${GRID_LINE_RIGHT} w-px`,
-  "inset-x-0 top-[15%] h-px",
-  "inset-x-0 top-[81%] h-px",
-];
 
 type ContactScreenProps = {
   section: Section;
@@ -52,9 +44,7 @@ export default function ContactScreen({ section, intro = true }: ContactScreenPr
       <div data-hero-panel className="absolute inset-0 bg-white" />
 
       <div ref={contentRef} data-hero-content className="invisible absolute inset-0 text-black">
-        {LINES.map((className) => (
-          <span key={className} aria-hidden className={`absolute bg-brand-blue/50 ${className}`} />
-        ))}
+        <LightGridLines />
 
         {/* Globo de diálogo */}
         <div className="absolute left-[4.6%] top-[17.4%] w-[41%] rounded-[clamp(1rem,1.6vw,1.75rem)] bg-brand-blue px-[2%] py-[1.4%] text-white">

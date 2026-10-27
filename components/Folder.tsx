@@ -9,14 +9,29 @@ export type FolderTab = {
   label: string;
   /** Colores de la pestaña (fondo y texto), p. ej. "bg-brand-darkblue text-white" */
   className: string;
+  /** Colores cuando está activa (si no se indica, usa `className`) */
+  activeClassName?: string;
   content: ReactNode;
 };
+
+// Tamaños de pestaña
+const TAB_SIZES = {
+  md: "px-[clamp(1rem,2.2vw,2.25rem)] text-[clamp(0.85rem,1vw,1.05rem)]",
+  lg: "min-w-[clamp(8rem,12.5vw,14rem)] px-[clamp(1rem,2vw,2.25rem)] text-left text-[clamp(0.9rem,1.05vw,1.15rem)]",
+} as const;
+
+// Borde y sombra de la hoja por defecto (para fondos claros)
+const DEFAULT_FRAME = "border border-black/80 shadow-[2px_3px_0_0_rgba(0,0,0,0.85)]";
 
 type FolderProps = {
   tabs: FolderTab[];
   className?: string;
   /** Clases extra para la hoja del folder (padding, alto mínimo…) */
   panelClassName?: string;
+  /** Borde y sombra de la hoja (reemplaza los de por defecto, p. ej. sobre fondo oscuro) */
+  frameClassName?: string;
+  /** Tamaño de las pestañas */
+  size?: keyof typeof TAB_SIZES;
 };
 
 /**
@@ -24,7 +39,13 @@ type FolderProps = {
  * (animations/folder.ts) y el contenido entra con un fade al cambiar.
  * Todas las hojas quedan montadas (las ocultas con `hidden`), así un formulario conserva lo cargado.
  */
-export default function Folder({ tabs, className = "", panelClassName = "" }: FolderProps) {
+export default function Folder({
+  tabs,
+  className = "",
+  panelClassName = "",
+  frameClassName = DEFAULT_FRAME,
+  size = "md",
+}: FolderProps) {
   const id = useId();
   const rootRef = useRef<HTMLDivElement>(null);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -79,9 +100,9 @@ export default function Folder({ tabs, className = "", panelClassName = "" }: Fo
               onClick={() => setActive(i)}
               onKeyDown={onKeyDown}
               data-folder-tab
-              className={`cursor-pointer rounded-t-md px-[clamp(1rem,2.2vw,2.25rem)] font-display text-[clamp(0.85rem,1vw,1.05rem)] transition-[opacity,padding] duration-300 ${
+              className={`cursor-pointer rounded-t-md font-display transition-[opacity,padding] duration-300 ${TAB_SIZES[size]} ${
                 selected ? "pb-2 pt-2.5 font-bold opacity-100" : "pb-1.5 pt-2 opacity-70 hover:opacity-100"
-              } ${tab.className}`}
+              } ${selected ? (tab.activeClassName ?? tab.className) : tab.className}`}
             >
               {tab.label}
             </button>
@@ -90,7 +111,7 @@ export default function Folder({ tabs, className = "", panelClassName = "" }: Fo
       </div>
 
       <div
-        className={`relative rounded-md border border-black/80 bg-white shadow-[2px_3px_0_0_rgba(0,0,0,0.85)] ${panelClassName}`}
+        className={`relative rounded-md bg-white ${frameClassName} ${panelClassName}`}
       >
         {tabs.map((tab, i) => (
           <div

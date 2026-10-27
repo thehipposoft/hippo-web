@@ -1,6 +1,7 @@
 import { gsap } from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { getLenis } from "@/lib/lenis";
 
 gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 
@@ -96,14 +97,14 @@ export function createWebDevSteps(root: HTMLElement): () => void {
     onUpdate: (self) => goToStep(Math.round(self.progress * lastStep)),
   });
 
-  // Botones: scroll suave hasta el paso
+  // Botones: scroll suave hasta el paso (con Lenis si está activo; si no, ScrollToPlugin)
   const handlers = buttons.map((button, step) => {
-    const onClick = () =>
-      gsap.to(window, {
-        scrollTo: st.start + ((st.end - st.start) * step) / lastStep,
-        duration: 1,
-        ease: "power2.inOut",
-      });
+    const onClick = () => {
+      const target = st.start + ((st.end - st.start) * step) / lastStep;
+      const lenis = getLenis();
+      if (lenis) lenis.scrollTo(target, { duration: 1 });
+      else gsap.to(window, { scrollTo: target, duration: 1, ease: "power2.inOut" });
+    };
     button.addEventListener("click", onClick);
     return () => button.removeEventListener("click", onClick);
   });
