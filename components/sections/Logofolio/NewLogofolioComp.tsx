@@ -5,6 +5,7 @@ import gsap from 'gsap'
 import { useGsap } from '@/lib/useGsap'
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import LogofolioSingleComp from './LogofolioSingleComp'
+import { useTranslations } from 'next-intl'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -45,6 +46,7 @@ const NewLogofolioComp = ({
 }:LogofolioObjectTypes) => {
 
     const container = useRef<HTMLDivElement>(null)
+    const t = useTranslations('Logofolio.ui')
 
     useGsap(() => {
         const mm = gsap.matchMedia();
@@ -139,32 +141,32 @@ const NewLogofolioComp = ({
                 {data.name}
             </h1>
             <div className='flex items-center gap-8 title'>
-                <h4 className='text-base hidden md:block text-black'>Logofolio</h4>
+                <h4 className='text-base hidden md:block text-black'>{t('label')}</h4>
             </div>
         </div>
         <div className='h-[150vh] flex justify-center sticky top-0 pt-[35vh]'>
-            <Image sizes='100vw' fill src={data.backgroundOne} alt='Background' className='-z-10' />
-            <Image src={data.logo} alt={`${data.name} Logo`} sizes='375px' width={375} height={200} className='object-contain logo max-h-[250px] ' />
+            <Image sizes='100vw' fill src={data.backgroundOne} alt={t('backgroundAlt', { name: data.name })} className='-z-10' />
+            <Image src={data.logo} alt={t('logoAlt', { name: data.name })} sizes='375px' width={375} height={200} className='object-contain logo max-h-[250px] ' />
         </div>
         {
             data.secondSectionCustom ?
             <div className='h-screen sticky top-0 flex items-center justify-center'>
-                <Image sizes='100vw' src={data.backgroundTwo} fill className='object-cover' alt={`${data.name} image 2`} />
+                <Image sizes='100vw' src={data.backgroundTwo} fill className='object-cover' alt={t('imageAlt', { name: data.name })} />
                 <div className='flex relative z-20'>
-                    <Image src={"/assets/images/logofolio/perri-salud.png"} alt='Perri salud logo' width={440} height={210} />
-                    <Image src={"/assets/images/logofolio/perri-import.png"} alt='Perri import logo' width={440} height={210} />
-                    <Image src={"/assets/images/logofolio/perri-casa.png"} alt='Perri casa logo' width={440} height={210} />
+                    <Image src={"/assets/images/logofolio/perri-salud.png"} alt={t('subBrandAlt', { name: 'Perri Salud' })} width={440} height={210} />
+                    <Image src={"/assets/images/logofolio/perri-import.png"} alt={t('subBrandAlt', { name: 'Perri Import' })} width={440} height={210} />
+                    <Image src={"/assets/images/logofolio/perri-casa.png"} alt={t('subBrandAlt', { name: 'Perri Casa' })} width={440} height={210} />
                 </div>
             </div>
             :
             <div className='h-screen sticky top-0'>
-                <Image sizes='100vw' src={data.backgroundTwo} fill className='object-cover' alt={`${data.name} image 2`} />
+                <Image sizes='100vw' src={data.backgroundTwo} fill className='object-cover' alt={t('imageAlt', { name: data.name })} />
             </div>
         }
 
         <div className='h-screen flex flex-col lg:flex-row relative'>
             <div className={`${data.contain ? "bg-white" : ""} lg:w-1/2 relative h-screen`}>
-                <Image sizes='50vw' src={data.itemImage} fill className={`${data.contain ? "object-contain" : "object-cover"} ${data.left && "object-left"}`} alt='Object image' />
+                <Image sizes='50vw' src={data.itemImage} fill className={`${data.contain ? "object-contain" : "object-cover"} ${data.left && "object-left"}`} alt={t('itemAlt', { name: data.name })} />
             </div>
             <div style={{gridTemplateColumns: `repeat(${data.colorSecondary.length}, minmax(0, 1fr))`}} className={'lg:w-1/2 grid grid-rows-2 h-screen'}>
                 <div style={{backgroundColor: data.colorPrimary}} className={` col-span-full flex justify-end items-end p-4 w-full`}>
@@ -182,7 +184,7 @@ const NewLogofolioComp = ({
         <div className='flex flex-col relative'>
             <div className='flex lg:flex-row flex-col h-screen legend-container sticky top-0'>
                 <div style={{backgroundColor: data.backgroundLegend}} className='lg:w-1/2 flex justify-center items-center relative h-screen lg:h-auto'>
-                    {data.backgroundLegendImage && <Image sizes='50vw' src={data.backgroundLegendImage} alt='Legend background Image' fill className='object-cover' />}
+                    {data.backgroundLegendImage && <Image sizes='50vw' src={data.backgroundLegendImage} alt={t('legendBackgroundAlt', { name: data.name })} fill className='object-cover' />}
                     <div className='flex flex-wrap justify-center gap-1 max-w-xl text-center text-2xl light relative z-20 px-8 md:px-0 w-3/5'>
                         {
                             data.legend.split(" ").map((char: string, index: number) => (
@@ -192,7 +194,7 @@ const NewLogofolioComp = ({
                     </div>
                 </div>
                 <div className='lg:w-1/2 relative' style={{backgroundColor: data.backgroundLegend}}>
-                    <Image sizes='50vw' src={data.backgroundThree} fill className={`${data.contain ? "object-contain" : "object-cover"} legend-image`} alt='Background three' />
+                    <Image sizes='50vw' src={data.backgroundThree} fill className={`${data.contain ? "object-contain" : "object-cover"} legend-image`} alt={t('backgroundAlt', { name: data.name })} />
                 </div>
             </div>
             <div style={{backgroundColor: data.backgroundLegend}} className='h-[50vh]' />

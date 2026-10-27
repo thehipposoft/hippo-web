@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import Image from 'next/image';
 import LogofolioGallery from './LogofolioGallery';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 export type LogofolioSingleData = {
     name: string;
@@ -22,6 +23,8 @@ export type LogofolioSingleData = {
 };
 
 const LogofolioSingleComp = ({ data }: { data: LogofolioSingleData }) => {
+    const t = useTranslations('Logofolio.ui');
+
     return (
         <div className='flex flex-col lg:h-screen text-black lg:gap-12 relative bg-white z-20'>
             <div className='flex justify-between pt-20 lg:pt-12 2xl:pt-16 lg:w-[1300px] w-[85vw] mx-auto'>
@@ -34,19 +37,19 @@ const LogofolioSingleComp = ({ data }: { data: LogofolioSingleData }) => {
                 {
                     data.isOld &&
                             <div className='flex items-center gap-8'>
-                                <h4 className='text-base hidden md:block'>Logofolio</h4>
+                                <h4 className='text-base hidden md:block'>{t('label')}</h4>
                             </div>
                 }
                 {
                     data.category &&
                     <div className='flex items-center gap-4'>
-                        <p className='hidden md:block'>Social Media</p>
+                        <p className='hidden md:block'>{t('socialMedia')}</p>
                     </div>
                 }
             </div>
             <div className='lg:w-[1300px] w-[80vw] my-4 md:mt-8 mx-auto min-h-[600px] 2xl:min-h-[700px] 2xl:m-auto flex flex-col-reverse lg:flex-row justify-between md:gap-2 gap-14'>
                 <div className='lg:w-[375px] md:w-[450px] w-[80vw] lg:h-[550px] md:my-12 md:mx-auto lg:mx-0 lg:my-0'>
-                    <LogofolioGallery images={data.gallery ?? []} vc={data.vectorColors ?? []} />
+                    <LogofolioGallery images={data.gallery ?? []} vc={data.vectorColors ?? []} name={data.name} />
                 </div>
                 <div className='flex flex-col lg:h-[550px] justify-between'>
                     <div className='flex flex-col gap-2 text-sm md:w-[460px]'>
@@ -59,13 +62,13 @@ const LogofolioSingleComp = ({ data }: { data: LogofolioSingleData }) => {
                             {
                                 data.client ?
                                 <div>
-                                    <p>Client:</p>
+                                    <p>{t('client')}</p>
                                     <p>{data.client}</p>
-                                    <p>We invite you to check out their Instagram profile <Link href={data.instagram ?? ''} target='_blank' rel='noreferrer' className='underline bold'>here!</Link></p>
+                                    <p>{t.rich('instagram', { link: (chunks) => <Link href={data.instagram ?? ''} target='_blank' rel='noreferrer' className='underline bold'>{chunks}</Link> })}</p>
                                 </div>
                                 :
                                 <div>
-                                    <h4>Concept:</h4>
+                                    <h4>{t('concept')}</h4>
                                     {
                                         data.concept && data.concept.length > 1 ?
                                         <div>
@@ -91,7 +94,7 @@ const LogofolioSingleComp = ({ data }: { data: LogofolioSingleData }) => {
                         <h3 className='light uppercase'>{data.country}</h3>
                         <h3 className='light uppercase'>{data.date}</h3>
                         <Link href={data.href ?? ''} target='_blank' rel='noreferrer' className={`${data.href === '' ? 'hidden' : ''} relative z-10 mt-2 overflow-hidden duration-500 px-4 tracking-[0.2em] text-xs py-2 border-cyan border-2 text-black w-fit rounded-3xl hover:bg-cyan hover:scale-x-105 uppercase`}>
-                               Discover Site
+                               {t('discover')}
                         </Link>
                         {
                             data.category
@@ -104,7 +107,7 @@ const LogofolioSingleComp = ({ data }: { data: LogofolioSingleData }) => {
                     {
                         data.logo ?
                         <div className={`relative w-[${data.logoSizes?.[0]}] h-[${data.logoSizes?.[1]}]`}>
-                            <Image sizes={data.logoSizes?.[0]} src={data.logo} alt={`${data.name} logo`} fill className='object-contain' />
+                            <Image sizes={data.logoSizes?.[0]} src={data.logo} alt={t('logoAlt', { name: data.name })} fill className='object-contain' />
                         </div>
                         :
                         <></>

@@ -1,6 +1,8 @@
 import type { ComponentType } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import type { Locale } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import SectionScreen from "@/components/SectionScreen";
 import AboutStatement from "@/components/sections/about/AboutStatement";
 import AboutTimeline from "@/components/sections/about/AboutTimeline";
@@ -35,9 +37,11 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/[section]">): Promise<Metadata> {
-  const { section } = await params;
+  const { locale, section } = await params;
   const data = getSection(section);
-  return { title: data ? `${data.title} · Hippo` : "Hippo" };
+  if (!data) return { title: "Hippo" };
+  const t = await getTranslations({ locale: locale as Locale, namespace: "Sections" });
+  return { title: `${t(`${data.slug}.title`)} · Hippo` };
 }
 
 export default async function SectionPage({ params }: PageProps<"/[locale]/[section]">) {

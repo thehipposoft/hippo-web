@@ -1,14 +1,15 @@
-// Secciones del sitio (recuadros de <Start /> y páginas /[section]).
-// `heroTitle`: título de la pantalla de sección; `\n` marca el corte de línea.
+// Secciones del sitio (recuadros de <Start /> y páginas /[section]). Los slugs son los mismos en
+// ambos idiomas; los textos están en messages/*.json: Sections.<slug>.title y .heroTitle
+// (`\n` marca el corte de línea del título de la pantalla de sección).
 export const SECTIONS = [
-  { slug: "branding-design", title: "Branding & Design", heroTitle: "Branding\n& Design" },
-  { slug: "web-development", title: "Web Development", heroTitle: "Web\nDevelopment" },
-  { slug: "hippo-lab", title: "Hippo Lab", heroTitle: "Hippo Lab" },
-  { slug: "systems-ia", title: "Systems & IA", heroTitle: "Systems\n& IA" },
-  { slug: "contact", title: "Contact", heroTitle: "Contact" },
-  { slug: "about", title: "About Us", heroTitle: "About Us" },
-  { slug: "brochure", title: "Brochure", heroTitle: "Brochure" },
-  { slug: "portfolio", title: "Portfolio", heroTitle: "Portfolio" },
+  { slug: "branding-design" },
+  { slug: "web-development" },
+  { slug: "hippo-lab" },
+  { slug: "systems-ia" },
+  { slug: "contact" },
+  { slug: "about" },
+  { slug: "brochure" },
+  { slug: "portfolio" },
 ] as const;
 
 export type Section = (typeof SECTIONS)[number];

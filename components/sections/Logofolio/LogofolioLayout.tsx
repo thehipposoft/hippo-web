@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { createLogofolioEntrance } from "@/animations/branding/logofolio";
 import { useGsap } from "@/lib/useGsap";
 

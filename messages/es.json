@@ -6,5 +6,375 @@
     "title": "Página no encontrada",
     "description": "La página que buscás no existe o cambió de lugar.",
     "back": "Volver al inicio"
+  },
+  "Sections": {
+    "branding-design": {
+      "title": "Branding & Diseño",
+      "heroTitle": "Branding\n& Diseño"
+    },
+    "web-development": {
+      "title": "Desarrollo Web",
+      "heroTitle": "Desarrollo\nWeb"
+    },
+    "hippo-lab": {
+      "title": "Hippo Lab",
+      "heroTitle": "Hippo Lab"
+    },
+    "systems-ia": {
+      "title": "Sistemas & IA",
+      "heroTitle": "Sistemas\n& IA"
+    },
+    "contact": {
+      "title": "Contacto",
+      "heroTitle": "Contacto"
+    },
+    "about": {
+      "title": "Nosotros",
+      "heroTitle": "Nosotros"
+    },
+    "brochure": {
+      "title": "Brochure",
+      "heroTitle": "Brochure"
+    },
+    "portfolio": {
+      "title": "Portfolio",
+      "heroTitle": "Portfolio"
+    }
+  },
+  "Logofolio": {
+    "ui": {
+      "label": "Logofolio",
+      "concept": "Concepto:",
+      "discover": "Ver sitio",
+      "client": "Cliente:",
+      "socialMedia": "Redes sociales",
+      "instagram": "Te invitamos a ver su perfil de Instagram <link>¡acá!</link>",
+      "logoAlt": "Logo de {name}",
+      "imageAlt": "{name}: imagen de la marca",
+      "backgroundAlt": "{name}: fondo",
+      "itemAlt": "{name}: aplicación de la marca",
+      "legendBackgroundAlt": "{name}: fondo de la leyenda",
+      "galleryAlt": "{name}: galería, imagen {number}",
+      "subBrandAlt": "Logo de {name}",
+      "primaryPalette": "Paleta principal",
+      "tonalGradient": "Gradiente tonal",
+      "primaryColors": "Colores principales",
+      "secondaryColors": "Colores secundarios",
+      "accent": "Acento",
+      "colorPalette": "Paleta de colores",
+      "primaryColorsAlt": "Colores principales de Inspir",
+      "tonalGradientAlt": "Gradiente tonal de Inspir"
+    },
+    "projects": {
+      "rock-steady-digital": {
+        "country": "Australia",
+        "date": "noviembre 2022",
+        "legend": "Unimos personas, procesos, herramientas y datos de forma creativa para ayudar a que tu negocio crezca.",
+        "description": [
+          "Rock Steady acompaña a las organizaciones en su transformación digital e implementa lo que necesitan.",
+          "Su misión es potenciar las capacidades digitales de las empresas con desarrollo web y de redes sociales, implementaciones de e-commerce y procesos de transformación digital.",
+          "Rock Steady une personas, procesos, herramientas y datos de forma creativa para ayudar a las empresas a crecer con mejora continua."
+        ],
+        "concept": [
+          "El logo es audaz y lúdico, un símbolo de la actitud de la empresa: representa su carácter rebelde e innovador. Los elementos que lo acompañan (las estrellas) simbolizan el camino de la transformación digital, que busca conectar el pasado con el futuro de las empresas."
+        ]
+      },
+      "inspir-performance": {
+        "country": "París - Australia",
+        "date": "marzo 2023",
+        "legend": "La mente no es un vaso que llenar, sino un fuego que encender.",
+        "description": [
+          "Inspir es experta en alto rendimiento: ayuda a deportistas de élite y a ejecutivos de ámbitos competitivos a liberar el poder de la mente y desarrollar la fortaleza mental que necesitan para dar lo mejor de sí.",
+          "Ofrece una solución innovadora y eficiente para asociaciones, y responde a todo tipo de necesidades: ayuda, asesoramiento y acompañamiento a deportistas, equipos u organizaciones."
+        ],
+        "concept": [
+          "“La mente no es un vaso que llenar, sino un fuego que encender.” Plutarco, antigua Grecia."
+        ]
+      },
+      "diversity-employment": {
+        "country": "Nueva Zelanda",
+        "date": "octubre 2023",
+        "legend": "",
+        "description": [
+          "Diversity Employment ayuda a empresas de la región de Nelson/Tasman a reclutar y retener empleados en ocupaciones difíciles de cubrir por falta de personal calificado.",
+          "El reclutamiento para la retención combina un proceso de selección cuidadoso con el objetivo de lograr una relación duradera y satisfactoria con cada empleado."
+        ],
+        "concept": [
+          "Cuerda, conexión, el monograma abstracto “D E”. La marca se construyó a partir del círculo, una de las formas geométricas más flexibles y con más significado.",
+          "Aquí, dos semicírculos unidos por un círculo interior reflejan el propósito de la empresa: ser intermediaria entre el empleador y el inmigrante. Su forma circular la vuelve emocionalmente más positiva y cercana, y transmite otros valores: movimiento, globalidad, protección y confianza."
+        ]
+      },
+      "lumina-technologies": {
+        "country": "EE. UU.",
+        "date": "septiembre 2025",
+        "legend": "Reimaginar la interfaz entre la luz y la materia",
+        "description": [
+          "Lumina Technologies es una startup de vanguardia especializada en química avanzada para impulsar la innovación en el mercado OLED.",
+          "Lumina Technologies impulsa la tecnología de AR/VR y de pantallas para mejorar la experiencia de sus clientes."
+        ],
+        "concept": [
+          "El logo de Lumina Technologies es una representación visual de la precisión, la innovación y la integración, atributos clave de la tecnología patentada de la marca.",
+          "La marca presenta formas geométricas translúcidas superpuestas que evocan sutilmente la estructura ultrafina y multicapa de las pantallas con esta tecnología. El diseño logra un equilibrio perfecto entre estructura y fluidez."
+        ]
+      },
+      "destino-salta": {
+        "country": "Argentina",
+        "date": "octubre 2023",
+        "legend": "Tu próximo destino, tu lugar para disfrutar Salta.",
+        "description": [
+          "Destino Salta es un proyecto de alquileres temporarios que busca ofrecer una experiencia de alojamiento única en la ciudad de Salta, en el noroeste argentino, de forma simple y confiable."
+        ],
+        "concept": [
+          "Destino Salta es una marca que honra la riqueza cultural y paisajística de la provincia de Salta. El logo busca capturar su esencia: sus colores terrosos evocan la paleta cromática regional y destacan el tono bordó del poncho salteño como color principal.",
+          "Para el diseño se eligieron elementos reconocidos de la flora y la fauna local, para transmitir la enorme biodiversidad de la provincia. El paisaje salteño es uno de sus atributos más famosos, y por eso miles de turistas la visitan cada año."
+        ]
+      },
+      "perri": {
+        "country": "ARG",
+        "date": "septiembre 2025",
+        "legend": "Reimaginar la interfaz entre la luz y la materia",
+        "description": [
+          "Lumina Technologies es una startup de vanguardia especializada en química avanzada para impulsar la innovación en el mercado OLED.",
+          "Lumina Technologies impulsa la tecnología de AR/VR y de pantallas para mejorar la experiencia de sus clientes."
+        ],
+        "concept": [
+          "El logo de Lumina Technologies es una representación visual de la precisión, la innovación y la integración, atributos clave de la tecnología patentada de la marca.",
+          "La marca presenta formas geométricas translúcidas superpuestas que evocan sutilmente la estructura ultrafina y multicapa de las pantallas con esta tecnología. El diseño logra un equilibrio perfecto entre estructura y fluidez."
+        ]
+      }
+    }
+  },
+  "Brochure": {
+    "intro": {
+      "title": "Diferentes habilidades,",
+      "titleLine2": "mismos objetivos.",
+      "columns": [
+        [
+          "Ayudamos a las empresas a avanzar con claridad y confianza.",
+          "Toda experiencia digital exitosa comienza por comprender. Nos tomamos el tiempo necesario para conocer tu negocio, tu público, tu mercado y las oportunidades que se avecinan."
+        ],
+        [
+          "Al combinar estrategia, diseño y tecnología, creamos soluciones que no sólo se ven bien, sino que generan un valor cuantificable y favorecen el crecimiento a largo plazo.",
+          "Nuestro papel es sencillo: ayudarte a tomar mejores decisiones digitales y convertir ideas ambiciosas en resultados significativos."
+        ]
+      ],
+      "servicesLabel": "Nuestros servicios"
+    },
+    "capabilitiesLabel": "Podemos ayudarte con:",
+    "services": {
+      "consultoria": {
+        "title": "Consultoría",
+        "summary": [
+          "Entendemos el problema antes de construir.",
+          "Encontramos oportunidades y definimos el mejor camino para avanzar."
+        ],
+        "lead": [
+          "Antes de construir, entendemos."
+        ],
+        "paragraphs": [
+          "Nos metemos en tu negocio para entender cómo funciona, qué necesita y dónde están las oportunidades.",
+          "Analizamos tu ecosistema digital, tus procesos y las herramientas que ya utilizás para detectar qué puede mejorarse, simplificarse o conectarse."
+        ],
+        "steps": [
+          {
+            "title": "Primer acercamiento / Reunión inicial",
+            "text": "Conocemos tu negocio, hacemos preguntas y entendemos el desafío."
+          },
+          {
+            "title": "Definición de objetivos",
+            "text": "Ponemos foco en lo que realmente necesita resolverse."
+          },
+          {
+            "title": "Diseño de soluciones",
+            "text": "Exploramos alternativas y definimos el camino más adecuado."
+          },
+          {
+            "title": "Implementación",
+            "text": "Convertimos la estrategia en soluciones concretas."
+          },
+          {
+            "title": "Monitoreo y mejoras",
+            "text": "Medimos, aprendemos y ajustamos lo que haga falta."
+          }
+        ],
+        "result": "El resultado es una <strong>hoja de ruta clara</strong> para tomar mejores decisiones, aprovechar mejor tus recursos y construir sobre una base sólida."
+      },
+      "branding": {
+        "title": "Branding & Diseño",
+        "summary": [
+          "Creamos marcas que se reconocen, conectan y perduran.",
+          "Diseño con propósito, desde la idea hasta cada punto de contacto."
+        ],
+        "lead": [
+          "No hacemos marcas para que se vean bien.",
+          "Las hacemos para que tengan sentido."
+        ],
+        "paragraphs": [
+          "Construimos identidades que expresan quién sos, ayudan a diferenciarte y hacen que tu marca sea fácil de reconocer y recordar.",
+          "Combinamos estrategia y diseño para crear sistemas visuales coherentes que funcionan en todos los puntos de contacto: desde una identidad y sus guidelines hasta piezas de comunicación, packaging, espacios y experiencias digitales."
+        ],
+        "closing": "Porque una marca es mucho más que un logo. Es la forma en que las personas te reconocen, te recuerdan y confían en vos.",
+        "capabilities": [
+          "Estrategia e identidad de marca",
+          "Rebranding",
+          "Manuales de marca",
+          "Sistemas visuales",
+          "Papelería y comunicación",
+          "Brochures y materiales comerciales",
+          "Packaging",
+          "Señalética",
+          "Contenido y piezas digitales",
+          "Edición de video de baja complejidad"
+        ]
+      },
+      "desarrollo-web": {
+        "title": "Desarrollo Web",
+        "summary": [
+          "Diseñamos y desarrollamos experiencias que se ven bien y funcionan mejor.",
+          "Hechas para crecer con tu negocio."
+        ],
+        "lead": [
+          "Diseñado para verse bien. Construido para funcionar mejor."
+        ],
+        "paragraphs": [
+          "Diseñamos y desarrollamos sitios web y productos digitales que combinan una buena experiencia de usuario, rendimiento y tecnología.",
+          "Desde una landing page hasta plataformas digitales complejas, cada proyecto se adapta a las necesidades reales de tu negocio.",
+          "Trabajamos desde el diseño y el prototipo hasta el desarrollo, implementación y mantenimiento."
+        ],
+        "closing": "Porque una buena experiencia digital no termina cuando el sitio se publica. Tiene que seguir funcionando, evolucionando y creciendo con vos.",
+        "capabilities": [
+          "Diseño UX/UI + Prototipado",
+          "Desarrollo web responsive",
+          "Landing pages",
+          "Sitios institucionales",
+          "Plataformas digitales",
+          "Hosting y dominios",
+          "Mantenimiento",
+          "Integraciones",
+          "Optimización y mejoras"
+        ],
+        "tags": [
+          "Integrados",
+          "Responsive",
+          "Seguros"
+        ]
+      },
+      "automatizacion": {
+        "title": "Automatización",
+        "summary": [
+          "Conectamos lo que hoy está separado y automatizamos lo repetitivo.",
+          "Menos tareas manuales. Más tiempo para lo que importa."
+        ],
+        "lead": [
+          "Dejá que lo repetitivo se haga solo."
+        ],
+        "paragraphs": [
+          "Muchas empresas trabajan con sistemas que no se hablan entre sí, tareas que se repiten todos los días y procesos que dependen demasiado de las personas.",
+          "Diseñamos flujos inteligentes que conectan herramientas, automatizan tareas y hacen que la información llegue donde tiene que llegar.",
+          "Desde asistentes y agentes de IA hasta integraciones con WhatsApp, CRM, bases de datos y sistemas internos."
+        ],
+        "closing": "Menos trabajo manual. Más tiempo para lo que importa.",
+        "capabilities": [
+          "Chatbots y asistentes inteligentes",
+          "Agentes de IA",
+          "Automatización de procesos",
+          "Integraciones con WhatsApp",
+          "Integraciones con CRM y bases de datos",
+          "Sincronización de información",
+          "Notificaciones automáticas",
+          "Generación de reportes",
+          "Flujos de trabajo personalizados"
+        ],
+        "tags": [
+          "Chatbots",
+          "Agentes",
+          "Integraciones"
+        ]
+      }
+    },
+    "cta": {
+      "title": "¿Hablamos?",
+      "link": "Contanos tu proyecto"
+    }
+  },
+  "Portfolio": {
+    "statement": [
+      "Cada experiencia digital",
+      "tiene más de una capa."
+    ],
+    "title": "Nuestros proyectos",
+    "discover": "Descubrir",
+    "flagAlt": "Bandera de {country}",
+    "imageAlt": "{name}: sitio web",
+    "projects": {
+      "kidcanibal": {
+        "industry": "Estudio de cine",
+        "work": "Diseño + Código + SEO"
+      },
+      "Reynoso": {
+        "industry": "Inmobiliaria",
+        "work": "Diseño + Código + SEO"
+      },
+      "FerreteriaGAY": {
+        "industry": "Materiales y construcción",
+        "work": "Código + SEO"
+      },
+      "SIMA": {
+        "industry": "Materiales y construcción",
+        "work": "Diseño web + Código"
+      },
+      "TeMStudio": {
+        "industry": "Arquitectura y diseño",
+        "work": "Diseño web + Código"
+      },
+      "IVOS": {
+        "industry": "Construcción",
+        "work": "Diseño web + Código"
+      },
+      "TheCTherapy": {
+        "industry": "Belleza - Bienestar",
+        "work": "Diseño web + Código"
+      },
+      "CopaTomada": {
+        "industry": "Retail",
+        "work": "Diseño web + Código"
+      },
+      "LaboratorioLIAP": {
+        "industry": "Educación - Políticas públicas",
+        "work": "Diseño web + Código"
+      },
+      "MBAnalyst": {
+        "industry": "Análisis de datos - Power BI",
+        "work": "Diseño web + Código"
+      },
+      "RockSteady": {
+        "industry": "Comunicación - Tecnología - Digital",
+        "work": "Diseño web + Código"
+      },
+      "MasonryMen": {
+        "industry": "Construcción",
+        "work": "Diseño web + Código"
+      },
+      "JamesConradArchitect": {
+        "industry": "Arquitectura",
+        "work": "Diseño web + Código"
+      },
+      "DestinoSalta": {
+        "industry": "Alquileres - Alojamiento",
+        "work": "Diseño web + Código"
+      },
+      "SPEKTRUM": {
+        "industry": "Arquitectura",
+        "work": "Código + SEO"
+      }
+    },
+    "countries": {
+      "arg": "Argentina",
+      "aus": "Australia",
+      "cr": "Costa Rica",
+      "ger": "Alemania",
+      "usa": "Estados Unidos",
+      "esp": "España"
+    }
   }
 }

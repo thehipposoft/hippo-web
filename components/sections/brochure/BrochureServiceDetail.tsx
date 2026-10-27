@@ -2,12 +2,15 @@
 
 import { useRef } from "react";
 import { createScrollReveal } from "@/animations/reveal";
-import type { BrochureService } from "@/lib/brochure";
+import { BROCHURE_SERVICES, useBrochureService } from "@/lib/brochure";
+import { useTranslations } from "next-intl";
 import { GRID_LINE_LEFT, GRID_LINE_RIGHT } from "@/lib/sectionGrid";
 import { useGsap } from "@/lib/useGsap";
 
 /** Brochure · detalle de un servicio (págs. 4–7), sin fotos. */
-export default function BrochureServiceDetail({ service }: { service: BrochureService }) {
+export default function BrochureServiceDetail({ base }: { base: (typeof BROCHURE_SERVICES)[number] }) {
+  const service = useBrochureService(base);
+  const t = useTranslations("Brochure");
   const rootRef = useRef<HTMLElement>(null);
   useGsap((root) => createScrollReveal(root), rootRef);
 
@@ -82,7 +85,7 @@ export default function BrochureServiceDetail({ service }: { service: BrochureSe
 
           {service.capabilities && (
             <div data-reveal>
-              <p className="mb-3">Podemos ayudarte con:</p>
+              <p className="mb-3">{t("capabilitiesLabel")}</p>
               <ul className="flex flex-col gap-2">
                 {service.capabilities.map((item, i) => {
                   const bullets = service.bullets;

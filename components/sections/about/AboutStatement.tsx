@@ -2,7 +2,7 @@
 
 import { Fragment, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { createAboutStatement } from "@/animations/about/statement";
 import { getSectionHref } from "@/lib/sections";
 import { useGsap } from "@/lib/useGsap";

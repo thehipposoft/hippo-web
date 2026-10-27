@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import SectionHeroLines from "@/components/SectionHeroLines";
 import SectionMenu from "@/components/SectionMenu";
 import type { Section } from "@/lib/sections";
@@ -14,6 +15,7 @@ type SectionHeroProps = {
  * exactamente con esta maqueta.
  */
 export default function SectionHero({ section, intro = true }: SectionHeroProps) {
+  const t = useTranslations("Sections");
   return (
     <div className="relative h-svh w-full overflow-hidden">
       <div data-hero-panel className="absolute inset-0 bg-brand-black">
@@ -25,7 +27,7 @@ export default function SectionHero({ section, intro = true }: SectionHeroProps)
           data-hero-title
           className="origin-top-left whitespace-pre-line font-display text-[clamp(2.75rem,7.8vw,7.5rem)] font-bold leading-[0.85] text-white"
         >
-          {section.heroTitle}
+          {t(`${section.slug}.heroTitle`)}
         </h1>
       </div>
 

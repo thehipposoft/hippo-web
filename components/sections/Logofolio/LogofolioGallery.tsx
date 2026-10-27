@@ -2,9 +2,11 @@
 import Image from 'next/image';
 import React, { useRef } from 'react';
 import { gsap } from 'gsap';
+import { useTranslations } from 'next-intl';
 
 
-const LogofolioGallery = ({ images, vc }: { images: string[]; vc: string[] }) => {
+const LogofolioGallery = ({ images, vc, name }: { images: string[]; vc: string[]; name: string }) => {
+    const t = useTranslations('Logofolio.ui');
 
     const container = useRef<HTMLDivElement>(null);
 
@@ -23,28 +25,28 @@ const LogofolioGallery = ({ images, vc }: { images: string[]; vc: string[] }) =>
         <div ref={container}>
             <div className='gallery__wrapper origin-top flex relative overflow-hidden mx-auto rounded-md'>
                 <div className='md:min-w-[450px] lg:min-w-[375px] min-w-[80vw] md:h-[550px] h-[450px] relative group cursor-pointer' onClick={onClickOne}>
-                    <Image sizes="(max-width: 768px) 80vw, (max-width: 1200px) 450px, 375px" src={images[0]} alt='Gallery first image' fill className='object-cover' />
+                    <Image sizes="(max-width: 768px) 80vw, (max-width: 1200px) 450px, 375px" src={images[0]} alt={t('galleryAlt', { name, number: 1 })} fill className='object-cover' />
                     <svg className='absolute right-4 bottom-4 z-10 duration-500 group-hover:rotate-180 group-hover:scale-110' width="45" height="45" viewBox="0 0 40 40" fill="" xmlns="http://www.w3.org/2000/svg"  >
                         <path d="M1.25 20H38.75" stroke={`${vc[0]}`} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="3 3"/>
                         <path d="M20 1.25V38.75" stroke={`${vc[0]}`} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="3 3"/>
                     </svg>
                 </div>
                 <div className='md:min-w-[450px] lg:min-w-[375px] min-w-[80vw] md:h-[550px] h-[450px] relative group cursor-pointer' onClick={onClickTwo}>
-                    <Image sizes="(max-width: 768px) 80vw, (max-width: 1200px) 450px, 375px" src={images[1]} alt='Gallery second image' fill className='object-cover' />
+                    <Image sizes="(max-width: 768px) 80vw, (max-width: 1200px) 450px, 375px" src={images[1]} alt={t('galleryAlt', { name, number: 2 })} fill className='object-cover' />
                     <svg className='absolute right-4 bottom-4 z-10 duration-500 group-hover:rotate-180 group-hover:scale-110' width="45" height="45" viewBox="0 0 40 40" fill="" xmlns="http://www.w3.org/2000/svg"  >
                         <path d="M1.25 20H38.75" stroke={`${vc[1]}`} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="3 3"/>
                         <path d="M20 1.25V38.75" stroke={`${vc[1]}`} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="3 3"/>
                     </svg>
                 </div>
                 <div className='md:min-w-[450px] lg:min-w-[375px] min-w-[80vw] md:h-[550px] h-[450px] relative group cursor-pointer' onClick={onClickThree}>
-                    <Image sizes="(max-width: 768px) 80vw, (max-width: 1200px) 450px, 375px" src={images[2]} alt='Gallery third image' fill className='object-cover' />
+                    <Image sizes="(max-width: 768px) 80vw, (max-width: 1200px) 450px, 375px" src={images[2]} alt={t('galleryAlt', { name, number: 3 })} fill className='object-cover' />
                     <svg className='absolute right-4  bottom-4 z-10 duration-500 group-hover:rotate-180 group-hover:scale-110' width="45" height="45" viewBox="0 0 40 40" fill="" xmlns="http://www.w3.org/2000/svg"  >
                         <path d="M1.25 20H38.75" stroke={`${vc[2]}`} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="3 3"/>
                         <path d="M20 1.25V38.75" stroke={`${vc[2]}`} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="3 3"/>
                     </svg>
                 </div>
                 <div className='md:min-w-[450px] lg:min-w-[375px] min-w-[80vw] md:h-[550px] h-[450px] relative group cursor-pointer' onClick={onClickFour}>
-                    <Image sizes="(max-width: 768px) 80vw, (max-width: 1200px) 450px, 375px" src={images[3]} alt='Gallery fourth image' fill className='object-cover' />
+                    <Image sizes="(max-width: 768px) 80vw, (max-width: 1200px) 450px, 375px" src={images[3]} alt={t('galleryAlt', { name, number: 4 })} fill className='object-cover' />
                     <svg className='absolute right-4 bottom-4 z-10 duration-500 group-hover:rotate-180 group-hover:scale-110' width="45" height="45" viewBox="0 0 40 40" fill="" xmlns="http://www.w3.org/2000/svg"  >
                         <path d="M1.25 20H38.75" stroke={`${vc[3]}`} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="3 3"/>
                         <path d="M20 1.25V38.75" stroke={`${vc[3]}`} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="3 3"/>

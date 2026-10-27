@@ -10,8 +10,6 @@ const PORTFOLIO_DATA = [
             nameColor: '#000000',
             textColor: '#000000',
             href: 'https://kidcanibal.com/',
-            industry: 'FILM STUDIO',
-            work: 'Design + Code + SEO',
             year: '2026',
             flag: '/assets/images/portfolio/flag-cr.svg',
             technologies_icons: <div className="flex items-center gap-2">
@@ -29,8 +27,6 @@ const PORTFOLIO_DATA = [
             nameColor: '#000000',
             textColor: '#000000',
             href: 'https://ferreteriagay.com.ar/',
-            industry: 'Real State',
-            work: 'Design + Code + SEO',
             year: '2025',
             flag: '/assets/images/portfolio/flag-arg.svg',
             technologies_icons: <div className="flex items-center gap-2">
@@ -48,8 +44,6 @@ const PORTFOLIO_DATA = [
             nameColor: '#000000',
             textColor: '#000000',
             href: 'https://ferreteriagay.com.ar/',
-            industry: 'Materials and Construction',
-            work: 'Code + SEO',
             year: '2025',
             flag: '/assets/images/portfolio/flag-arg.svg',
             technologies_icons: <div className="flex items-center gap-2">
@@ -70,8 +64,6 @@ const PORTFOLIO_DATA = [
             nameColor: '#000000',
             textColor: '#000000',
             href: 'https://grupo-sima.com.ar/',
-            industry: 'Materials & Construction',
-            work: 'Web Design + Code',
             year: '2025',
             flag: '/assets/images/portfolio/flag-arg.svg',
             technologies_icons: <div className="flex items-center gap-2">
@@ -94,8 +86,6 @@ const PORTFOLIO_DATA = [
             nameColor: '#000000',
             textColor: '#000000',
             href: 'https://temarqui.com/',
-            industry: 'Architecture & Design',
-            work: 'Web Design + Code',
             year: '2025',
             flag: '/assets/images/portfolio/flag-arg.svg',
             secondFlag: '/assets/images/portfolio/flag-esp.svg',
@@ -119,8 +109,6 @@ const PORTFOLIO_DATA = [
             nameColor: '#000000',
             textColor: '#000000',
             href: 'https://ivos.com.ar/',
-            industry: 'Construction',
-            work: 'Web Design + Code',
             year: '2025',
             flag: '/assets/images/portfolio/flag-arg.svg',
             technologies_icons: <div className="flex items-center gap-2">
@@ -144,8 +132,6 @@ const PORTFOLIO_DATA = [
             nameColor: '#000000',
             textColor: '#000000',
             href: 'https://thectherapy.com.au/',
-            industry: 'Beauty - Wellness',
-            work: 'Web Design + Code',
             year: '2024',
             flag: '/assets/images/portfolio/flag-aus.svg',
             technologies_icons: <div className="flex items-center gap-2">
@@ -172,8 +158,6 @@ const PORTFOLIO_DATA = [
             nameColor: '#000000',
             textColor: '#000000',
             href: 'https://copatomada.com.ar/',
-            industry: 'Retail',
-            work: 'Web Design + Code',
             year: '2023',
             flag: '/assets/images/portfolio/flag-arg.svg',
             technologies_icons: <div className="flex items-center gap-2">
@@ -193,8 +177,6 @@ const PORTFOLIO_DATA = [
             nameColor: '#000000',
             textColor: '#000000',
             href: 'https://laboratorioliap.com.ar/',
-            industry: 'Education - Policy',
-            work: 'Web Design + Code',
             year: '2024',
             flag: '/assets/images/portfolio/flag-arg.svg',
             technologies_icons: <div className="flex items-center gap-2">
@@ -217,8 +199,6 @@ const PORTFOLIO_DATA = [
             nameColor: '#000000',
             textColor: '#000000',
             href: 'https://www.mbanalyst.com/',
-            industry: 'Data analyst - Power BI',
-            work: 'Web Design + Code',
             year: '2023',
             flag: '/assets/images/portfolio/flag-aus.svg',
             technologies_icons: <div className="flex items-center gap-2">
@@ -238,8 +218,6 @@ const PORTFOLIO_DATA = [
             nameColor: '#FFFFFF',
             textColor: '#FFFFFF',
             href: 'https://www.rocksteadydigital.com.au/',
-            industry: 'Communication - Tech - Digital',
-            work: 'Web Design + Code',
             year: '2023',
             flag: '/assets/images/portfolio/flag-aus.svg',
             technologies_icons: <div className="flex items-center gap-2">
@@ -259,8 +237,6 @@ const PORTFOLIO_DATA = [
             nameColor: '#000000',
             textColor: '#000000',
             href: 'https://masonrymen.com.au/',
-            industry: 'Construction',
-            work: 'Web Design + Code',
             year: '2024',
             flag: '/assets/images/portfolio/flag-aus.svg',
             technologies_icons: <div className="flex items-center gap-2">
@@ -281,8 +257,6 @@ const PORTFOLIO_DATA = [
             nameColor: '#000000',
             textColor: '#000000',
             href: 'https://www.conradarchitect.com/',
-            industry: 'Architecture',
-            work: 'Web Design + Code',
             year: '2023',
             flag: '/assets/images/portfolio/flag-usa.svg',
             technologies_icons: <div className="flex items-center gap-2">
@@ -300,8 +274,6 @@ const PORTFOLIO_DATA = [
             name: 'Destino Salta',
             nameColor: '#000000',
             href: 'https://destinosalta.com.ar/',
-            industry: 'Rental - accommodation',
-            work: 'Web Design + Code',
             year: '2023',
             flag: '/assets/images/portfolio/flag-arg.svg',
             technologies_icons: <div className="flex items-center gap-2">
@@ -321,8 +293,6 @@ const PORTFOLIO_DATA = [
             nameColor: '#000000',
             textColor: '#000000',
             href: 'https://steelartsla.com.ar/',
-            industry: 'Architecture',
-            work: 'Code + SEO',
             year: '2023',
             flag: '/assets/images/portfolio/flag-ger.svg',
             technologies_icons: <div className="flex items-center gap-2">

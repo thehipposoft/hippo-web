@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import type { MouseEvent } from "react";
+import { useTranslations } from "next-intl";
 import { getSection, getSectionHref, type Section, type SectionSlug } from "@/lib/sections";
 
 // Variables que necesita la grilla (el contenedor también tiene que definir --start-box,
@@ -30,6 +31,7 @@ type SectionTilesProps = {
 
 /** Grilla de recuadros de secciones (inicio y menú). Arrancan sin clicks: los habilita la animación. */
 export default function SectionTiles({ className = "", onTileClick }: SectionTilesProps) {
+  const t = useTranslations("Sections");
   return (
     <nav
       aria-label="Secciones"
@@ -52,14 +54,14 @@ export default function SectionTiles({ className = "", onTileClick }: SectionTil
             {/* Título + copia oscura para el hover (ver animations/start/tileHover.ts) */}
             <span className="relative -my-[0.2em] block overflow-hidden py-[0.2em]">
               <span data-start-tile-title className="block origin-bottom-left">
-                {section.title}
+                {t(`${tile.slug}.title`)}
               </span>
               <span
                 aria-hidden
                 data-start-tile-title-hover
                 className="absolute inset-0 block origin-bottom-left py-[0.2em] text-black underline decoration-[0.06em] underline-offset-[0.12em]"
               >
-                {section.title}
+                {t(`${tile.slug}.title`)}
               </span>
             </span>
           </Link>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, type MouseEvent } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { createTileTransition } from "@/animations/start/tileTransition";
 import SectionScreen from "@/components/SectionScreen";
 import { markHeroArrival } from "@/lib/heroArrival";
