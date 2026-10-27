@@ -7,6 +7,7 @@ import { createCharRoll } from "@/animations/charRoll";
 import RollText from "@/components/RollText";
 import { useGsap } from "@/lib/useGsap";
 import { GRID_LINE_LEFT, GRID_LINE_RIGHT } from "@/lib/sectionGrid";
+import { useTranslations } from "next-intl";
 
 // Líneas de fondo: las verticales continúan las de <SectionHero />
 const LINES = [
@@ -37,15 +38,10 @@ const STICKERS = [
   },
 ] as const;
 
-const STATEMENT = [
-  "Good design gets attention.",
-  "Great brands give people",
-  "a reason to remember.",
-];
-
 /** Branding & Design · pantalla 2: frase de marca con stickers. */
 export default function BrandingStatement() {
   const rootRef = useRef<HTMLElement>(null);
+  const t = useTranslations("Branding");
 
   useGsap((root) => {
     const tl = createBrandingStatement(root);
@@ -65,9 +61,10 @@ export default function BrandingStatement() {
       <div className="absolute inset-y-[15%] left-[7.5%] right-[12%] flex items-center">
         <p className="font-display text-statement font-bold leading-[0.8] text-white tracking-tight">
           <RollText
-            lines={STATEMENT}
+            lines={t.raw("statement") as string[]}
             decorate={{
-              "remember.": (
+              // Palabra con el círculo (la última del texto, en cada idioma)
+              [t("marked")]: (
                 <svg
                   aria-hidden
                   viewBox="0 0 300 100"

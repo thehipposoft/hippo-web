@@ -2,9 +2,10 @@
 
 import { useRef } from "react";
 import { gsap } from "gsap";
+import { useTranslations } from "next-intl";
 import LightGridLines from "@/components/LightGridLines";
 import SectionMenu from "@/components/SectionMenu";
-import ContactForm, { CONTACT_EMAIL } from "@/components/sections/contact/ContactForm";
+import ContactForm, { CONTACT_EMAILS } from "@/components/sections/contact/ContactForm";
 import { takeHeroArrival } from "@/lib/heroArrival";
 import type { Section } from "@/lib/sections";
 import { useGsap } from "@/lib/useGsap";
@@ -23,6 +24,7 @@ type ContactScreenProps = {
  * Partes que usa la transición: [data-hero-panel], [data-hero-content] y el botón de <SectionMenu />.
  */
 export default function ContactScreen({ section, intro = true }: ContactScreenProps) {
+  const t = useTranslations("Contact");
   const contentRef = useRef<HTMLDivElement>(null);
 
   useGsap(
@@ -52,29 +54,32 @@ export default function ContactScreen({ section, intro = true }: ContactScreenPr
             <path d="M40 0V48H0C14 42 28 30 40 0Z" fill="currentColor" />
           </svg>
           <h1 className="font-display text-[clamp(2rem,3.4vw,4rem)] font-bold leading-[1.25]">
-            Got an idea?
+            {t("titleLine1")}
             <br />
-            Let&apos;s make it a thing.
+            {t("titleLine2")}
           </h1>
         </div>
 
         <p className="absolute left-[7.4%] top-[46.5%] w-[36%] font-display text-[clamp(0.85rem,0.9vw,1rem)] leading-snug">
-          It can be a half-baked idea, a big problem, a weird thought or something you&apos;ve been meaning to fix
-          for years.
+          {t("intro")}
           <br />
-          Tell us. We&apos;ll take it from there…
+          {t("introCta")}
         </p>
 
         <ul className="absolute left-[8%] top-[58%] flex flex-col gap-[clamp(1rem,1.8vw,2rem)] font-display text-[clamp(0.85rem,0.9vw,1rem)]">
-          <li>
-            <a href={`mailto:${CONTACT_EMAIL}`} className="flex items-center gap-3 hover:underline">
-              {/* TODO: reemplazar por el ícono dibujado a mano del diseño */}
-              <svg aria-hidden viewBox="0 0 48 32" fill="none" className="w-[clamp(2rem,2.6vw,3rem)]">
-                <path d="M3 9h34v20H3z M3 9l17 12 17-12" stroke="currentColor" strokeWidth={2} strokeLinejoin="round" />
-                <path d="M40 4l3-3M42 9h5M38 1l1-1" stroke="currentColor" strokeWidth={2} strokeLinecap="round" />
-              </svg>
-              {CONTACT_EMAIL}
-            </a>
+          <li className="flex items-center gap-3">
+            {/* TODO: reemplazar por el ícono dibujado a mano del diseño */}
+            <svg aria-hidden viewBox="0 0 48 32" fill="none" className="w-[clamp(2rem,2.6vw,3rem)] shrink-0">
+              <path d="M3 9h34v20H3z M3 9l17 12 17-12" stroke="currentColor" strokeWidth={2} strokeLinejoin="round" />
+              <path d="M40 4l3-3M42 9h5M38 1l1-1" stroke="currentColor" strokeWidth={2} strokeLinecap="round" />
+            </svg>
+            <span className="flex flex-col">
+              {CONTACT_EMAILS.map((email) => (
+                <a key={email} href={`mailto:${email}`} className="hover:underline">
+                  {email}
+                </a>
+              ))}
+            </span>
           </li>
           <li>
             <a href={`tel:${PHONE.replaceAll(" ", "")}`} className="flex items-center gap-3 hover:underline">

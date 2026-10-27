@@ -1,54 +1,33 @@
 "use client";
 
-import { useRef, useState, type ReactNode } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { createWheel } from "@/animations/about/wheel";
 import { GRID_LINE_LEFT } from "@/lib/sectionGrid";
 import { IRREGULAR_MASK } from "@/lib/shapes";
 import { useGsap } from "@/lib/useGsap";
+import { useTranslations } from "next-intl";
 
 // Año activo al cargar (2026)
 const INITIAL = 4;
 
-// Años de la rueda. Sin `title` el año no tiene contenido (por ahora 2023).
-// TODO: ilustración dentro del recuadro activo de cada año
+// Años de la rueda. Con `hasContent` el año tiene título y texto en About.wheel.years.<year>
+// (por ahora 2023 no). TODO: ilustración dentro del recuadro activo de cada año
 const YEARS: {
-  year: string;
+  year: "2021" | "2022" | "2023" | "2024" | "2026";
   color: string;
-  title?: string;
-  text?: ReactNode;
-  image?: { src: string; width: number; height: number; alt: string };
+  hasContent?: boolean;
+  image?: { src: string; width: number; height: number };
 }[] = [
-  {
-    year: "2021",
-    color: "bg-brand-blue",
-    title: "It started with a few good ideas.",
-    text: "Hippo was born as a small team of professionals from different backgrounds, brought together by design, code and a curiosity for digital. We took on all kinds of projects, learned fast and questioned almost everything.",
-  },
-  {
-    year: "2022",
-    color: "bg-brand-pink",
-    title: "We started figuring it out.",
-    text: "More projects, more clients, more questions. We grew from doing things to thinking about why we were doing them — developing our skills, our process and our way of working.",
-  },
+  { year: "2021", color: "bg-brand-blue", hasContent: true },
+  { year: "2022", color: "bg-brand-pink", hasContent: true },
   { year: "2023", color: "bg-brand-orange" },
-  {
-    year: "2024",
-    color: "bg-brand-green",
-    title: "More than a software factory.",
-    text: "We started thinking bigger. Strategy, consulting and long-term partnerships became part of the way we work. We kept designing and developing, but with a clearer idea of where we wanted to go.",
-  },
+  { year: "2024", color: "bg-brand-green", hasContent: true },
   {
     year: "2026",
     color: "bg-brand-darkpink",
-    title: "Hello, Hippo.",
-    text: (
-      <>
-        TheHipposoft <strong>becomes Hippo.</strong> Five years in, we have more experience, more tools and more
-        freedom to choose the work we want to do — while keeping the thing that started it all: curiosity.
-      </>
-    ),
-    image: { src: "/assets/images/about/hippo-personajewhite.svg", width: 135, height: 219, alt: "Hippo, el personaje de HippoSoft" },
+    hasContent: true,
+    image: { src: "/assets/images/about/hippo-personajewhite.svg", width: 135, height: 219 },
   },
 ];
 
@@ -58,6 +37,7 @@ const LINES = [`inset-y-0 ${GRID_LINE_LEFT} w-px`, "inset-x-0 top-[15%] h-px", `
 
 /** About · rueda de años: el año activo queda arriba al medio; al elegir otro, la rueda gira. */
 export default function AboutWheel() {
+  const t = useTranslations("About.wheel");
   const rootRef = useRef<HTMLElement>(null);
   const goToRef = useRef<(index: number) => void>(() => {});
   const [active, setActive] = useState(INITIAL);
@@ -76,7 +56,7 @@ export default function AboutWheel() {
   return (
     <section
       ref={rootRef}
-      aria-label="Nuestra historia"
+      aria-label={t("label")}
       className="relative h-svh w-full overflow-hidden bg-brand-black text-white"
     >
       {LINES.map((className) => (
@@ -128,16 +108,20 @@ export default function AboutWheel() {
         {YEARS.map((item) => (
           <div key={item.year} data-wheel-content aria-live="polite" className="col-start-1 row-start-1">
             <p className="font-display text-[clamp(1.5rem,2.3vw,2.6rem)] font-bold leading-none">{item.year}</p>
-            {item.title && (
+            {item.hasContent && item.year !== "2023" && (
               <h3 className="mt-2 font-display text-[clamp(0.9rem,1.1vw,1.2rem)] font-bold uppercase leading-tight">
-                {item.title}
+                {t(`years.${item.year}.title`)}
               </h3>
             )}
-            {item.text && <p className="mt-1.5 text-[clamp(0.75rem,0.8vw,0.9rem)] leading-snug">{item.text}</p>}
+            {item.hasContent && item.year !== "2023" && (
+              <p className="mt-1.5 text-[clamp(0.75rem,0.8vw,0.9rem)] leading-snug">
+                {t.rich(`years.${item.year}.text`, { strong: (chunks) => <strong>{chunks}</strong> })}
+              </p>
+            )}
             {item.image && (
               <Image
                 src={item.image.src}
-                alt={item.image.alt}
+                alt={t("characterAlt")}
                 width={item.image.width}
                 height={item.image.height}
                 className="mx-auto mt-3 h-auto w-[clamp(3.5rem,5vw,5.5rem)]"

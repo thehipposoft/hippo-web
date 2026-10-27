@@ -6,46 +6,17 @@ import { Link } from "@/i18n/navigation";
 import { createAboutStatement } from "@/animations/about/statement";
 import { getSectionHref } from "@/lib/sections";
 import { useGsap } from "@/lib/useGsap";
+import { useTranslations } from "next-intl";
 
-// ── Copy ─────────────────────────────────────────────────────────
-const INTRO = {
-  // El título se arma como: titleStart + titleMarked (con el círculo) + titleEnd
-  titleStart: "Tecnología con ",
-  titleMarked: "propósito",
-  titleEnd: ".",
-  paragraphs: [
-    "Somos Hippo, un equipo que diseña y desarrolla experiencias digitales para equipos que quieren crecer sin sumar complejidad.",
-    "Creemos que la tecnología no debería ocupar el centro de la escena, sino hacer posible todo lo que ocurre detrás. Por eso diseñamos herramientas que conectan personas, procesos e ideas, y creamos sistemas que simplifican el trabajo para que cada equipo pueda concentrarse en lo que realmente importa.",
-  ],
-};
+// ── Copy: en messages/*.json (About.intro, About.values, About.closing) ──
+// Acá solo lo visual: colores de cada card, en el orden de About.values.items
+const VALUE_CARD_CLASSES = [
+  "bg-brand-orange text-brand-darkorange",
+  "bg-brand-darkblue text-white",
+  "bg-brand-green text-brand-darkgreen",
+];
 
-const VALUES = {
-  // Dos renglones; el segundo (destacado) va más grande y subrayado
-  titleStart: "Lo que nos",
-  titleMarked: "Mueve",
-  items: [
-    {
-      title: "Propósito antes que herramientas.",
-      text: "Entendemos tu negocio antes de construir. Cada decisión técnica tiene que tener un porqué.",
-      className: "bg-brand-orange text-brand-darkorange",
-    },
-    {
-      title: "Acompañamiento real.",
-      text: "No entregamos y desaparecemos. Nos involucramos en cada etapa, del primer boceto al soporte posterior al lanzamiento.",
-      className: "bg-brand-darkblue text-white",
-    },
-    {
-      title: "Construir juntos.",
-      text: "Trabajamos en alianza, alineados con tus objetivos, como parte de tu equipo y no como un proveedor más.",
-      className: "bg-brand-green text-brand-darkgreen",
-    },
-  ],
-};
-
-const CLOSING = {
-  text: "Buscamos ser el aliado técnico de proyectos con propósito y de equipos que realmente creen en lo que hacen. Nos sumamos a ideas que valen la pena y ayudamos a hacerlas llegar más lejos usando la tecnología de una manera consciente.",
-  cta: "Hablemos",
-};
+type ValueItem = { title: string; text: string };
 
 /** Texto partido en palabras (texto real, legible por lectores de pantalla y buscadores) */
 function Words({ text }: { text: string }) {
@@ -73,6 +44,19 @@ function Chars({ text }: { text: string }) {
  */
 export default function AboutStatement() {
   const rootRef = useRef<HTMLDivElement>(null);
+  const t = useTranslations("About");
+  const INTRO = {
+    titleStart: t("intro.titleStart"),
+    titleMarked: t("intro.titleMarked"),
+    titleEnd: t("intro.titleEnd"),
+    paragraphs: t.raw("intro.paragraphs") as string[],
+  };
+  const VALUES = {
+    titleStart: t("values.titleStart"),
+    titleMarked: t("values.titleMarked"),
+    items: (t.raw("values.items") as ValueItem[]).map((item, i) => ({ ...item, className: VALUE_CARD_CLASSES[i] })),
+  };
+  const CLOSING = { text: t("closing.text"), cta: t("closing.cta") };
 
   useGsap((root) => createAboutStatement(root), rootRef);
 
@@ -181,7 +165,7 @@ export default function AboutStatement() {
           <Image
             data-about-character
             src="/assets/images/hippo-personaje.svg"
-            alt="Hippo, el personaje de HippoSoft"
+            alt={t("closing.characterAlt")}
             width={148}
             height={210}
             className="h-auto w-[clamp(12rem,20vw,26rem)] -scale-x-100 justify-self-center md:justify-self-end"

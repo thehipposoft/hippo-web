@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { createStartIntro } from "@/animations/start/intro";
 import { createStartScroll } from "@/animations/start/scroll";
 import { createTileHover } from "@/animations/start/tileHover";
@@ -31,6 +32,7 @@ const LINES = [
 ] as const;
 
 export default function Start() {
+  const t = useTranslations("Home");
   const rootRef = useRef<HTMLElement>(null);
   const { handleTileClick, overlay } = useTileTransition(
     () => rootRef.current?.querySelector<HTMLElement>("[data-start-box]") ?? null,
@@ -76,20 +78,19 @@ export default function Start() {
               data-start-text
               className="text-[max(0.875rem,calc(var(--start-box)*0.045))] leading-[1.45]"
             >
-              We create to connect.
+              {t("title")}
             </h1>
             <p
               data-start-text
               className="mt-[1.45em] max-w-[65%] text-[max(0.875rem,calc(var(--start-box)*0.045))] leading-[1.45]"
             >
-              We turn ideas into digital experiences through design, technology and intelligent
-              automation.
+              {t("description")}
             </p>
             <p
               data-start-text
               className="mt-[calc(var(--start-box)*0.065)] text-[max(0.75rem,calc(var(--start-box)*0.030))]"
             >
-              Design · Technology · Automation
+              {t("tagline")}
             </p>
           </div>
 
@@ -97,8 +98,7 @@ export default function Start() {
             data-start-copy-alt
             className="invisible absolute inset-x-0 top-0 px-[calc(var(--start-box)*0.065)] pt-[calc(var(--start-box)*0.07)] font-display text-[max(0.875rem,calc(var(--start-box)*0.06))] font-bold leading-[1.45] text-(--start-ink-filled) opacity-0"
           >
-            From identity to digital experiences, from websites to automation, we create the systems
-            that help businesses connect, evolve, and work better.
+            {t("manifesto")}
           </p>
 
           <div
@@ -107,7 +107,7 @@ export default function Start() {
           >
             <Image
               src="/assets/images/logo-fullcolor.png"
-              alt="Hippo"
+              alt={t("logoAlt")}
               width={1870}
               height={490}
               priority

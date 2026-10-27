@@ -31,7 +31,7 @@ export function createWebDevStatement(root: HTMLElement): gsap.core.Timeline {
     // El punto acompaña al último tramo desde que empieza
     if (i === segments.length - 1) tl.set("[data-webdev-dot]", { autoAlpha: 1 });
     tl.to(segment, {
-      duration: Math.max(0.6, text.length * SECONDS_PER_CHAR),
+      duration: Math.max(0.25, text.length * SECONDS_PER_CHAR),
       scrambleText: { text, chars: SCRAMBLE_CHARS, revealDelay: 0.6, speed: 0.3 },
     });
   });

@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { createWebDevStatement } from "@/animations/web-development/statement";
 import { GRID_LINE_LEFT, GRID_LINE_RIGHT } from "@/lib/sectionGrid";
 import { useGsap } from "@/lib/useGsap";
+import { useTranslations } from "next-intl";
 
 // Líneas de fondo: las verticales continúan las de <SectionHero />
 const LINES = [
@@ -28,9 +29,23 @@ function Scramble({ text, className = "" }: { text: string; className?: string }
   );
 }
 
+/**
+ * Frase partida en palabras: cada una es un tramo de <Scramble /> (no se corta por dentro), así
+ * el texto puede pasar de renglón en idiomas con frases más largas.
+ */
+function ScrambleWords({ text }: { text: string }) {
+  return text.split(" ").map((word, i) => (
+    <span key={i}>
+      {i > 0 && " "}
+      <Scramble text={word} />
+    </span>
+  ));
+}
+
 /** Web Development · pantalla 2: frase de entrada con efecto de tipeo. */
 export default function WebDevStatement() {
   const rootRef = useRef<HTMLElement>(null);
+  const t = useTranslations("WebDev.statement");
 
   useGsap((root) => {
     const tl = createWebDevStatement(root);
@@ -45,15 +60,15 @@ export default function WebDevStatement() {
 
       <div className="absolute inset-y-[16%] left-[8.3%] right-[12%] flex items-center">
         <p className="font-display text-statement font-bold leading-[1.2] text-white">
-          <span className="sr-only">Designed to look good. Built to work even better.</span>
+          <span className="sr-only">{t("full")}</span>
           <span aria-hidden>
             <span className="block">
-              <Scramble text="Designed to look good" />
+              <ScrambleWords text={t("line1")} />
             </span>
             <span className="block">
-              <Scramble text="Built to work" />{" "}
+              <ScrambleWords text={t("line2")} />{" "}
               <span className="relative inline-block">
-                <Scramble text="even better" />
+                <ScrambleWords text={t("marked")} />
                 {/* Subrayado a mano */}
                 <svg
                   data-webdev-underline

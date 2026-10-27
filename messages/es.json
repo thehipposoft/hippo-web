@@ -376,5 +376,193 @@
       "usa": "Estados Unidos",
       "esp": "España"
     }
+  },
+  "Home": {
+    "title": "Creamos para conectar.",
+    "description": "Convertimos ideas en experiencias digitales con diseño, tecnología y automatización inteligente.",
+    "tagline": "Diseño · Tecnología · Automatización",
+    "manifesto": "De la identidad a lo digital, de la web a la automatización: creamos los sistemas que ayudan a las empresas a conectar, crecer y trabajar mejor.",
+    "logoAlt": "Hippo"
+  },
+  "Nav": {
+    "sections": "Secciones",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "language": "Idioma",
+    "switchTo": "Ver en {language}",
+    "languages": {
+      "es": "Español",
+      "en": "English"
+    }
+  },
+  "Contact": {
+    "titleLine1": "¿Tenés una idea?",
+    "titleLine2": "Hagámosla realidad.",
+    "intro": "Puede ser una idea a medio cocinar, un gran problema, un pensamiento raro o algo que venís queriendo resolver hace años.",
+    "introCta": "Contanos. Nosotros nos encargamos del resto…",
+    "form": {
+      "tabs": {
+        "contact": "contacto",
+        "project": "proyecto",
+        "timeline": "plazos"
+      },
+      "name": "Tu nombre",
+      "email": "Tu email",
+      "message": "Tu mensaje",
+      "project": "Proyecto",
+      "interestedIn": "Me interesa…",
+      "interests": [
+        "Diseño web",
+        "Desarrollo web",
+        "Diseño gráfico",
+        "Branding",
+        "Sistemas & IA"
+      ],
+      "whenLive": "¿Para cuándo lo querés publicado?",
+      "timelines": [
+        "Lo antes posible",
+        "En unos meses",
+        "Sin apuro",
+        "Solo explorando"
+      ],
+      "budget": "¿Con qué presupuesto contás?",
+      "send": "¡enviar!",
+      "mail": {
+        "subject": "Nuevo proyecto",
+        "name": "Nombre",
+        "email": "Email",
+        "interests": "Me interesa",
+        "timeline": "Plazos",
+        "budget": "Presupuesto"
+      }
+    }
+  },
+  "Branding": {
+    "statement": [
+      "El buen diseño llama la atención.",
+      "Las grandes marcas le dan a la gente",
+      "un motivo para recordar."
+    ],
+    "marked": "recordar."
+  },
+  "WebDev": {
+    "statement": {
+      "line1": "Diseñado para verse bien",
+      "line2": "Construido para funcionar",
+      "marked": "aún mejor",
+      "full": "Diseñado para verse bien. Construido para funcionar aún mejor."
+    },
+    "steps": {
+      "heading": "Estrategia, consultoría, desarrollo y soporte continuo —",
+      "headingLine2": "todo bajo un mismo techo.",
+      "nav": "Pasos",
+      "stepLabel": "Paso {number}: {label}",
+      "items": [
+        {
+          "label": "Pensalo",
+          "title": "Estrategia y planificación",
+          "description": "Entendemos el problema, el negocio y hacia dónde querés ir."
+        },
+        {
+          "label": "Construilo",
+          "title": "Desarrollo",
+          "description": "Convertimos el plan en experiencias digitales que funcionan."
+        },
+        {
+          "label": "Mejoralo",
+          "title": "Optimización y consultoría",
+          "description": "Aprendemos, ajustamos y hacemos que todo funcione mejor."
+        },
+        {
+          "label": "Hacelo avanzar.",
+          "title": "Mantenimiento y soporte",
+          "description": "Seguimos cerca para que todo siga funcionando y evolucionando."
+        }
+      ]
+    }
+  },
+  "Systems": {
+    "statement": {
+      "line1": "Conectamos personas, herramientas",
+      "line2": "y procesos para que todo",
+      "line3": "siga avanzando ",
+      "marked1": "sin el trabajo",
+      "marked2": "repetitivo."
+    },
+    "folder": {
+      "title": "nos ocupamos de",
+      "tabs": {
+        "chatbots": "Chatbots",
+        "agents": "Agentes",
+        "workflows": "Flujos de trabajo"
+      }
+    }
+  },
+  "About": {
+    "intro": {
+      "titleStart": "Tecnología con ",
+      "titleMarked": "propósito",
+      "titleEnd": ".",
+      "paragraphs": [
+        "Somos Hippo, un equipo que diseña y desarrolla experiencias digitales para equipos que quieren crecer sin sumar complejidad.",
+        "Creemos que la tecnología no debería ocupar el centro de la escena, sino hacer posible todo lo que ocurre detrás. Por eso diseñamos herramientas que conectan personas, procesos e ideas, y creamos sistemas que simplifican el trabajo para que cada equipo pueda concentrarse en lo que realmente importa."
+      ]
+    },
+    "values": {
+      "titleStart": "Lo que nos",
+      "titleMarked": "Mueve",
+      "items": [
+        {
+          "title": "Propósito antes que herramientas.",
+          "text": "Entendemos tu negocio antes de construir. Cada decisión técnica tiene que tener un porqué."
+        },
+        {
+          "title": "Acompañamiento real.",
+          "text": "No entregamos y desaparecemos. Nos involucramos en cada etapa, del primer boceto al soporte posterior al lanzamiento."
+        },
+        {
+          "title": "Construir juntos.",
+          "text": "Trabajamos en alianza, alineados con tus objetivos, como parte de tu equipo y no como un proveedor más."
+        }
+      ]
+    },
+    "closing": {
+      "text": "Buscamos ser el aliado técnico de proyectos con propósito y de equipos que realmente creen en lo que hacen. Nos sumamos a ideas que valen la pena y ayudamos a hacerlas llegar más lejos usando la tecnología de una manera consciente.",
+      "cta": "Hablemos",
+      "characterAlt": "Hippo, nuestro personaje"
+    },
+    "timeline": {
+      "lines": [
+        [
+          "Cinco años.",
+          "Muchas ideas."
+        ],
+        [
+          "Y todavía más aprendizajes."
+        ]
+      ]
+    },
+    "wheel": {
+      "label": "Nuestra historia",
+      "characterAlt": "Hippo, nuestro personaje",
+      "years": {
+        "2021": {
+          "title": "Todo empezó con unas pocas buenas ideas.",
+          "text": "Hippo nació como un equipo chico de profesionales con distintos recorridos, unidos por el diseño, el código y la curiosidad por lo digital. Tomamos todo tipo de proyectos, aprendimos rápido y cuestionamos casi todo."
+        },
+        "2022": {
+          "title": "Empezamos a encontrarle la vuelta.",
+          "text": "Más proyectos, más clientes, más preguntas. Pasamos de hacer cosas a pensar por qué las hacíamos, y desarrollamos nuestras habilidades, nuestro proceso y nuestra forma de trabajar."
+        },
+        "2024": {
+          "title": "Más que una software factory.",
+          "text": "Empezamos a pensar en grande. La estrategia, la consultoría y las alianzas a largo plazo se volvieron parte de cómo trabajamos. Seguimos diseñando y desarrollando, pero con una idea más clara de hacia dónde queríamos ir."
+        },
+        "2026": {
+          "title": "Hola, Hippo.",
+          "text": "TheHipposoft <strong>se convierte en Hippo.</strong> Cinco años después, tenemos más experiencia, más herramientas y más libertad para elegir el trabajo que queremos hacer, sin perder lo que empezó todo: la curiosidad."
+        }
+      }
+    }
   }
 }

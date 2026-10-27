@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { gsap } from "gsap";
+import { useTranslations } from "next-intl";
 import { createMenuToggle } from "@/animations/menu";
 import { createTileHover } from "@/animations/start/tileHover";
 import SectionTiles, { SECTION_TILES_VARS } from "@/components/SectionTiles";
@@ -20,6 +21,7 @@ type SectionMenuProps = {
  * Abrir/cerrar no cambia de ruta: es un timeline que va y vuelve (animations/menu.ts).
  */
 export default function SectionMenu({ section }: SectionMenuProps) {
+  const t = useTranslations("Nav");
   const buttonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
@@ -104,7 +106,7 @@ export default function SectionMenu({ section }: SectionMenuProps) {
       <button
         ref={buttonRef}
         type="button"
-        aria-label={open ? "Cerrar menú" : "Abrir menú"}
+        aria-label={open ? t("closeMenu") : t("openMenu")}
         aria-expanded={open}
         onClick={open ? closeMenu : openMenu}
         data-hero-menu

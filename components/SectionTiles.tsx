@@ -32,9 +32,10 @@ type SectionTilesProps = {
 /** Grilla de recuadros de secciones (inicio y menú). Arrancan sin clicks: los habilita la animación. */
 export default function SectionTiles({ className = "", onTileClick }: SectionTilesProps) {
   const t = useTranslations("Sections");
+  const tNav = useTranslations("Nav");
   return (
     <nav
-      aria-label="Secciones"
+      aria-label={tNav("sections")}
       data-start-tiles
       className={`grid grid-cols-[1fr_1.4fr_var(--start-box)_1.4fr_1fr] grid-rows-[1fr_var(--start-box)_1fr] gap-(--start-gap) p-(--start-gap) ${className}`}
     >

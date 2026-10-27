@@ -5,33 +5,17 @@ import Image from "next/image";
 import { createWebDevSteps } from "@/animations/web-development/steps";
 import { GRID_LINE_LEFT, GRID_LINE_RIGHT } from "@/lib/sectionGrid";
 import { useGsap } from "@/lib/useGsap";
+import { useTranslations } from "next-intl";
 
+// Íconos de cada paso; los textos están en WebDev.steps.items (mismo orden)
 const STEPS = [
-  {
-    label: "Think it",
-    title: "Strategy & Planning",
-    description: "We understand the problem, the business and where you want to go.",
-    icon: { src: "/assets/images/webdev/webdev-icon1.png", width: 340, height: 328 },
-  },
-  {
-    label: "Build it",
-    title: "Development",
-    description: "We turn the plan into digital experiences that work.",
-    icon: { src: "/assets/images/webdev/webdev-icon2.png", width: 400, height: 318 },
-  },
-  {
-    label: "Improve it",
-    title: "Optimization & Consulting",
-    description: "We learn, adjust and make things better.",
-    icon: { src: "/assets/images/webdev/webdev-icon3.png", width: 340, height: 328 },
-  },
-  {
-    label: "Keep it moving.",
-    title: "Maintenance & Support",
-    description: "We stay around to keep everything running and evolving.",
-    icon: { src: "/assets/images/webdev/webdev-icon4.png", width: 349, height: 328 },
-  },
+  { icon: { src: "/assets/images/webdev/webdev-icon1.png", width: 340, height: 328 } },
+  { icon: { src: "/assets/images/webdev/webdev-icon2.png", width: 400, height: 318 } },
+  { icon: { src: "/assets/images/webdev/webdev-icon3.png", width: 340, height: 328 } },
+  { icon: { src: "/assets/images/webdev/webdev-icon4.png", width: 349, height: 328 } },
 ] as const;
+
+type StepText = { label: string; title: string; description: string };
 
 // Líneas de fondo: las verticales de los extremos continúan las de las pantallas anteriores
 const LINES = [
@@ -45,6 +29,8 @@ const LINES = [
 
 /** Web Development · proceso en 4 pasos, recorrido con el scroll (sección pineada). */
 export default function WebDevSteps() {
+  const t = useTranslations("WebDev.steps");
+  const items = t.raw("items") as StepText[];
   const rootRef = useRef<HTMLElement>(null);
 
   useGsap((root) => createWebDevSteps(root), rootRef);
@@ -61,12 +47,12 @@ export default function WebDevSteps() {
       {/* Título y pasos */}
       <div className="absolute left-[5.5%] top-[19%] font-display font-bold">
         <h2 className="text-[clamp(1.25rem,2vw,2.25rem)] leading-tight tracking-tight">
-          Strategy, consulting, development &amp; ongoing support —
+          {t("heading")}
           <br />
-          all under one roof.
+          {t("headingLine2")}
         </h2>
         <p className="mt-[0.4em] text-[clamp(1.35rem,2.15vw,2.4rem)]">
-          {STEPS.map((step, i) => (
+          {items.map((step, i) => (
             <span
               key={step.label}
               data-step-label
@@ -75,20 +61,20 @@ export default function WebDevSteps() {
               {i > 0 && <span aria-hidden>→ </span>}
               {step.label}
               <sup className="ml-[0.1em] text-[0.3em]">{i + 1}</sup>
-              {i < STEPS.length - 1 && " "}
+              {i < items.length - 1 && " "}
             </span>
           ))}
         </p>
       </div>
 
       {/* Navegación por pasos */}
-      <nav aria-label="Pasos" className="absolute left-[5.5%] top-[39.5%] flex gap-1.5">
-        {STEPS.map((step, i) => (
+      <nav aria-label={t("nav")} className="absolute left-[5.5%] top-[39.5%] flex gap-1.5">
+        {items.map((step, i) => (
           <button
             key={step.label}
             type="button"
             data-step-button
-            aria-label={`Paso ${i + 1}: ${step.label}`}
+            aria-label={t("stepLabel", { number: i + 1, label: step.label })}
             aria-current={i === 0 ? "step" : undefined}
             className={`flex size-[clamp(1.75rem,2.2vw,2.5rem)] cursor-pointer items-center justify-center rounded-full font-display text-[clamp(0.9rem,1.2vw,1.35rem)] font-bold text-white ${
               i === 0 ? "bg-(--steps-active)" : "bg-(--steps-muted)"
@@ -102,7 +88,7 @@ export default function WebDevSteps() {
       {/* Descripción del paso actual */}
       {/* Todas en la misma celda de la grilla (superpuestas, alineadas abajo) */}
       <div className="absolute bottom-[19%] left-[5.5%] grid w-[clamp(16rem,22vw,24rem)]">
-        {STEPS.map((step) => (
+        {items.map((step) => (
           <div key={step.title} data-step-description className="col-start-1 row-start-1 self-end">
             <h3 className="text-[clamp(0.95rem,1.05vw,1.15rem)] font-medium">{step.title}</h3>
             <p className="text-[clamp(0.95rem,1.05vw,1.15rem)] leading-relaxed">{step.description}</p>

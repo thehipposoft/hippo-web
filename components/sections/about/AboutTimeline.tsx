@@ -6,9 +6,8 @@ import { createAboutTimeline } from "@/animations/about/timeline";
 import { GRID_LINE_LEFT } from "@/lib/sectionGrid";
 import { IRREGULAR_MASK } from "@/lib/shapes";
 import { useGsap } from "@/lib/useGsap";
+import { useTranslations } from "next-intl";
 
-// Renglones; cada renglón tiene una o más oraciones (se escriben de a una, con pausa entre ellas)
-const STATEMENT = [["Five years.", "A lot of ideas."], ["Even more things learned."]];
 
 // Líneas de fondo (sin animación): la vertical continúa la del resto del sitio
 const LINES = [
@@ -37,6 +36,9 @@ const SWATCHES = [
 
 /** About · "Five years…": frase que se escribe oración por oración, con stickers y la paleta. */
 export default function AboutTimeline() {
+  const t = useTranslations("About.timeline");
+  // Renglones; cada renglón tiene una o más oraciones (se escriben de a una, con pausa entre ellas)
+  const STATEMENT = t.raw("lines") as string[][];
   const rootRef = useRef<HTMLElement>(null);
 
   useGsap((root) => createAboutTimeline(root), rootRef);

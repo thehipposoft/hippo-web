@@ -376,5 +376,193 @@
       "usa": "United States",
       "esp": "Spain"
     }
+  },
+  "Home": {
+    "title": "We create to connect.",
+    "description": "We turn ideas into digital experiences through design, technology and intelligent automation.",
+    "tagline": "Design · Technology · Automation",
+    "manifesto": "From identity to digital experiences, from websites to automation, we create the systems that help businesses connect, evolve, and work better.",
+    "logoAlt": "Hippo"
+  },
+  "Nav": {
+    "sections": "Sections",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "language": "Language",
+    "switchTo": "View in {language}",
+    "languages": {
+      "es": "Español",
+      "en": "English"
+    }
+  },
+  "Contact": {
+    "titleLine1": "Got an idea?",
+    "titleLine2": "Let's make it a thing.",
+    "intro": "It can be a half-baked idea, a big problem, a weird thought or something you've been meaning to fix for years.",
+    "introCta": "Tell us. We'll take it from there…",
+    "form": {
+      "tabs": {
+        "contact": "contact",
+        "project": "project",
+        "timeline": "timeline"
+      },
+      "name": "Your name",
+      "email": "Your email",
+      "message": "Your message",
+      "project": "Project",
+      "interestedIn": "I'm interested in…",
+      "interests": [
+        "Web design",
+        "Web Development",
+        "Graphic design",
+        "Branding",
+        "Systems & AI"
+      ],
+      "whenLive": "When do you want to be live?",
+      "timelines": [
+        "ASAP",
+        "In a quarter",
+        "Flexible",
+        "Just Exploring"
+      ],
+      "budget": "Working budget?",
+      "send": "send!",
+      "mail": {
+        "subject": "New project",
+        "name": "Name",
+        "email": "Email",
+        "interests": "Interested in",
+        "timeline": "Timeline",
+        "budget": "Budget"
+      }
+    }
+  },
+  "Branding": {
+    "statement": [
+      "Good design gets attention.",
+      "Great brands give people",
+      "a reason to remember."
+    ],
+    "marked": "remember."
+  },
+  "WebDev": {
+    "statement": {
+      "line1": "Designed to look good",
+      "line2": "Built to work",
+      "marked": "even better",
+      "full": "Designed to look good. Built to work even better."
+    },
+    "steps": {
+      "heading": "Strategy, consulting, development & ongoing support —",
+      "headingLine2": "all under one roof.",
+      "nav": "Steps",
+      "stepLabel": "Step {number}: {label}",
+      "items": [
+        {
+          "label": "Think it",
+          "title": "Strategy & Planning",
+          "description": "We understand the problem, the business and where you want to go."
+        },
+        {
+          "label": "Build it",
+          "title": "Development",
+          "description": "We turn the plan into digital experiences that work."
+        },
+        {
+          "label": "Improve it",
+          "title": "Optimization & Consulting",
+          "description": "We learn, adjust and make things better."
+        },
+        {
+          "label": "Keep it moving.",
+          "title": "Maintenance & Support",
+          "description": "We stay around to keep everything running and evolving."
+        }
+      ]
+    }
+  },
+  "Systems": {
+    "statement": {
+      "line1": "We connect people, tools",
+      "line2": "and processes so things",
+      "line3": "keep moving ",
+      "marked1": "without the",
+      "marked2": "busywork."
+    },
+    "folder": {
+      "title": "we take care",
+      "tabs": {
+        "chatbots": "Chatbots",
+        "agents": "Agents",
+        "workflows": "Workflows"
+      }
+    }
+  },
+  "About": {
+    "intro": {
+      "titleStart": "Technology with ",
+      "titleMarked": "purpose",
+      "titleEnd": ".",
+      "paragraphs": [
+        "We're Hippo, a team that designs and builds digital experiences for teams that want to grow without adding complexity.",
+        "We believe technology shouldn't take center stage — it should make everything behind the scenes possible. That's why we design tools that connect people, processes and ideas, and build systems that simplify work so every team can focus on what really matters."
+      ]
+    },
+    "values": {
+      "titleStart": "What",
+      "titleMarked": "Drives us",
+      "items": [
+        {
+          "title": "Purpose before tools.",
+          "text": "We understand your business before we build. Every technical decision needs a reason."
+        },
+        {
+          "title": "Real partnership.",
+          "text": "We don't deliver and disappear. We're involved at every stage, from the first sketch to post-launch support."
+        },
+        {
+          "title": "Building together.",
+          "text": "We work as partners, aligned with your goals — as part of your team, not just another vendor."
+        }
+      ]
+    },
+    "closing": {
+      "text": "We want to be the technical partner for purpose-driven projects and teams who truly believe in what they do. We join ideas worth pursuing and help them go further, using technology mindfully.",
+      "cta": "Let's talk",
+      "characterAlt": "Hippo, our mascot"
+    },
+    "timeline": {
+      "lines": [
+        [
+          "Five years.",
+          "A lot of ideas."
+        ],
+        [
+          "Even more things learned."
+        ]
+      ]
+    },
+    "wheel": {
+      "label": "Our story",
+      "characterAlt": "Hippo, our mascot",
+      "years": {
+        "2021": {
+          "title": "It started with a few good ideas.",
+          "text": "Hippo was born as a small team of professionals from different backgrounds, brought together by design, code and a curiosity for digital. We took on all kinds of projects, learned fast and questioned almost everything."
+        },
+        "2022": {
+          "title": "We started figuring it out.",
+          "text": "More projects, more clients, more questions. We grew from doing things to thinking about why we were doing them — developing our skills, our process and our way of working."
+        },
+        "2024": {
+          "title": "More than a software factory.",
+          "text": "We started thinking bigger. Strategy, consulting and long-term partnerships became part of the way we work. We kept designing and developing, but with a clearer idea of where we wanted to go."
+        },
+        "2026": {
+          "title": "Hello, Hippo.",
+          "text": "TheHipposoft <strong>becomes Hippo.</strong> Five years in, we have more experience, more tools and more freedom to choose the work we want to do — while keeping the thing that started it all: curiosity."
+        }
+      }
+    }
   }
 }
