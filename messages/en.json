@@ -1,6 +1,8 @@
 {
   "Metadata": {
-    "siteTitle": "Hippo"
+    "siteTitle": "Hippo",
+    "description": "We design and build digital experiences: branding, web development, AI systems and consulting for companies that want to grow without adding complexity.",
+    "logofolio": "Logofolio"
   },
   "NotFound": {
     "title": "Page not found",

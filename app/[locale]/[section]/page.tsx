@@ -19,6 +19,7 @@ import SystemsStatement from "@/components/sections/systems-ia/SystemsStatement"
 import WebDevStatement from "@/components/sections/web-development/WebDevStatement";
 import WebDevSteps from "@/components/sections/web-development/WebDevSteps";
 import { SECTIONS, getSection, type SectionSlug } from "@/lib/sections";
+import { localizedMetadata } from "@/lib/seo";
 
 // Contenido propio de cada sección, en orden, debajo de la pantalla de entrada
 const SECTION_CONTENT: Partial<Record<SectionSlug, ComponentType[]>> = {
@@ -41,7 +42,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/[section
   const data = getSection(section);
   if (!data) return { title: "Hippo" };
   const t = await getTranslations({ locale: locale as Locale, namespace: "Sections" });
-  return { title: `${t(`${data.slug}.title`)} · Hippo` };
+  return { title: `${t(`${data.slug}.title`)} · Hippo`, ...localizedMetadata(`/${data.slug}`, locale as Locale) };
 }
 
 export default async function SectionPage({ params }: PageProps<"/[locale]/[section]">) {

@@ -6,6 +6,7 @@ import LogofolioSingleComp from "@/components/sections/Logofolio/LogofolioSingle
 import NewLogofolioComp from "@/components/sections/Logofolio/NewLogofolioComp";
 import { LOGOFOLIO, getLogofolioProject } from "@/lib/logofolio";
 import { LOGOFOLIO_SECTION } from "@/lib/logofolioSlugs";
+import { localizedMetadata } from "@/lib/seo";
 
 // Por ahora solo Branding & Design tiene subpáginas: las fichas del logofolio
 const SECTION = LOGOFOLIO_SECTION;
@@ -15,9 +16,14 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/[section]/[slug]">): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const project = getLogofolioProject(slug);
-  return { title: project ? `${project.data.name} · Logofolio · Hippo` : "Hippo" };
+  if (!project) return { title: "Hippo" };
+  const t = await getTranslations({ locale: locale as Locale, namespace: "Metadata" });
+  return {
+    title: `${project.data.name} · ${t("logofolio")} · Hippo`,
+    ...localizedMetadata(`/${SECTION}/${project.slug}`, locale as Locale),
+  };
 }
 
 export default async function LogofolioProjectPage({ params }: PageProps<"/[locale]/[section]/[slug]">) {
