@@ -34,13 +34,13 @@ export function generateStaticParams() {
   return SECTIONS.map(({ slug }) => ({ section: slug }));
 }
 
-export async function generateMetadata({ params }: PageProps<"/[section]">): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps<"/[locale]/[section]">): Promise<Metadata> {
   const { section } = await params;
   const data = getSection(section);
   return { title: data ? `${data.title} · Hippo` : "Hippo" };
 }
 
-export default async function SectionPage({ params }: PageProps<"/[section]">) {
+export default async function SectionPage({ params }: PageProps<"/[locale]/[section]">) {
   const { section } = await params;
   const data = getSection(section);
   if (!data) notFound();

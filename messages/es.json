@@ -1,1 +1,10 @@
-{ "Metadata": { "siteTitle": "Hippo" } }
+{
+  "Metadata": {
+    "siteTitle": "Hippo"
+  },
+  "NotFound": {
+    "title": "Página no encontrada",
+    "description": "La página que buscás no existe o cambió de lugar.",
+    "back": "Volver al inicio"
+  }
+}

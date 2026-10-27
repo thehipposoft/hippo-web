@@ -1,13 +1,14 @@
 import Image from "next/image";
 import type { LogofolioTypes } from "@/components/sections/Logofolio/NewLogofolioComp";
+import type { LogofolioSlug } from "@/lib/logofolioSlugs";
 import type { LogofolioSingleData } from "@/components/sections/Logofolio/LogofolioSingleComp";
 
 // Fichas del logofolio (/branding-design/[slug]).
 // Datos y textos (inglés) traídos de hipposoftsite-2024.
 
 export type LogofolioProject =
-  | { slug: string; layout: "full"; data: LogofolioTypes }
-  | { slug: string; layout: "single"; data: LogofolioSingleData };
+  | { slug: LogofolioSlug; layout: "full"; data: LogofolioTypes }
+  | { slug: LogofolioSlug; layout: "single"; data: LogofolioSingleData };
 
 // ── Bloques de paleta ────────────────────────────────────────────
 // `bg`: clase de Tailwind escrita completa (bg-[#hex]) para que la genere el build
