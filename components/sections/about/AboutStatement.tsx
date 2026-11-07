@@ -63,8 +63,9 @@ export default function AboutStatement() {
   return (
     <div ref={rootRef} className="text-black">
       {/* 1. Intro */}
-      <section data-about-intro className="relative flex min-h-svh items-center overflow-hidden bg-white py-[18svh]">
-        <div className="relative pl-[7.5%] pr-[12%]">
+      {/* Mobile: sin alto de pantalla completa y con menos aire entre bloques */}
+      <section data-about-intro className="relative flex items-center overflow-hidden bg-white pb-[6svh] pt-[12svh] md:min-h-svh md:py-[18svh]">
+        <div className="relative px-[calc(5.5%_+_1.25rem)] md:pl-[7.5%] md:pr-[12%]">
           <h2 data-about-type className="font-display text-statement tracking-tight font-bold leading-[1.05]">
             <Chars text={INTRO.titleStart} />
             <span className="relative inline-block">
@@ -99,7 +100,7 @@ export default function AboutStatement() {
       {/* 2. Lo que nos mueve */}
       <section
         data-about-cards
-        className="relative min-h-svh overflow-hidden bg-white px-[7.5%] py-[18svh] motion-safe:md:h-svh motion-safe:md:py-0"
+        className="relative overflow-hidden bg-white px-[calc(5.5%_+_1.25rem)] py-[6svh] md:min-h-svh md:px-[7.5%] md:py-[18svh] motion-safe:md:h-svh motion-safe:md:py-0"
       >
         <h2
           data-about-type
@@ -144,8 +145,8 @@ export default function AboutStatement() {
       </section>
 
       {/* 3. Cierre */}
-      <section data-about-closing className="relative flex min-h-svh items-center overflow-hidden bg-white py-[18svh]">
-        <div className="relative grid w-full gap-4 pl-[7.5%] pr-[12%] md:grid-cols-[1fr_auto]">
+      <section data-about-closing className="relative flex items-center overflow-hidden bg-white pb-[12svh] pt-[6svh] md:min-h-svh md:py-[18svh]">
+        <div className="relative grid w-full gap-4 px-[calc(5.5%_+_1.25rem)] md:grid-cols-[1fr_auto] md:pl-[7.5%] md:pr-[12%]">
           <div>
             {/* Entra línea por línea, cada una recortada por su propia máscara */}
             <h2 data-about-lines className="font-display text-[clamp(1.75rem,3.2vw,3.5rem)] font-bold leading-tight">

@@ -13,13 +13,14 @@ export default function SystemsFolder() {
   const t = useTranslations("Systems.folder");
   return (
     <section className="relative h-svh w-full overflow-hidden bg-brand-black">
-      <h2 className="absolute left-[12.8%] top-[10%] font-display text-[clamp(1.5rem,2.1vw,2.5rem)] font-bold text-white">
+      <h2 className="absolute left-[calc(5.5%_+_1.25rem)] top-[13%] font-display text-[7vw] font-bold text-white md:left-[12.8%] md:top-[10%] md:text-[clamp(1.5rem,2.1vw,2.5rem)]">
         {t("title")}
       </h2>
 
       <Folder
         size="lg"
-        className="absolute left-[12.7%] top-[18.7%] w-[66%]"
+        // Mobile: ocupa el ancho entre los márgenes y crece hacia abajo (hoja vertical)
+        className="absolute left-[calc(5.5%_+_1.25rem)] right-[calc(5.5%_+_1.25rem)] top-[21%] md:right-auto md:left-[12.7%] md:top-[18.7%] md:w-[66%]"
         frameClassName="shadow-[3px_4px_0_0_var(--color-brand-darkgreen)]"
         panelClassName="p-[3%]"
         tabs={TABS.map((tab) => ({
@@ -27,7 +28,7 @@ export default function SystemsFolder() {
           label: t(`tabs.${tab.id}`),
           activeClassName: "bg-white text-black",
           // TODO: imagen / video de cada servicio
-          content: <div aria-hidden className="aspect-[1002/444] w-full rounded-xl" />,
+          content: <div aria-hidden className="aspect-[3/4] w-full rounded-xl md:aspect-[1002/444]" />,
         }))}
       />
     </section>

@@ -4,8 +4,10 @@ import type { Locale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import LogofolioSingleComp from "@/components/sections/Logofolio/LogofolioSingleComp";
 import NewLogofolioComp from "@/components/sections/Logofolio/NewLogofolioComp";
+import SectionMenu from "@/components/SectionMenu";
 import { LOGOFOLIO, getLogofolioProject } from "@/lib/logofolio";
 import { LOGOFOLIO_SECTION } from "@/lib/logofolioSlugs";
+import { getSection } from "@/lib/sections";
 import { localizedMetadata } from "@/lib/seo";
 
 // Por ahora solo Branding & Design tiene subpáginas: las fichas del logofolio
@@ -29,7 +31,8 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/[section
 export default async function LogofolioProjectPage({ params }: PageProps<"/[locale]/[section]/[slug]">) {
   const { locale, section, slug } = await params;
   const project = section === SECTION ? getLogofolioProject(slug) : undefined;
-  if (!project) notFound();
+  const parent = getSection(section);
+  if (!project || !parent) notFound();
 
   // Textos de la ficha (Logofolio.projects.<slug>), sumados a los datos no traducibles
   const t = await getTranslations({ locale: locale as Locale, namespace: "Logofolio.projects" });
@@ -48,6 +51,8 @@ export default async function LogofolioProjectPage({ params }: PageProps<"/[loca
       ) : (
         <NewLogofolioComp data={{ ...project.data, ...texts }} />
       )}
+      {/* Menú de secciones, igual que en el resto del sitio */}
+      <SectionMenu section={parent} atSectionRoot={false} />
     </main>
   );
 }

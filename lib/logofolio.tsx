@@ -1,5 +1,6 @@
 import Image, { type ImageProps } from "next/image";
 import { useTranslations } from "next-intl";
+import PerriShowcase from "@/components/sections/Logofolio/PerriShowcase";
 import type { LogofolioTypes } from "@/components/sections/Logofolio/NewLogofolioComp";
 import type { LogofolioSlug } from "@/lib/logofolioSlugs";
 import type { LogofolioSingleData } from "@/components/sections/Logofolio/LogofolioSingleComp";
@@ -276,8 +277,6 @@ export const LOGOFOLIO: LogofolioProject[] = [
     },
   },
   {
-    // TODO: en el sitio viejo, Perri reutilizaba textos e imágenes de Lumina (leyenda, fondos 3 y final,
-    // galería, descripción y concepto). Reemplazar por el contenido real de Perri.
     slug: "perri",
     layout: "full",
     data: {
@@ -289,30 +288,10 @@ export const LOGOFOLIO: LogofolioProject[] = [
       contain: true,
       colorPrimary: "#0043AC",
       colorSecondary: ["#F78A1D", "#00AFC8", "#00B97D"],
-      backgroundThree: "/assets/images/logofolio/lumina/lumina-4.png",
-      backgroundLegend: "#FFFFFF",
-      backgroundLegendImage: "/assets/images/logofolio/lumina/background3.jpg",
-      backgroundFinal: "/assets/images/logofolio/lumina/background4.jpg",
       name: "PERRI",
       href: "",
-      content: (
-        <div className="flex flex-col justify-between gap-8 pt-6 md:flex-row md:gap-0">
-          <div className="flex flex-col gap-2">
-            <p className="text-sm">
-              <Label k="colorPalette" />
-            </p>
-            <PaletteImage src="/assets/images/logofolio/lumina/paleta_lumina.png" className="w-[475px]" altKey={null} width={1198} height={430} />
-          </div>
-        </div>
-      ),
-      logoSizes: ["240px", "100px"],
-      gallery: [
-        "/assets/images/logofolio/lumina/lumina-1.png",
-        "/assets/images/logofolio/lumina/lumina-2.png",
-        "/assets/images/logofolio/lumina/lumina-3.png",
-        "/assets/images/logofolio/lumina/lumina-4.png",
-      ],
-      vectorColors: ["#000000", "#000000", "#000000", "#000000"],
+      // Cierre propio (no usa leyenda, fondo final ni la ficha con galería del resto)
+      ending: <PerriShowcase name="PERRI" />,
     },
   },
 ];

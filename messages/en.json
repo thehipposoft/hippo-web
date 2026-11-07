@@ -132,17 +132,11 @@
         ]
       },
       "perri": {
-        "country": "ARG",
-        "date": "September 2025",
-        "legend": "Reimagine the interface between light and matter",
-        "description": [
-          "Lumina Technologies is a cutting-edge start-up specializing in advanced chemistry to drive innovation in the OLED market.",
-          "Lumina Technologies drives AR/VR and display technology to enhance customer experience."
-        ],
-        "concept": [
-          "The Lumina Technologies logo is a visual representation of precision, innovation and seamless integration, key attributes of the brand's patented technology.",
-          "The mark features layered translucent geometric shapes that subtly evoke the ultra-thin, multi-layered structure of displays built with this technology. The design strikes a perfect balance between structure and fluidity."
-        ]
+        "country": "Salta - Argentina",
+        "date": "January - 2026",
+        "legend": "",
+        "description": [],
+        "concept": []
       }
     }
   },
@@ -481,6 +475,15 @@
           "description": "We stay around to keep everything running and evolving."
         }
       ]
+    },
+    "story": {
+      "title1": "Your website is your first impression.",
+      "title2": "Let's make it count.",
+      "p1": "Your website is your project's digital calling card. Before a meeting, a call or a message, that's where people get to know you. In a few seconds, they decide whether they trust you.",
+      "p2": "A great web experience communicates <red>professionalism</red>, <red>dedication</red> and <red>creativity</red> without having to explain it. It shows in how it looks, how fast it loads and how easy it is to find what you're looking for.",
+      "p3": "We design and build websites tailored to your business, consistent with your brand and with the standards you already bring to your work. It can be a landing page or a full platform. Either way, we take care of <mark>design, performance and security</mark>, and of what happens after launch.",
+      "closing": "Elevate your brand with a website that <u>lives up to your standards.</u>",
+      "cta": "I want my website"
     }
   },
   "Systems": {
@@ -564,6 +567,29 @@
           "title": "Hello, Hippo.",
           "text": "TheHipposoft <strong>becomes Hippo.</strong> Five years in, we have more experience, more tools and more freedom to choose the work we want to do — while keeping the thing that started it all: curiosity."
         }
+      }
+    }
+  },
+  "HippoLab": {
+    "badge": "The Hippo Lab",
+    "line1": "Some <idea>ideas</idea> need a <plan>plan.</plan>",
+    "line2": "Others need a <play>playground.</play>",
+    "playground": {
+      "lines": [
+        "Ideas get weird,",
+        "hippos get wild,",
+        "click this <button>little hippo</button>",
+        "and let it run wild."
+      ],
+      "button": "Drop hippos"
+    },
+    "cards": {
+      "title": "What kind of hippo are you today?",
+      "hint": "Pick a card",
+      "cards": {
+        "multitasker": "The Multitasker",
+        "coffee": "The Coffee lover",
+        "thinker": "The Thinker"
       }
     }
   }

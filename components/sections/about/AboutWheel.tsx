@@ -33,7 +33,11 @@ const YEARS: {
 
 
 // Líneas de fondo: la vertical continúa la del resto del sitio
-const LINES = [`inset-y-0 ${GRID_LINE_LEFT} w-px`, "inset-x-0 top-[15%] h-px", `${GRID_LINE_LEFT} right-0 top-[83%] h-px`];
+const LINES = [
+  `inset-y-0 ${GRID_LINE_LEFT} w-px`,
+  "inset-x-0 top-14 h-px md:top-[15%]",
+  `${GRID_LINE_LEFT} right-0 bottom-14 h-px md:bottom-auto md:top-[83%]`,
+];
 
 /** About · rueda de años: el año activo queda arriba al medio; al elegir otro, la rueda gira. */
 export default function AboutWheel() {
@@ -74,7 +78,7 @@ export default function AboutWheel() {
           onClick={() => select(i)}
           aria-label={item.year}
           aria-current={i === active ? "true" : undefined}
-          className="group absolute z-10 size-[clamp(1.75rem,2.4vw,2.9rem)] cursor-pointer"
+          className="group absolute z-10 size-8 cursor-pointer md:size-[clamp(1.75rem,2.4vw,2.9rem)]"
         >
           {/* GSAP mueve/gira/escala el botón (y anula scale/rotate de CSS en él): el hover va en esta capa */}
           <span
@@ -103,18 +107,20 @@ export default function AboutWheel() {
         </button>
       ))}
 
-      {/* Contenido del año activo: todos en la misma celda, se muestra uno. Angosto, entre los años vecinos */}
-      <div className="absolute left-1/2 top-[calc(36%_+_clamp(3rem,4.5vw,5.25rem))] grid w-[min(22rem,26vw)] -translate-x-1/2 text-center">
+      {/* Contenido del año activo: todos en la misma celda, se muestra uno.
+          Desktop: angosto, entre los años vecinos. Mobile: los años van por fuera del arco
+          (animations/about/wheel.ts) y el contenido usa todo el ancho, debajo del recuadro activo */}
+      <div className="absolute left-[calc(5.5%_+_1.25rem)] right-[calc(5.5%_+_1.25rem)] top-[calc(26%_+_3.5rem)] grid text-center md:left-1/2 md:right-auto md:top-[calc(36%_+_clamp(3rem,4.5vw,5.25rem))] md:w-[min(22rem,26vw)] md:-translate-x-1/2">
         {YEARS.map((item) => (
           <div key={item.year} data-wheel-content aria-live="polite" className="col-start-1 row-start-1">
-            <p className="font-display text-[clamp(1.5rem,2.3vw,2.6rem)] font-bold leading-none">{item.year}</p>
+            <p className="font-display text-[2.25rem] font-bold leading-none md:text-[clamp(1.5rem,2.3vw,2.6rem)]">{item.year}</p>
             {item.hasContent && item.year !== "2023" && (
-              <h3 className="mt-2 font-display text-[clamp(0.9rem,1.1vw,1.2rem)] font-bold uppercase leading-tight">
+              <h3 className="mt-2 font-display text-[1.1rem] font-bold uppercase leading-tight md:text-[clamp(0.9rem,1.1vw,1.2rem)]">
                 {t(`years.${item.year}.title`)}
               </h3>
             )}
             {item.hasContent && item.year !== "2023" && (
-              <p className="mt-1.5 text-[clamp(0.75rem,0.8vw,0.9rem)] leading-snug">
+              <p className="mt-3 text-[0.95rem] leading-relaxed md:mt-1.5 md:text-[clamp(0.75rem,0.8vw,0.9rem)] md:leading-snug">
                 {t.rich(`years.${item.year}.text`, { strong: (chunks) => <strong>{chunks}</strong> })}
               </p>
             )}

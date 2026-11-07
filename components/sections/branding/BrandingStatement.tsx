@@ -13,28 +13,30 @@ import { useTranslations } from "next-intl";
 const LINES = [
   `inset-y-0 ${GRID_LINE_LEFT} w-px`,
   `inset-y-0 ${GRID_LINE_RIGHT} w-px`,
-  "inset-x-0 top-[15%] h-px",
-  "inset-x-0 top-[85%] h-px",
+  // Mobile: pegadas a los bordes (la de arriba, al borde inferior del botón del menú)
+  "inset-x-0 top-14 h-px md:top-[15%]",
+  "inset-x-0 bottom-14 h-px md:bottom-auto md:top-[85%]",
 ] as const;
 
+// Mobile: más grandes y cerca del texto (arriba a los costados y abajo a la derecha)
 const STICKERS = [
   {
     src: "/assets/images/desing/h.png",
     width: 348,
     height: 339,
-    className: "left-14 top-[12%] w-[clamp(4rem,8vw,8rem)]",
+    className: "left-[10%] top-[22%] w-[22vw] md:left-14 md:top-[12%] md:w-[clamp(4rem,8vw,8rem)]",
   },
   {
     src: "/assets/images/desing/desing-recurso.png",
     width: 415,
     height: 391,
-    className: "left-[84%] top-[9%] w-[clamp(3.5rem,7.2vw,7rem)]",
+    className: "left-[68%] top-[21%] w-[20vw] md:left-[84%] md:top-[9%] md:w-[clamp(3.5rem,7.2vw,7rem)]",
   },
   {
     src: "/assets/images/desing/hippo-recurso.png",
     width: 341,
     height: 380,
-    className: "left-[84.5%] top-[71%] w-[clamp(4.5rem,9.3vw,9rem)]",
+    className: "left-[64%] top-[66%] w-[26vw] md:left-[84.5%] md:top-[71%] md:w-[clamp(4.5rem,9.3vw,9rem)]",
   },
 ] as const;
 
@@ -58,8 +60,8 @@ export default function BrandingStatement() {
         <span key={className} aria-hidden className={`absolute bg-brand-blue/50 ${className}`} />
       ))}
 
-      <div className="absolute inset-y-[15%] left-[7.5%] right-[12%] flex items-center">
-        <p className="font-display text-statement font-bold leading-[0.8] text-white tracking-tight">
+      <div className="absolute inset-y-[15%] left-[calc(5.5%_+_1.25rem)] right-[calc(5.5%_+_1.25rem)] flex items-center md:left-[7.5%] md:right-[12%]">
+        <p className="font-display text-[9.5vw] font-bold leading-[0.8] text-white tracking-tight md:text-statement">
           <RollText
             lines={t.raw("statement") as string[]}
             decorate={{

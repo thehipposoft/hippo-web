@@ -30,6 +30,8 @@ export function createWebDevSteps(root: HTMLElement): () => void {
 
   const styles = getComputedStyle(root);
   const activeColor = styles.getPropertyValue("--steps-active").trim() || "#000";
+  // Cada palabra tiene su color activo (--label-active en la etiqueta); los botones, en activeColor
+  const labelActiveColors = labels.map((label) => getComputedStyle(label).getPropertyValue("--label-active").trim() || activeColor);
   const mutedColor = styles.getPropertyValue("--steps-muted").trim() || "#a3a3a3";
 
   // Estado inicial: paso 1 visible, el resto de las tarjetas fuera de pantalla
@@ -64,7 +66,7 @@ export function createWebDevSteps(root: HTMLElement): () => void {
   const goToStep = (step: number) => {
     if (step === current) return;
     current = step;
-    gsap.to(labels, { color: (k: number) => (k === step ? activeColor : mutedColor), duration: 0.4, overwrite: "auto" });
+    gsap.to(labels, { color: (k: number) => (k === step ? labelActiveColors[k] : mutedColor), duration: 0.4, overwrite: "auto" });
     gsap.to(buttons, {
       backgroundColor: (k: number) => (k === step ? activeColor : mutedColor),
       duration: 0.4,

@@ -1,6 +1,7 @@
 import LogofolioLayout from "./LogofolioLayout";
-import { GRID_CONTENT_INSET, GRID_LINE_LEFT, GRID_LINE_RIGHT } from "@/lib/sectionGrid";
+import { GRID_LINE_LEFT, GRID_LINE_RIGHT } from "@/lib/sectionGrid";
 import { useTranslations } from "next-intl";
+import { LOGOFOLIO_ANCHOR } from "@/lib/logofolioSlugs";
 
 // Líneas de fondo: continúan las verticales de las pantallas anteriores
 const LINES = [GRID_LINE_LEFT, GRID_LINE_RIGHT];
@@ -9,14 +10,15 @@ const LINES = [GRID_LINE_LEFT, GRID_LINE_RIGHT];
 export default function LogofolioComp() {
   const t = useTranslations("Logofolio.ui");
   return (
-    <section className="relative flex h-svh w-full items-center overflow-hidden bg-white">
+    <section id={LOGOFOLIO_ANCHOR} className="relative flex min-h-svh w-full items-center overflow-hidden bg-white py-[10svh] md:h-svh md:py-0">
       {LINES.map((className) => (
         <span key={className} aria-hidden className={`absolute inset-y-0 w-px bg-brand-blue/50 ${className}`} />
       ))}
 
       <h2 className="sr-only">{t("label")}</h2>
-      <div className={`absolute inset-y-0 ${GRID_CONTENT_INSET} flex items-center justify-center`}>
-        <div className="w-[min(60vw,72rem)]">
+      {/* Mobile: en el flujo, entre las líneas; desktop: centrado en la pantalla */}
+      <div className={`relative w-full px-[calc(5.5%_+_1.25rem)] md:absolute md:inset-y-0 md:left-14 md:right-[5.5%] md:px-0 md:flex md:items-center md:justify-center`}>
+        <div className="w-full md:w-[min(60vw,72rem)]">
           <LogofolioLayout />
         </div>
       </div>

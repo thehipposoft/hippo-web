@@ -3,6 +3,8 @@ import Image from 'next/image';
 import LogofolioGallery from './LogofolioGallery';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import { LOGOFOLIO_ANCHOR, LOGOFOLIO_SECTION } from '@/lib/logofolioSlugs'
+import { Link as LocaleLink } from '@/i18n/navigation'
 
 export type LogofolioSingleData = {
     name: string;
@@ -37,7 +39,9 @@ const LogofolioSingleComp = ({ data }: { data: LogofolioSingleData }) => {
                 {
                     data.isOld &&
                             <div className='flex items-center gap-8'>
-                                <h4 className='text-base hidden md:block'>{t('label')}</h4>
+                                <h4 className='text-base hidden md:block'>
+                    <LocaleLink href={`/${LOGOFOLIO_SECTION}#${LOGOFOLIO_ANCHOR}`} className='hover:underline'>{t('label')}</LocaleLink>
+                </h4>
                             </div>
                 }
                 {

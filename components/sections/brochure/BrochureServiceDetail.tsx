@@ -18,7 +18,7 @@ export default function BrochureServiceDetail({ base }: { base: (typeof BROCHURE
     <section
       ref={rootRef}
       id={service.id}
-      className="relative w-full scroll-mt-0 overflow-hidden bg-white py-[14svh] text-black"
+      className="relative w-full scroll-mt-0 overflow-hidden bg-white py-[6svh] text-black md:py-[14svh]"
     >
       {[GRID_LINE_LEFT, GRID_LINE_RIGHT].map((className) => (
         <span key={className} aria-hidden className={`absolute inset-y-0 w-px bg-brand-blue/50 ${className}`} />
@@ -32,7 +32,7 @@ export default function BrochureServiceDetail({ base }: { base: (typeof BROCHURE
         {service.title}
       </span>
 
-      <div className="relative grid gap-[clamp(2.5rem,6vw,6rem)] pl-[7.5%] pr-[12%] md:grid-cols-2">
+      <div className="relative grid gap-[clamp(2.5rem,6vw,6rem)] px-[calc(5.5%_+_1.25rem)] md:grid-cols-2 md:pl-[7.5%] md:pr-[12%]">
         {/* Presentación */}
         <div>
           <h2 data-reveal className="font-display text-[clamp(2.25rem,4.5vw,4.75rem)] font-bold leading-[1.05] text-brand-darkblue">

@@ -17,7 +17,8 @@ export type FolderTab = {
 // Tamaños de pestaña
 const TAB_SIZES = {
   md: "px-[clamp(1rem,2.2vw,2.25rem)] text-[clamp(0.85rem,1vw,1.05rem)]",
-  lg: "min-w-[clamp(8rem,12.5vw,14rem)] px-[clamp(1rem,2vw,2.25rem)] text-left text-[clamp(0.9rem,1.05vw,1.15rem)]",
+  // Mobile: las pestañas se reparten el ancho de la carpeta (el texto puede ir en dos renglones)
+  lg: "min-w-0 flex-1 px-3 text-left text-[0.85rem] leading-tight md:min-w-[clamp(8rem,12.5vw,14rem)] md:flex-none md:px-[clamp(1rem,2vw,2.25rem)] md:text-[clamp(0.9rem,1.05vw,1.15rem)] md:leading-normal",
 } as const;
 
 // Borde y sombra de la hoja por defecto (para fondos claros)

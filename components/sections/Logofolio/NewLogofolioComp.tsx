@@ -6,6 +6,8 @@ import { useGsap } from '@/lib/useGsap'
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import LogofolioSingleComp from './LogofolioSingleComp'
 import { useTranslations } from 'next-intl'
+import { LOGOFOLIO_ANCHOR, LOGOFOLIO_SECTION } from '@/lib/logofolioSlugs'
+import { Link } from '@/i18n/navigation'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,8 +25,8 @@ export interface LogofolioTypes {
     legend: string,
     backgroundLegend?: string,
     backgroundLegendImage?: string,
-    backgroundThree: string,
-    backgroundFinal: string,
+    backgroundThree?: string,
+    backgroundFinal?: string,
     name: string,
     country: string,
     date: string,
@@ -35,6 +37,8 @@ export interface LogofolioTypes {
     content?: ReactNode,
     logoSizes?: string[],
     vectorColors?: string[]
+    /** Reemplaza todo lo que sigue a los colores (leyenda, fondo final y ficha con galería) */
+    ending?: ReactNode
 }
 
 type LogofolioObjectTypes = {
@@ -116,6 +120,8 @@ const NewLogofolioComp = ({
             scale: .8
         })
 
+        // La leyenda no existe en las fichas con cierre propio (`ending`)
+        if (!container.current?.querySelector(".legend-container")) return
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: ".legend-container",
@@ -141,7 +147,9 @@ const NewLogofolioComp = ({
                 {data.name}
             </h1>
             <div className='flex items-center gap-8 title'>
-                <h4 className='text-base hidden md:block text-black'>{t('label')}</h4>
+                <h4 className='text-base hidden md:block text-black'>
+                    <Link href={`/${LOGOFOLIO_SECTION}#${LOGOFOLIO_ANCHOR}`} className='hover:underline'>{t('label')}</Link>
+                </h4>
             </div>
         </div>
         <div className='h-[150vh] flex justify-center sticky top-0 pt-[35vh]'>
@@ -150,12 +158,13 @@ const NewLogofolioComp = ({
         </div>
         {
             data.secondSectionCustom ?
-            <div className='h-screen sticky top-0 flex items-center justify-center'>
-                <Image sizes='100vw' src={data.backgroundTwo} fill className='object-cover' alt={t('imageAlt', { name: data.name })} />
-                <div className='flex relative z-20'>
-                    <Image src={"/assets/images/logofolio/perri-salud.png"} alt={t('subBrandAlt', { name: 'Perri Salud' })} width={440} height={210} />
-                    <Image src={"/assets/images/logofolio/perri-import.png"} alt={t('subBrandAlt', { name: 'Perri Import' })} width={440} height={210} />
-                    <Image src={"/assets/images/logofolio/perri-casa.png"} alt={t('subBrandAlt', { name: 'Perri Casa' })} width={440} height={210} />
+            // Mobile: sin la imagen de fondo, los tres logos uno abajo del otro (salud, casa, import)
+            <div className='h-screen sticky top-0 flex items-center justify-center bg-white md:bg-transparent'>
+                <Image sizes='100vw' src={data.backgroundTwo} fill className='hidden object-cover md:block' alt={t('imageAlt', { name: data.name })} />
+                <div className='flex relative z-20 flex-col items-center gap-[6vh] md:flex-row md:gap-0'>
+                    <Image src={"/assets/images/logofolio/perri-salud.png"} alt={t('subBrandAlt', { name: 'Perri Salud' })} width={440} height={210} className='h-auto w-[70vw] md:w-auto' />
+                    <Image src={"/assets/images/logofolio/perri-import.png"} alt={t('subBrandAlt', { name: 'Perri Import' })} width={440} height={210} className='order-last h-auto w-[70vw] md:order-none md:w-auto' />
+                    <Image src={"/assets/images/logofolio/perri-casa.png"} alt={t('subBrandAlt', { name: 'Perri Casa' })} width={440} height={210} className='h-auto w-[70vw] md:w-auto' />
                 </div>
             </div>
             :
@@ -169,40 +178,45 @@ const NewLogofolioComp = ({
                 <Image sizes='50vw' src={data.itemImage} fill className={`${data.contain ? "object-contain" : "object-cover"} ${data.left && "object-left"}`} alt={t('itemAlt', { name: data.name })} />
             </div>
             <div style={{gridTemplateColumns: `repeat(${data.colorSecondary.length}, minmax(0, 1fr))`}} className={'lg:w-1/2 grid grid-rows-2 h-screen'}>
-                <div style={{backgroundColor: data.colorPrimary}} className={` col-span-full flex justify-end items-end p-4 w-full`}>
+                <div style={{backgroundColor: data.colorPrimary}} className={`text-white col-span-full flex justify-end items-end p-4 w-full`}>
                     {data.colorPrimary}
                 </div>
                 {
                     data.colorSecondary.map((val, index) => (
                         <div style={{backgroundColor: val}} key={index} className='flex justify-end p-4 col-span-1'>
-                            <p className={`${val === "#FFFFFF" ? "text-black" : ""}`}>{val}</p>
+                            {/* Texto blanco salvo sobre el blanco (no se vería) */}
+                            <p className={`${val === "#FFFFFF" ? "text-black" : "text-white"}`}>{val}</p>
                         </div>
                     ))
                 }
             </div>
         </div>
-        <div className='flex flex-col relative'>
-            <div className='flex lg:flex-row flex-col h-screen legend-container sticky top-0'>
-                <div style={{backgroundColor: data.backgroundLegend}} className='lg:w-1/2 flex justify-center items-center relative h-screen lg:h-auto'>
-                    {data.backgroundLegendImage && <Image sizes='50vw' src={data.backgroundLegendImage} alt={t('legendBackgroundAlt', { name: data.name })} fill className='object-cover' />}
-                    <div className='flex flex-wrap justify-center gap-1 max-w-xl text-center text-2xl light relative z-20 px-8 md:px-0 w-3/5'>
-                        {
-                            data.legend.split(" ").map((char: string, index: number) => (
-                                    <p className='reveal' key={index}>{char}</p>
-                            ))
-                        }
+        {data.ending ?? (
+          <>
+            <div className='flex flex-col relative'>
+                <div className='flex lg:flex-row flex-col h-screen legend-container sticky top-0'>
+                    <div style={{backgroundColor: data.backgroundLegend}} className='lg:w-1/2 flex justify-center items-center relative h-screen lg:h-auto'>
+                        {data.backgroundLegendImage && <Image sizes='50vw' src={data.backgroundLegendImage} alt={t('legendBackgroundAlt', { name: data.name })} fill className='object-cover' />}
+                        <div className='flex flex-wrap justify-center gap-1 max-w-xl text-center text-2xl light relative z-20 px-8 md:px-0 w-3/5 text-white'>
+                            {
+                                data.legend.split(" ").map((char: string, index: number) => (
+                                        <p className='reveal' key={index}>{char}</p>
+                                ))
+                            }
+                        </div>
+                    </div>
+                    <div className='lg:w-1/2 relative' style={{backgroundColor: data.backgroundLegend}}>
+                        {data.backgroundThree && <Image sizes='50vw' src={data.backgroundThree} fill className={`${data.contain ? "object-contain" : "object-cover"} legend-image`} alt={t('backgroundAlt', { name: data.name })} />}
                     </div>
                 </div>
-                <div className='lg:w-1/2 relative' style={{backgroundColor: data.backgroundLegend}}>
-                    <Image sizes='50vw' src={data.backgroundThree} fill className={`${data.contain ? "object-contain" : "object-cover"} legend-image`} alt={t('backgroundAlt', { name: data.name })} />
-                </div>
+                <div style={{backgroundColor: data.backgroundLegend}} className='h-[50vh]' />
             </div>
-            <div style={{backgroundColor: data.backgroundLegend}} className='h-[50vh]' />
-        </div>
-        <div className='h-screen sticky top-0 flex items-end pb-12 '>
-            <Image src={data.backgroundFinal} alt='' className='object-cover -z-10' fill />
-        </div>
-        <LogofolioSingleComp data={data} />
+            <div className='h-screen sticky top-0 flex items-end pb-12 '>
+                {data.backgroundFinal && <Image src={data.backgroundFinal} alt='' className='object-cover -z-10' fill />}
+            </div>
+            <LogofolioSingleComp data={data} />
+          </>
+        )}
     </div>
   )
 }

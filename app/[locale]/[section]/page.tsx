@@ -11,6 +11,8 @@ import BrandingStatement from "@/components/sections/branding/BrandingStatement"
 import BrochureCta from "@/components/sections/brochure/BrochureCta";
 import BrochureDetails from "@/components/sections/brochure/BrochureDetails";
 import BrochureServices from "@/components/sections/brochure/BrochureServices";
+import HippoLabCards from "@/components/sections/hippolab/HippoLabCards";
+import HippoLabPlayground from "@/components/sections/hippolab/HippoLabPlayground";
 import LogofolioComp from "@/components/sections/Logofolio";
 import PortfolioGrid from "@/components/sections/portfolio/PortfolioGrid";
 import PortfolioStatement from "@/components/sections/portfolio/PortfolioStatement";
@@ -18,6 +20,7 @@ import SystemsFolder from "@/components/sections/systems-ia/SystemsFolder";
 import SystemsStatement from "@/components/sections/systems-ia/SystemsStatement";
 import WebDevStatement from "@/components/sections/web-development/WebDevStatement";
 import WebDevSteps from "@/components/sections/web-development/WebDevSteps";
+import WebDevStory from "@/components/sections/web-development/WebDevStory";
 import { SECTIONS, getSection, type SectionSlug } from "@/lib/sections";
 import { localizedMetadata } from "@/lib/seo";
 
@@ -25,10 +28,11 @@ import { localizedMetadata } from "@/lib/seo";
 const SECTION_CONTENT: Partial<Record<SectionSlug, ComponentType[]>> = {
   "branding-design": [BrandingStatement, LogofolioComp],
   portfolio: [PortfolioStatement, PortfolioGrid],
-  "web-development": [WebDevStatement, WebDevSteps],
+  "web-development": [WebDevStatement, WebDevSteps, WebDevStory],
   "systems-ia": [SystemsStatement, SystemsFolder],
   about: [AboutTimeline, AboutWheel, AboutStatement],
   brochure: [BrochureServices, BrochureDetails, BrochureCta],
+  "hippo-lab": [HippoLabPlayground, HippoLabCards],
 };
 
 export const instant = false;

@@ -42,14 +42,20 @@ export default function ContactScreen({ section, intro = true }: ContactScreenPr
   );
 
   return (
-    <div className="relative h-svh w-full overflow-hidden">
+    // Mobile: layout vertical que crece con el contenido. Desktop (md): pantalla fija con todo en posición absoluta
+    <div className="relative min-h-svh w-full overflow-hidden md:h-svh">
       <div data-hero-panel className="absolute inset-0 bg-white" />
 
-      <div ref={contentRef} data-hero-content className="invisible absolute inset-0 text-black">
+      {/* Mobile: el contenido arranca 1.25rem adentro de las verticales de la grilla (5.5%) */}
+      <div
+        ref={contentRef}
+        data-hero-content
+        className="invisible relative flex flex-col gap-10 px-[calc(5.5%_+_1.25rem)] pb-[12svh] pt-[16svh] text-black md:absolute md:inset-0 md:block md:p-0"
+      >
         <LightGridLines />
 
-        {/* Globo de diálogo */}
-        <div className="absolute left-[4.6%] top-[17.4%] w-[41%] rounded-[clamp(1rem,1.6vw,1.75rem)] bg-brand-blue px-[2%] py-[1.4%] text-white">
+        {/* Globo de diálogo (mobile: 1º) */}
+        <div className="relative order-1 rounded-[clamp(1rem,1.6vw,1.75rem)] bg-brand-blue px-5 py-4 text-white md:absolute md:left-[4.6%] md:top-[17.4%] md:w-[41%] md:px-[2%] md:py-[1.4%]">
           <svg aria-hidden viewBox="0 0 40 48" className="absolute -left-[clamp(1.1rem,1.6vw,1.75rem)] bottom-0 h-[clamp(1.75rem,2.6vw,3rem)] w-[clamp(1.4rem,2.1vw,2.4rem)] text-brand-blue">
             <path d="M40 0V48H0C14 42 28 30 40 0Z" fill="currentColor" />
           </svg>
@@ -60,13 +66,15 @@ export default function ContactScreen({ section, intro = true }: ContactScreenPr
           </h1>
         </div>
 
-        <p className="absolute left-[7.4%] top-[46.5%] w-[36%] font-display text-[clamp(0.85rem,0.9vw,1rem)] leading-snug">
+        {/* Texto (mobile: 3º) */}
+        <p className="order-3 font-display text-base leading-snug md:absolute md:left-[7.4%] md:top-[46.5%] md:w-[36%] md:text-[clamp(0.85rem,0.9vw,1rem)]">
           {t("intro")}
           <br />
           {t("introCta")}
         </p>
 
-        <ul className="absolute left-[8%] top-[58%] flex flex-col gap-[clamp(1rem,1.8vw,2rem)] font-display text-[clamp(0.85rem,0.9vw,1rem)]">
+        {/* Datos de contacto (mobile: 4º) */}
+        <ul className="order-4 flex flex-col gap-[clamp(1rem,1.8vw,2rem)] font-display text-base md:absolute md:left-[8%] md:top-[58%] md:text-[clamp(0.85rem,0.9vw,1rem)]">
           <li className="flex items-center gap-3">
             {/* TODO: reemplazar por el ícono dibujado a mano del diseño */}
             <svg aria-hidden viewBox="0 0 48 32" fill="none" className="w-[clamp(2rem,2.6vw,3rem)] shrink-0">
@@ -95,7 +103,8 @@ export default function ContactScreen({ section, intro = true }: ContactScreenPr
           </li>
         </ul>
 
-        <ContactForm className="absolute left-[50.3%] top-[26.8%] w-[39.7%]" />
+        {/* Formulario (mobile: 2º) */}
+        <ContactForm className="order-2 w-full md:absolute md:left-[50.3%] md:top-[26.8%] md:w-[39.7%]" />
       </div>
 
       <SectionMenu section={section} />

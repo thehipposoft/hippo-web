@@ -1,15 +1,17 @@
 import { gsap } from "gsap";
 // ScrollTrigger se registra una sola vez, en lib/useGsap.ts
 
-// Separación entre años sobre el círculo (grados) y escala del recuadro activo
-const STEP_DEG = 30;
 const ACTIVE_SCALE = 2;
-// Geometría relativa a la sección: radio y altura del punto más alto del arco (donde va el activo)
-const RADIUS_W = 0.36;
-const RADIUS_H = 0.95;
-const TOP_Y = 0.36;
-// Distancia del año hacia adentro del círculo (px)
-const LABEL_INSET = 64;
+// Geometría: separación entre años sobre el círculo (grados), radio y altura del punto más alto
+// del arco (donde va el activo) relativos a la sección, y distancia del año hacia adentro del
+// círculo (px; negativa = por fuera).
+// Mobile: rueda más grande que la pantalla (arco abierto) con los años por fuera, para que el
+// contenido del activo tenga todo el ancho debajo.
+const GEOMETRY = {
+  desktop: { stepDeg: 30, radiusW: 0.36, radiusH: 0.95, topY: 0.36, labelInset: 64 },
+  mobile: { stepDeg: 24, radiusW: 0.62, radiusH: 0.95, topY: 0.26, labelInset: -34 },
+};
+const MOBILE = "(max-width: 767px)";
 
 type Wheel = { goTo: (index: number) => void; destroy: () => void };
 
@@ -44,23 +46,24 @@ export function createWheel(root: HTMLElement, initial = 0): Wheel {
 
   const layout = () => {
     const { width, height } = root.getBoundingClientRect();
-    const r = Math.min(width * RADIUS_W, height * RADIUS_H);
+    const { stepDeg, radiusW, radiusH, topY, labelInset } = window.matchMedia(MOBILE).matches ? GEOMETRY.mobile : GEOMETRY.desktop;
+    const r = Math.min(width * radiusW, height * radiusH);
     const cx = width / 2;
-    const cy = height * TOP_Y + r;
+    const cy = height * topY + r;
 
     if (circle) gsap.set(circle, { width: r * 2, height: r * 2, x: cx - r, y: cy - r });
 
     boxes.forEach((box, i) => {
       const offset = wrapOffset(i);
-      const deg = -90 + offset * STEP_DEG;
+      const deg = -90 + offset * stepDeg;
       const rad = (deg * Math.PI) / 180;
       // El recuadro sigue la curva (tangente); el año queda derecho, hacia adentro del círculo
       const edge = edgeOpacity(offset);
       gsap.set(box, { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad), rotate: deg + 90, opacity: edge });
       // El año del activo lo oculta su propio tween (autoAlpha); acá solo el desvanecido del cruce
       gsap.set(labels[i], {
-        x: cx + (r - LABEL_INSET) * Math.cos(rad),
-        y: cy + (r - LABEL_INSET) * Math.sin(rad),
+        x: cx + (r - labelInset) * Math.cos(rad),
+        y: cy + (r - labelInset) * Math.sin(rad),
         "--edge": edge,
       });
     });

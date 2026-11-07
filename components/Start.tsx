@@ -80,9 +80,12 @@ export default function Start() {
             >
               {t("title")}
             </h1>
+            {/* La caja (y con ella letra y ancho) cambia de tamaño con el scroll: con líneas al límite
+                del ancho, el redondeo hace saltar palabras de renglón. Por eso hay margen de ancho y
+                el texto en español une "y automatización" con un espacio de no separación. */}
             <p
               data-start-text
-              className="mt-[1.45em] max-w-[65%] text-[max(0.875rem,calc(var(--start-box)*0.045))] leading-[1.45]"
+              className="mt-[1.45em] max-w-[68%] text-[max(0.875rem,calc(var(--start-box)*0.045))] leading-[1.45]"
             >
               {t("description")}
             </p>

@@ -14,8 +14,8 @@ export default function BrochureCta() {
   useGsap((root) => createScrollReveal(root), rootRef);
 
   return (
-    <section ref={rootRef} className="relative flex min-h-[70svh] w-full items-center bg-brand-black py-[14svh] text-white">
-      <div className="pl-[7.5%] pr-[12%]">
+    <section ref={rootRef} className="relative flex min-h-[50svh] w-full items-center bg-brand-black py-[10svh] text-white md:min-h-[70svh] md:py-[14svh]">
+      <div className="px-[calc(5.5%_+_1.25rem)] md:pl-[7.5%] md:pr-[12%]">
         <h2 data-reveal className="font-display text-statement font-bold leading-none">
           {t("title")}
         </h2>

@@ -38,12 +38,12 @@ export default function BrochureServices() {
   useGsap((root) => createScrollReveal(root), rootRef);
 
   return (
-    <section ref={rootRef} className="relative w-full overflow-hidden bg-white py-[16svh] text-brand-darkblue">
+    <section ref={rootRef} className="relative w-full overflow-hidden bg-white py-[8svh] text-brand-darkblue md:py-[16svh]">
       {[GRID_LINE_LEFT, GRID_LINE_RIGHT].map((className) => (
         <span key={className} aria-hidden className={`absolute inset-y-0 w-px bg-brand-blue/50 ${className}`} />
       ))}
 
-      <div className="relative pl-[7.5%] pr-[9%]">
+      <div className="relative px-[calc(5.5%_+_1.25rem)] md:pl-[7.5%] md:pr-[9%]">
         <h2 data-reveal className="font-display text-statement font-bold leading-[1.05]">
           {t("title")}
           <br />

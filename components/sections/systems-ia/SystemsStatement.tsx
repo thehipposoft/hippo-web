@@ -10,18 +10,20 @@ import { useTranslations } from "next-intl";
 const LINES = [
   `inset-y-0 ${GRID_LINE_LEFT} w-px`,
   `inset-y-0 ${GRID_LINE_RIGHT} w-px`,
-  "inset-x-0 top-[15.3%] h-px",
-  `${GRID_LINE_LEFT} right-0 top-[84.5%] h-px`,
+  // Mobile: pegadas a los bordes (la de arriba, al borde inferior del botón del menú)
+  "inset-x-0 top-14 h-px md:top-[15.3%]",
+  `${GRID_LINE_LEFT} right-0 bottom-14 h-px md:bottom-auto md:top-[84.5%]`,
 ];
 
 // Renglones del texto: cada tramo es una clave de Systems.statement; los que tienen `underline`
 // llevan subrayado (con su desplazamiento)
 type StatementKey = "line1" | "line2" | "line3" | "marked1" | "marked2";
-const STATEMENT: { key: StatementKey; underline?: string }[][] = [
+// `path`: trazo irregular, como dibujado a mano (viewBox 300×12, como en <WebDevStory />)
+const STATEMENT: { key: StatementKey; underline?: string; path?: string }[][] = [
   [{ key: "line1" }],
   [{ key: "line2" }],
-  [{ key: "line3" }, { key: "marked1", underline: "left-[0.1em] right-0" }],
-  [{ key: "marked2", underline: "-left-[0.15em] -right-[0.3em]" }],
+  [{ key: "line3" }, { key: "marked1", underline: "left-[0.1em] right-0", path: "M2 7C60 5 120 4 180 5C230 6 270 7 298 8" }],
+  [{ key: "marked2", underline: "-left-[0.15em] -right-[0.3em]", path: "M2 5C55 7 115 8 175 6C225 4 268 4 298 6" }],
 ];
 
 /** Caracteres sueltos para la animación de tipeo (los espacios también ocupan su lugar) */
@@ -49,8 +51,8 @@ export default function SystemsStatement() {
         <span key={className} aria-hidden className={`absolute bg-brand-blue/50 ${className}`} />
       ))}
 
-      <div className="absolute inset-y-[15.3%] left-[7.7%] right-[12%] flex items-center">
-        <p className="font-display text-statement font-bold leading-[1.12] text-white">
+      <div className="absolute inset-y-[15.3%] left-[calc(5.5%_+_1.25rem)] right-[calc(5.5%_+_1.25rem)] flex items-center md:left-[7.7%] md:right-[12%]">
+        <p className="font-display text-[10.5vw] font-bold leading-[1.12] text-white md:text-statement">
           <span className="sr-only">{STATEMENT.flat().map((segment) => t(segment.key)).join("")}</span>
           <span aria-hidden>
             {STATEMENT.map((line, lineIndex) => (
@@ -62,16 +64,16 @@ export default function SystemsStatement() {
                       {/* Un <svg> absoluto no se estira entre left/right: lo hace el span */}
                       <span
                         data-systems-underline
-                        className={`pointer-events-none absolute -bottom-[0.1em] h-[0.06em] ${segment.underline}`}
+                        className={`pointer-events-none absolute -bottom-[0.14em] h-[0.2em] ${segment.underline}`}
                       >
                         <svg
-                          viewBox="0 0 100 4"
+                          viewBox="0 0 300 12"
                           preserveAspectRatio="none"
                           fill="none"
                           className="block size-full overflow-visible text-brand-blue"
                         >
                           <path
-                            d="M0 2H100"
+                            d={segment.path}
                             stroke="currentColor"
                             strokeWidth={5}
                             strokeLinecap="round"

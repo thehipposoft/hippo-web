@@ -10,18 +10,70 @@ import { getSection, getSectionHref, type Section, type SectionSlug } from "@/li
 export const SECTION_TILES_VARS =
   "[--start-gap:0.375rem] [--start-box-final:max(3rem,min(10svh,5vw))] [--start-tile-hover-bg:var(--color-white)] [--start-tile-hover-border:#d4d4d4]";
 
-// Recuadros de secciones, en una grilla de 5 columnas × 3 filas cuya celda central
-// (col 3 / fila 2) mide --start-box.
+// Recuadros de secciones alrededor de la celda central, que mide --start-box (ahí termina la caja
+// del inicio y va el botón del menú). Columnas y filas en minmax(0, …): con `1fr` no se achican por
+// debajo de su contenido y, con la caja todavía grande, la grilla se descentraba respecto de ella. Dos grillas, con el mismo "molinete" alrededor del centro:
+// - mobile: 3 columnas × 5 filas (centro en col 2 / fila 3), al estilo Dropbox en vertical
+// - desktop (md): 5 columnas × 3 filas (centro en col 3 / fila 2)
 // `from`: lado desde el que entran. `wave`: tanda de entrada (0 = primeros).
-const TILES: { slug: SectionSlug; from: string; wave: number; className: string }[] = [
-  { slug: "branding-design", from: "left", wave: 0, className: "col-start-2 row-span-2 row-start-2 bg-brand-pink text-brand-darkpink" },
-  { slug: "web-development", from: "right", wave: 0, className: "col-start-4 row-span-2 row-start-1 bg-brand-orange text-brand-darkorange" },
-  { slug: "hippo-lab", from: "top", wave: 1, className: "col-span-2 col-start-2 row-start-1 bg-brand-darkpink text-brand-pink" },
-  { slug: "systems-ia", from: "bottom", wave: 1, className: "col-span-2 col-start-3 row-start-3 bg-brand-green text-brand-darkgreen" },
-  { slug: "contact", from: "left", wave: 2, className: "col-start-1 row-span-2 row-start-1 bg-brand-darkblue text-white" },
-  { slug: "about", from: "right", wave: 2, className: "col-start-5 row-span-2 row-start-2 bg-brand-darkorange text-brand-orange" },
-  { slug: "brochure", from: "top", wave: 3, className: "col-start-5 row-start-1 bg-brand-darkgreen text-brand-green" },
-  { slug: "portfolio", from: "bottom", wave: 3, className: "col-start-1 row-start-3 bg-brand-blue text-brand-darkblue" },
+// Clases completas (mobile + md:) para que Tailwind las genere.
+const TILES: { slug: SectionSlug; from: string; wave: number; position: string; colors: string }[] = [
+  {
+    slug: "branding-design",
+    from: "left",
+    wave: 0,
+    position: "col-start-1 row-span-2 row-start-2 md:col-start-2 md:row-span-2 md:row-start-2",
+    colors: "bg-brand-pink text-brand-darkpink",
+  },
+  {
+    slug: "web-development",
+    from: "right",
+    wave: 0,
+    position: "col-start-3 row-span-2 row-start-3 md:col-start-4 md:row-span-2 md:row-start-1",
+    colors: "bg-brand-orange text-brand-darkorange",
+  },
+  {
+    slug: "hippo-lab",
+    from: "top",
+    wave: 1,
+    position: "col-span-2 col-start-2 row-start-2 md:col-span-2 md:col-start-2 md:row-start-1",
+    colors: "bg-brand-darkpink text-brand-pink",
+  },
+  {
+    slug: "systems-ia",
+    from: "bottom",
+    wave: 1,
+    position: "col-span-2 col-start-1 row-start-4 md:col-span-2 md:col-start-3 md:row-start-3",
+    colors: "bg-brand-green text-brand-darkgreen",
+  },
+  {
+    slug: "contact",
+    from: "left",
+    wave: 2,
+    position: "col-span-2 col-start-1 row-start-1 md:col-span-1 md:col-start-1 md:row-span-2 md:row-start-1",
+    colors: "bg-brand-darkblue text-white",
+  },
+  {
+    slug: "about",
+    from: "right",
+    wave: 2,
+    position: "col-span-2 col-start-2 row-start-5 md:col-span-1 md:col-start-5 md:row-span-2 md:row-start-2",
+    colors: "bg-brand-darkorange text-brand-orange",
+  },
+  {
+    slug: "brochure",
+    from: "top",
+    wave: 3,
+    position: "col-start-3 row-start-1 md:col-start-5 md:row-start-1",
+    colors: "bg-brand-darkgreen text-brand-green",
+  },
+  {
+    slug: "portfolio",
+    from: "bottom",
+    wave: 3,
+    position: "col-start-1 row-start-5 md:col-start-1 md:row-start-3",
+    colors: "bg-brand-blue text-brand-darkblue",
+  },
 ];
 
 type SectionTilesProps = {
@@ -37,7 +89,7 @@ export default function SectionTiles({ className = "", onTileClick }: SectionTil
     <nav
       aria-label={tNav("sections")}
       data-start-tiles
-      className={`grid grid-cols-[1fr_1.4fr_var(--start-box)_1.4fr_1fr] grid-rows-[1fr_var(--start-box)_1fr] gap-(--start-gap) p-(--start-gap) ${className}`}
+      className={`grid grid-cols-[minmax(0,1fr)_var(--start-box)_minmax(0,1fr)] grid-rows-[minmax(0,1fr)_minmax(0,1fr)_var(--start-box)_minmax(0,1fr)_minmax(0,1fr)] gap-(--start-gap) p-(--start-gap) md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)_var(--start-box)_minmax(0,1.4fr)_minmax(0,1fr)] md:grid-rows-[minmax(0,1fr)_var(--start-box)_minmax(0,1fr)] ${className}`}
     >
       {TILES.map((tile) => {
         const section = getSection(tile.slug);
@@ -50,7 +102,7 @@ export default function SectionTiles({ className = "", onTileClick }: SectionTil
             data-start-tile
             data-from={tile.from}
             data-wave={tile.wave}
-            className={`pointer-events-none rounded-xl border border-transparent p-[clamp(1rem,2vw,1.75rem)] font-display text-[clamp(1.25rem,2.6vw,2.5rem)] font-bold leading-tight ${tile.className}`}
+            className={`pointer-events-none min-w-0 overflow-hidden rounded-xl border border-transparent p-[clamp(1rem,2vw,1.75rem)] font-display text-[clamp(1.25rem,2.6vw,2.5rem)] font-bold leading-tight ${tile.position} ${tile.colors}`}
           >
             {/* Título + copia oscura para el hover (ver animations/start/tileHover.ts) */}
             <span className="relative -my-[0.2em] block overflow-hidden py-[0.2em]">

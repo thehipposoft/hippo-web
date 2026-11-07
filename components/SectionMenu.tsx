@@ -12,15 +12,20 @@ import { useGsap } from "@/lib/useGsap";
 import { useTileTransition } from "@/lib/useTileTransition";
 
 type SectionMenuProps = {
-  /** Sección actual: si se elige en el menú, solo se cierra */
+  /** Sección actual: si se elige en el menú, solo se cierra (salvo con atSectionRoot = false) */
   section: Section;
+  /**
+   * false en subpáginas de la sección (fichas del logofolio): ahí elegir la propia sección
+   * navega a su página principal en vez de solo cerrar el menú.
+   */
+  atSectionRoot?: boolean;
 };
 
 /**
  * Botón hamburguesa de las pantallas de sección + menú de recuadros.
  * Abrir/cerrar no cambia de ruta: es un timeline que va y vuelve (animations/menu.ts).
  */
-export default function SectionMenu({ section }: SectionMenuProps) {
+export default function SectionMenu({ section, atSectionRoot = true }: SectionMenuProps) {
   const t = useTranslations("Nav");
   const buttonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -77,7 +82,7 @@ export default function SectionMenu({ section }: SectionMenuProps) {
   }, [open]);
 
   const onTileClick = (event: MouseEvent<HTMLAnchorElement>, target: Section) => {
-    if (target.slug === section.slug) {
+    if (atSectionRoot && target.slug === section.slug) {
       event.preventDefault();
       closeMenu();
       return;
@@ -110,7 +115,8 @@ export default function SectionMenu({ section }: SectionMenuProps) {
         aria-expanded={open}
         onClick={open ? closeMenu : openMenu}
         data-hero-menu
-        className="group fixed left-0 top-[calc(50%_-_1.75rem)] z-[60] flex size-14 origin-top-left cursor-pointer items-center justify-center rounded-r-lg bg-brand-blue transition-colors duration-300 ease-out hover:bg-brand-darkblue focus-visible:bg-brand-darkblue"
+        // Mobile: pestaña arriba al centro (no rompe el centrado). Desktop: al costado izquierdo, centrado en alto
+        className="group fixed left-[calc(50%_-_1.75rem)] top-0 z-[60] flex size-14 origin-top-left cursor-pointer items-center justify-center rounded-b-lg bg-brand-blue transition-colors duration-300 ease-out hover:bg-brand-darkblue focus-visible:bg-brand-darkblue md:left-0 md:top-[calc(50%_-_1.75rem)] md:rounded-none md:rounded-r-lg"
       >
         {/* Hover: fondo y escala por CSS; GSAP anima la posición del botón y las líneas, no estas propiedades */}
         <span

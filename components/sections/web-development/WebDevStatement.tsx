@@ -10,8 +10,9 @@ import { useTranslations } from "next-intl";
 const LINES = [
   `inset-y-0 ${GRID_LINE_LEFT} w-px`,
   `inset-y-0 ${GRID_LINE_RIGHT} w-px`,
-  "inset-x-0 top-[16%] h-px",
-  `${GRID_LINE_LEFT} right-0 top-[85%] h-px`,
+  // Mobile: pegadas a los bordes (la de arriba, al borde inferior del botón del menú)
+  "inset-x-0 top-14 h-px md:top-[16%]",
+  `${GRID_LINE_LEFT} right-0 bottom-14 h-px md:bottom-auto md:top-[85%]`,
 ];
 
 /**
@@ -47,10 +48,7 @@ export default function WebDevStatement() {
   const rootRef = useRef<HTMLElement>(null);
   const t = useTranslations("WebDev.statement");
 
-  useGsap((root) => {
-    const tl = createWebDevStatement(root);
-    return () => tl.kill();
-  }, rootRef);
+  useGsap((root) => createWebDevStatement(root), rootRef);
 
   return (
     <section ref={rootRef} className="relative h-svh w-full overflow-hidden bg-brand-black">
@@ -58,8 +56,8 @@ export default function WebDevStatement() {
         <span key={className} aria-hidden className={`absolute bg-brand-blue/50 ${className}`} />
       ))}
 
-      <div className="absolute inset-y-[16%] left-[8.3%] right-[12%] flex items-center">
-        <p className="font-display text-statement font-bold leading-[1.2] text-white">
+      <div className="absolute inset-y-[16%] left-[calc(5.5%_+_1.25rem)] right-[calc(5.5%_+_1.25rem)] flex items-center md:left-[8.3%] md:right-[12%]">
+        <p className="font-display text-[10.5vw] font-bold leading-[1.2] text-white md:text-statement">
           <span className="sr-only">{t("full")}</span>
           <span aria-hidden>
             <span className="block">
@@ -67,6 +65,8 @@ export default function WebDevStatement() {
             </span>
             <span className="block">
               <ScrambleWords text={t("line2")} />{" "}
+              {/* Sin corte entre lo subrayado y el punto (si no, el punto podía quedar solo en otro renglón) */}
+              <span className="whitespace-nowrap">
               <span className="relative inline-block">
                 <ScrambleWords text={t("marked")} />
                 {/* Subrayado a mano */}
@@ -89,6 +89,7 @@ export default function WebDevStatement() {
               {/* El punto no pasa por caracteres aleatorios: aparece tal cual con el último tramo */}
               <span data-webdev-dot className="text-brand-green">
                 .
+              </span>
               </span>
             </span>
           </span>

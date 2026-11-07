@@ -37,9 +37,23 @@ export default function SmoothScroll() {
     };
   }, []);
 
-  // Al cambiar de ruta, arrancar arriba sin animación (si no, Lenis "viaja" desde la posición anterior)
+  // Al cambiar de ruta, arrancar arriba sin animación (si no, Lenis "viaja" desde la posición anterior).
+  // Si la URL trae un #ancla (p. ej. /branding-design#logofolio), ir a ese elemento cuando ya se montó.
   useEffect(() => {
-    getLenis()?.scrollTo(0, { immediate: true, force: true });
+    const lenis = getLenis();
+    if (!lenis) return;
+    const id = decodeURIComponent(window.location.hash.slice(1));
+    if (!id) {
+      lenis.scrollTo(0, { immediate: true, force: true });
+      return;
+    }
+    let frame = requestAnimationFrame(() => {
+      frame = requestAnimationFrame(() => {
+        const target = document.getElementById(id);
+        if (target) lenis.scrollTo(target, { immediate: true, force: true });
+      });
+    });
+    return () => cancelAnimationFrame(frame);
   }, [pathname]);
 
   return null;

@@ -4,6 +4,8 @@
 // El recorte acompaña el ancho real, sea cual sea. Los márgenes negativos dejan ver el grosor
 // del trazo y sus puntas redondeadas, que sobresalen de la caja.
 
-/** Estado inicial (oculto) y final (visible) para un gsap.fromTo */
-export const UNDERLINE_HIDDEN = { clipPath: "inset(-200% 100% -200% -5%)" };
+/** Estado inicial (oculto) y final (visible) para un gsap.fromTo.
+ * Oculto: el borde derecho del recorte arranca en el mismo -5% que el izquierdo (recorte vacío);
+ * con 100% quedaba a la vista la punta redondeada del trazo, como un punto antes de dibujarse. */
+export const UNDERLINE_HIDDEN = { clipPath: "inset(-200% 105% -200% -5%)" };
 export const UNDERLINE_SHOWN = { clipPath: "inset(-200% -5% -200% -5%)" };

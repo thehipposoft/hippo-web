@@ -132,17 +132,11 @@
         ]
       },
       "perri": {
-        "country": "ARG",
-        "date": "septiembre 2025",
-        "legend": "Reimaginar la interfaz entre la luz y la materia",
-        "description": [
-          "Lumina Technologies es una startup de vanguardia especializada en química avanzada para impulsar la innovación en el mercado OLED.",
-          "Lumina Technologies impulsa la tecnología de AR/VR y de pantallas para mejorar la experiencia de sus clientes."
-        ],
-        "concept": [
-          "El logo de Lumina Technologies es una representación visual de la precisión, la innovación y la integración, atributos clave de la tecnología patentada de la marca.",
-          "La marca presenta formas geométricas translúcidas superpuestas que evocan sutilmente la estructura ultrafina y multicapa de las pantallas con esta tecnología. El diseño logra un equilibrio perfecto entre estructura y fluidez."
-        ]
+        "country": "Salta - Argentina",
+        "date": "enero - 2026",
+        "legend": "",
+        "description": [],
+        "concept": []
       }
     }
   },
@@ -381,7 +375,7 @@
   },
   "Home": {
     "title": "Creamos para conectar.",
-    "description": "Convertimos ideas en experiencias digitales con diseño, tecnología y automatización inteligente.",
+    "description": "Convertimos ideas en experiencias digitales con diseño, tecnología y automatización inteligente.",
     "tagline": "Diseño · Tecnología · Automatización",
     "manifesto": "De la identidad a lo digital, de la web a la automatización: creamos los sistemas que ayudan a las empresas a conectar, crecer y trabajar mejor.",
     "logoAlt": "Hippo"
@@ -461,35 +455,44 @@
       "stepLabel": "Paso {number}: {label}",
       "items": [
         {
-          "label": "Pensalo",
+          "label": "Pensar",
           "title": "Estrategia y planificación",
           "description": "Entendemos el problema, el negocio y hacia dónde querés ir."
         },
         {
-          "label": "Construilo",
+          "label": "Construir",
           "title": "Desarrollo",
           "description": "Convertimos el plan en experiencias digitales que funcionan."
         },
         {
-          "label": "Mejoralo",
+          "label": "Mejorar",
           "title": "Optimización y consultoría",
           "description": "Aprendemos, ajustamos y hacemos que todo funcione mejor."
         },
         {
-          "label": "Hacelo avanzar.",
+          "label": "Hacerlo Avanzar",
           "title": "Mantenimiento y soporte",
           "description": "Seguimos cerca para que todo siga funcionando y evolucionando."
         }
       ]
+    },
+    "story": {
+      "title1": "Tu sitio es la primera impresión.",
+      "title2": "Hagamos que cuente.",
+      "p1": "Tu sitio web es la carta de presentación digital de tu proyecto. Antes de una reunión, una llamada o un mensaje, ahí es donde te conocen. En pocos segundos deciden si confían en vos.",
+      "p2": "Una buena experiencia web comunica <red>profesionalismo</red>, <red>dedicación</red> y <red>creatividad</red> sin necesidad de explicarlo. Se nota en cómo se ve, en lo rápido que carga y en lo fácil que es encontrar lo que se busca.",
+      "p3": "Diseñamos y desarrollamos sitios a la medida de tu negocio, coherentes con tu marca y con el nivel de exigencia que ya ponés en tu trabajo. Puede ser una landing page o una plataforma completa. En los dos casos cuidamos <mark>el diseño, el rendimiento y la seguridad</mark>, y también lo que pasa después del lanzamiento.",
+      "closing": "Elevá tu marca con un sitio <u>a la altura de tus estándares.</u>",
+      "cta": "Quiero mi web"
     }
   },
   "Systems": {
     "statement": {
-      "line1": "Conectamos personas, herramientas",
-      "line2": "y procesos para que todo",
-      "line3": "siga avanzando ",
-      "marked1": "sin el trabajo",
-      "marked2": "repetitivo."
+      "line1": "Conectamos personas,",
+      "line2": "herramientas y procesos",
+      "line3": "para avanzar ",
+      "marked1": "sin tareas",
+      "marked2": "repetitivas."
     },
     "folder": {
       "title": "nos ocupamos de",
@@ -564,6 +567,29 @@
           "title": "Hola, Hippo.",
           "text": "TheHipposoft <strong>se convierte en Hippo.</strong> Cinco años después, tenemos más experiencia, más herramientas y más libertad para elegir el trabajo que queremos hacer, sin perder lo que empezó todo: la curiosidad."
         }
+      }
+    }
+  },
+  "HippoLab": {
+    "badge": "The Hippo Lab",
+    "line1": "Unas <idea>ideas</idea> piden un <plan>plan.</plan>",
+    "line2": "Otras, un lugar para <play>jugar.</play>",
+    "playground": {
+      "lines": [
+        "Las ideas se ponen raras,",
+        "los hippos se ponen salvajes,",
+        "hacé click en este <button>hippo chiquito</button>",
+        "y dejalo correr libre."
+      ],
+      "button": "Soltar hippos"
+    },
+    "cards": {
+      "title": "¿Qué tipo de hippo sos hoy?",
+      "hint": "Elegí una carta",
+      "cards": {
+        "multitasker": "El multitarea",
+        "coffee": "El amante del café",
+        "thinker": "El pensador"
       }
     }
   }
