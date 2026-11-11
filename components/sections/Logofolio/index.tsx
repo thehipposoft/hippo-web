@@ -16,9 +16,9 @@ export default function LogofolioComp() {
       ))}
 
       <h2 className="sr-only">{t("label")}</h2>
-      {/* Mobile: en el flujo, entre las líneas; desktop: centrado en la pantalla */}
-      <div className={`relative w-full px-[calc(5.5%_+_1.25rem)] md:absolute md:inset-y-0 md:left-14 md:right-[5.5%] md:px-0 md:flex md:items-center md:justify-center`}>
-        <div className="w-full md:w-[min(60vw,72rem)]">
+      {/* Mobile: en el flujo, entre las líneas; desktop: centrado entre las dos verticales (w-auto: con w-full se pasaba de la derecha) */}
+      <div className={`relative w-full px-[calc(5.5%_+_1.25rem)] md:absolute md:w-auto md:inset-y-0 md:left-14 md:right-[5.5%] md:px-0 md:flex md:items-center md:justify-center`}>
+        <div className="w-full md:w-[90%] lg:w-[min(68vw,84rem)]">
           <LogofolioLayout />
         </div>
       </div>

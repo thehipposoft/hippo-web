@@ -16,7 +16,8 @@ const CARDS = [
   },
   {
     id: "coffee",
-    face: "bg-brand-pink text-brand-darkblue",
+    // Mismo violeta que el fondo de la ilustración (brand-pink no coincide)
+    face: "bg-[#c29fe5] text-brand-darkblue",
     image: { src: "/assets/images/hippolab/coffelover-hippo.png", width: 350, height: 336 },
   },
   {

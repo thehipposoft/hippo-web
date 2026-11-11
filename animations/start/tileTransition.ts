@@ -52,8 +52,33 @@ export function createTileTransition({ overlay, tile, box, onComplete }: TileTra
     0,
   );
 
-  // Título: arranca encima del título del recuadro (mismo tamaño y posición del primer renglón)
-  if (title && tileTitle) {
+  // Título palabra por palabra: cada palabra arranca encima de la misma palabra en el recuadro y
+  // viaja a su lugar. Así, si los renglones no coinciden (en el recuadro entra en uno solo y en la
+  // pantalla va en dos), el cambio de renglón también se anima en vez de saltar.
+  const words = title ? gsap.utils.toArray<HTMLElement>(title.querySelectorAll("[data-hero-word]")) : [];
+  const tileWords = tileTitle ? measureWords(tileTitle) : [];
+  if (title && tileTitle && words.length > 0 && words.length === tileWords.length) {
+    const srcStyles = getComputedStyle(tileTitle);
+    const scale = parseFloat(srcStyles.fontSize) / parseFloat(getComputedStyle(title).fontSize);
+    words.forEach((word, i) => {
+      const src = tileWords[i];
+      const box = word.getBoundingClientRect();
+      const text = textRect(word);
+      if (!src || !text) return;
+      // La palabra escala desde su esquina superior izquierda: el texto (que no arranca justo en el
+      // borde de la caja por el interlineado) se ubica escalado sobre el del recuadro
+      // El vertical termina antes: las palabras que pasan al renglón de abajo bajan primero y
+      // después se corren, así no se cruzan con las que crecen arriba
+      tl.fromTo(word, { x: src.left - box.left, scale }, { x: 0, scale: 1, duration: 1.1 }, 0).fromTo(
+        word,
+        { y: src.top - (box.top + (text.top - box.top) * scale) },
+        { y: 0, duration: 0.75 },
+        0,
+      );
+    });
+    tl.fromTo(title, { color: srcStyles.color }, { color: getComputedStyle(title).color, duration: 1.1 }, 0);
+  } else if (title && tileTitle) {
+    // Sin palabras para emparejar: el título entero, desde el primer renglón del recuadro
     const srcStyles = getComputedStyle(tileTitle);
     const dstStyles = getComputedStyle(title);
     const srcFont = parseFloat(srcStyles.fontSize);
@@ -119,4 +144,27 @@ export function createTileTransition({ overlay, tile, box, onComplete }: TileTra
   }
 
   return tl;
+}
+
+/** Caja del texto de un elemento (sin el interlineado), o null si no tiene texto */
+function textRect(el: HTMLElement): DOMRect | null {
+  const range = document.createRange();
+  range.selectNodeContents(el);
+  const rect = range.getBoundingClientRect();
+  return rect.width ? rect : null;
+}
+
+/** Cajas del texto de cada palabra de un elemento con texto plano (en orden) */
+function measureWords(el: HTMLElement): DOMRect[] {
+  const node = el.firstChild;
+  if (!node || node.nodeType !== Node.TEXT_NODE) return [];
+  const text = node.textContent ?? "";
+  const rects: DOMRect[] = [];
+  const range = document.createRange();
+  for (const match of text.matchAll(/\S+/g)) {
+    range.setStart(node, match.index);
+    range.setEnd(node, match.index + match[0].length);
+    rects.push(range.getBoundingClientRect());
+  }
+  return rects;
 }

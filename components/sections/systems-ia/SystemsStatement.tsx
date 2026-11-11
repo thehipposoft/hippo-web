@@ -15,16 +15,28 @@ const LINES = [
   `${GRID_LINE_LEFT} right-0 bottom-14 h-px md:bottom-auto md:top-[84.5%]`,
 ];
 
-// Renglones del texto: cada tramo es una clave de Systems.statement; los que tienen `underline`
-// llevan subrayado (con su desplazamiento)
-type StatementKey = "line1" | "line2" | "line3" | "marked1" | "marked2";
-// `path`: trazo irregular, como dibujado a mano (viewBox 300×12, como en <WebDevStory />)
-const STATEMENT: { key: StatementKey; underline?: string; path?: string }[][] = [
+// Tramos del texto (fluyen seguidos, sin renglones fijos): cada tramo es una clave de Systems.statement.
+type StatementKey = "line1" | "line2" | "marked";
+const STATEMENT: { key: StatementKey; underline?: boolean }[][] = [
   [{ key: "line1" }],
-  [{ key: "line2" }],
-  [{ key: "line3" }, { key: "marked1", underline: "left-[0.1em] right-0", path: "M2 7C60 5 120 4 180 5C230 6 270 7 298 8" }],
-  [{ key: "marked2", underline: "-left-[0.15em] -right-[0.3em]", path: "M2 5C55 7 115 8 175 6C225 4 268 4 298 6" }],
+  [{ key: "line2" }, { key: "marked", underline: true }],
 ];
+/**
+ * Texto subrayado: el span marca qué se subraya. El trazo no va acá: animations/systems-ia/statement.ts
+ * mide los renglones reales del span y dibuja un trazo continuo por renglón (en
+ * [data-systems-underline-layer]). La puntuación final queda afuera del subrayado.
+ */
+function UnderlinedText({ text }: { text: string }) {
+  const [, body = text, punctuation = ""] = text.match(/^(.*?)([.,;:!?]*)$/) ?? [];
+  return (
+    <>
+      <span data-systems-underline>
+        <TypedText text={body} />
+      </span>
+      <TypedText text={punctuation} />
+    </>
+  );
+}
 
 /** Caracteres sueltos para la animación de tipeo (los espacios también ocupan su lugar) */
 function TypedText({ text }: { text: string }) {
@@ -40,10 +52,7 @@ export default function SystemsStatement() {
   const rootRef = useRef<HTMLElement>(null);
   const t = useTranslations("Systems.statement");
 
-  useGsap((root) => {
-    const tl = createSystemsStatement(root);
-    return () => tl.kill();
-  }, rootRef);
+  useGsap((root) => createSystemsStatement(root), rootRef);
 
   return (
     <section ref={rootRef} className="relative h-svh w-full overflow-hidden bg-brand-black">
@@ -52,44 +61,27 @@ export default function SystemsStatement() {
       ))}
 
       <div className="absolute inset-y-[15.3%] left-[calc(5.5%_+_1.25rem)] right-[calc(5.5%_+_1.25rem)] flex items-center md:left-[7.7%] md:right-[12%]">
-        <p className="font-display text-[10.5vw] font-bold leading-[1.12] text-white md:text-statement">
-          <span className="sr-only">{STATEMENT.flat().map((segment) => t(segment.key)).join("")}</span>
-          <span aria-hidden>
-            {STATEMENT.map((line, lineIndex) => (
-              <span key={lineIndex} className="block">
-                {line.map((segment) =>
-                  segment.underline ? (
-                    <span key={segment.key} className="relative inline-block">
-                      <TypedText text={t(segment.key)} />
-                      {/* Un <svg> absoluto no se estira entre left/right: lo hace el span */}
-                      <span
-                        data-systems-underline
-                        className={`pointer-events-none absolute -bottom-[0.14em] h-[0.2em] ${segment.underline}`}
-                      >
-                        <svg
-                          viewBox="0 0 300 12"
-                          preserveAspectRatio="none"
-                          fill="none"
-                          className="block size-full overflow-visible text-brand-blue"
-                        >
-                          <path
-                            d={segment.path}
-                            stroke="currentColor"
-                            strokeWidth={5}
-                            strokeLinecap="round"
-                            vectorEffect="non-scaling-stroke"
-                          />
-                        </svg>
-                      </span>
-                    </span>
-                  ) : (
-                    <TypedText key={segment.key} text={t(segment.key)} />
-                  ),
-                )}
-              </span>
-            ))}
-          </span>
-        </p>
+        <div>
+          <p className="relative font-display text-[8.5vw] font-bold leading-[1.12] text-white md:text-[clamp(2rem,4.2vw,4.5rem)]">
+            <span data-systems-underline-layer aria-hidden className="pointer-events-none absolute inset-0" />
+            <span className="sr-only">{STATEMENT.map((line) => line.map((segment) => t(segment.key)).join("")).join(" ")}</span>
+            <span aria-hidden>
+              {STATEMENT.map((line, lineIndex) => (
+                // Tramos seguidos (sin cortes fijos): la frase se acomoda sola al ancho
+                <span key={lineIndex}>
+                  {lineIndex > 0 && " "}
+                  {line.map((segment) =>
+                    segment.underline ? (
+                      <UnderlinedText key={segment.key} text={t(segment.key)} />
+                    ) : (
+                      <TypedText key={segment.key} text={t(segment.key)} />
+                    ),
+                  )}
+                </span>
+              ))}
+            </span>
+          </p>
+        </div>
       </div>
     </section>
   );

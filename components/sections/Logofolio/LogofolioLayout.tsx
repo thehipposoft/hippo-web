@@ -21,19 +21,19 @@ const ROWS: { align: string; logos: Logo[] }[] = [
   {
     align: "md:items-center",
     logos: [
-      { src: "/assets/images/logofolio/rock-steady.png", alt: "Rock Steady Digital", width: 1078, height: 580, className: "md:w-[clamp(7rem,10.3vw,11rem)]", slug: "rock-steady-digital" },
-      { src: "/assets/images/logofolio/inspir.png", alt: "Inspir", width: 729, height: 390, className: "md:w-[clamp(6rem,9.1vw,10rem)]", slug: "inspir-performance" },
-      { src: "/assets/images/logofolio/diversity.png", alt: "Diversity Employment", width: 1189, height: 330, className: "md:w-[clamp(8.5rem,13vw,14rem)]", slug: "diversity-employment" },
-      { src: "/assets/images/logofolio/lumina.png", alt: "Lumina Technologies", width: 882, height: 370, className: "md:w-[clamp(8.5rem,12.7vw,14rem)]", slug: "lumina-technologies" },
+      { src: "/assets/images/logofolio/rock-steady.png", alt: "Rock Steady Digital", width: 1078, height: 580, className: "md:w-[clamp(8.4rem,12.4vw,13.2rem)]", slug: "rock-steady-digital" },
+      { src: "/assets/images/logofolio/inspir.png", alt: "Inspir", width: 729, height: 390, className: "md:w-[clamp(7.2rem,10.9vw,12rem)]", slug: "inspir-performance" },
+      { src: "/assets/images/logofolio/diversity.png", alt: "Diversity Employment", width: 1189, height: 330, className: "md:w-[clamp(10.2rem,15.6vw,16.8rem)]", slug: "diversity-employment" },
+      { src: "/assets/images/logofolio/lumina.png", alt: "Lumina Technologies", width: 882, height: 370, className: "md:w-[clamp(10.2rem,15.2vw,16.8rem)]", slug: "lumina-technologies" },
     ],
   },
   {
     align: "md:items-end",
     logos: [
-      { src: "/assets/images/logofolio/destino.png", alt: "Destino Salta", width: 660, height: 686, className: "md:w-[clamp(5rem,7.9vw,8.5rem)]", slug: "destino-salta" },
-      { src: "/assets/images/logofolio/perri-logo.webp", alt: "Perri", width: 1701, height: 607, className: "md:w-[clamp(8rem,12.1vw,13rem)]", slug: "perri" },
-      { src: "/assets/images/logofolio/logofolio-6.webp", alt: "Orgánica Natural Store", width: 364, height: 325, className: "md:w-[clamp(5rem,7.9vw,8.5rem)]" },
-      { src: "/assets/images/logofolio/logofolio-7.webp", alt: "Shizen Japanese Experience", width: 934, height: 1036, className: "md:w-[clamp(4rem,6.4vw,7rem)]" },
+      { src: "/assets/images/logofolio/destino.png", alt: "Destino Salta", width: 660, height: 686, className: "md:w-[clamp(6rem,9.5vw,10.2rem)]", slug: "destino-salta" },
+      { src: "/assets/images/logofolio/perri-logo.webp", alt: "Perri", width: 1701, height: 607, className: "md:w-[clamp(9.6rem,14.5vw,15.6rem)]", slug: "perri" },
+      { src: "/assets/images/logofolio/logofolio-6.webp", alt: "Orgánica Natural Store", width: 364, height: 325, className: "md:w-[clamp(6rem,9.5vw,10.2rem)]" },
+      { src: "/assets/images/logofolio/logofolio-7.webp", alt: "Shizen Japanese Experience", width: 934, height: 1036, className: "md:w-[clamp(4.8rem,7.7vw,8.4rem)]" },
     ],
   },
 ];
@@ -87,14 +87,14 @@ export default function LogofolioLayout() {
             <li key={logo.src}>
               {logo.slug ? (
                 <Link href={`/branding-design/${logo.slug}`} className="group flex flex-col items-center gap-3 outline-none">
-                  <div className={`flex h-32 w-full items-center justify-center md:h-[clamp(5rem,9vw,10rem)] md:w-auto md:justify-start ${row.align}`}>
+                  <div className={`flex h-32 w-full items-center justify-center md:h-[clamp(6rem,10.8vw,12rem)] md:w-auto md:justify-start ${row.align}`}>
                     <LogoImage logo={logo} interactive />
                   </div>
                   <Cross />
                 </Link>
               ) : (
                 <div className="flex flex-col items-center gap-3">
-                  <div className={`flex h-32 w-full items-center justify-center md:h-[clamp(5rem,9vw,10rem)] md:w-auto md:justify-start ${row.align}`}>
+                  <div className={`flex h-32 w-full items-center justify-center md:h-[clamp(6rem,10.8vw,12rem)] md:w-auto md:justify-start ${row.align}`}>
                     <LogoImage logo={logo} interactive={false} />
                   </div>
                   {/* Mismo alto que la cruz, para que las filas queden alineadas */}

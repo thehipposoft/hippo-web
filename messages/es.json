@@ -2,7 +2,8 @@
   "Metadata": {
     "siteTitle": "Hippo",
     "description": "Diseñamos y desarrollamos experiencias digitales: branding, desarrollo web, sistemas con IA y consultoría para empresas que quieren crecer sin sumar complejidad.",
-    "logofolio": "Logofolio"
+    "logofolio": "Logofolio",
+    "portfolio": "Portfolio"
   },
   "NotFound": {
     "title": "Página no encontrada",
@@ -299,6 +300,7 @@
       "tiene más de una capa."
     ],
     "title": "Nuestros proyectos",
+    "featured": "Destacados",
     "discover": "Descubrir",
     "flagAlt": "Bandera de {country}",
     "imageAlt": "{name}: sitio web",
@@ -371,6 +373,38 @@
       "ger": "Alemania",
       "usa": "Estados Unidos",
       "esp": "España"
+    },
+    "single": {
+      "scroll": "scroll",
+      "label": "Capas del proyecto",
+      "projects": {
+        "reynoso": {
+          "eyebrow": "Sistema digital",
+          "title": "Reynoso Bienes Raíces",
+          "layers": [
+            {
+              "title": "Reynoso Bienes Raíces",
+              "work": "Diseño web + Código + SEO",
+              "imageAlt": "Sitio web de Reynoso Bienes Raíces en distintos dispositivos"
+            },
+            {
+              "title": "Sitio de propiedades",
+              "work": "Diseño UX + Código",
+              "imageAlt": "Sitio de propiedades de Reynoso en una notebook"
+            },
+            {
+              "title": "Tarjetas digitales con tecnología NFC",
+              "work": "Diseño digital",
+              "imageAlt": "Tarjeta digital de Reynoso en un celular"
+            },
+            {
+              "title": "Agente de WhatsApp",
+              "work": "Automatización",
+              "imageAlt": "Agente de WhatsApp de Reynoso en un celular"
+            }
+          ]
+        }
+      }
     }
   },
   "Home": {
@@ -407,13 +441,13 @@
       "message": "Tu mensaje",
       "project": "Proyecto",
       "interestedIn": "Me interesa…",
-      "interests": [
-        "Diseño web",
-        "Desarrollo web",
-        "Diseño gráfico",
-        "Branding",
-        "Sistemas & IA"
-      ],
+      "interests": {
+        "web-design": "Diseño web",
+        "web-development": "Desarrollo web",
+        "graphic-design": "Diseño gráfico",
+        "branding": "Branding",
+        "systems-ia": "Sistemas & IA"
+      },
       "whenLive": "¿Para cuándo lo querés publicado?",
       "timelines": [
         "Lo antes posible",
@@ -430,6 +464,12 @@
         "interests": "Me interesa",
         "timeline": "Plazos",
         "budget": "Presupuesto"
+      },
+      "status": {
+        "sending": "Enviando…",
+        "success": "¡Gracias! Recibimos tu mensaje y te respondemos pronto.",
+        "error": "No pudimos enviar tu mensaje. Probá de nuevo o escribinos por mail.",
+        "invalid": "Completá tu nombre, un email válido y tu mensaje."
       }
     }
   },
@@ -488,19 +528,62 @@
   },
   "Systems": {
     "statement": {
-      "line1": "Conectamos personas,",
-      "line2": "herramientas y procesos",
-      "line3": "para avanzar ",
-      "marked1": "sin tareas",
-      "marked2": "repetitivas."
+      "line1": "Conectamos tus herramientas, automatizamos lo repetitivo y te damos el control de tu información.",
+      "line2": "Así tu equipo dedica su tiempo a lo que de verdad hace ",
+      "marked": "crecer el proyecto."
     },
     "folder": {
       "title": "nos ocupamos de",
       "tabs": {
-        "chatbots": "Chatbots",
         "agents": "Agentes",
-        "workflows": "Flujos de trabajo"
+        "automations": "Automatizaciones",
+        "systems": "Sistemas"
+      },
+      "items": {
+        "agents": {
+          "lead": "Atención inmediata, las 24 horas.",
+          "paragraphs": [
+            "Tus clientes escriben por WhatsApp a cualquier hora y esperan una respuesta rápida. Creamos agentes de IA que contestan al instante, entienden lo que se les pregunta y responden con la información de tu negocio: precios, horarios, disponibilidad, estado de un pedido.",
+            "No son bots de respuestas fijas. Mantienen una conversación natural, toman datos, agendan citas, registran pedidos y pasan la conversación a una persona de tu equipo cuando hace falta."
+          ],
+          "closing": "Ningún mensaje queda sin respuesta y ninguna venta se pierde por llegar tarde.",
+          "tags": [
+            "Chatbots en WhatsApp",
+            "Asistentes en tu sitio web",
+            "Atención y ventas automatizadas"
+          ]
+        },
+        "automations": {
+          "lead": "Dejá que lo repetitivo se haga solo.",
+          "paragraphs": [
+            "Copiar datos de un sistema a otro, enviar el mismo correo cada vez, armar el reporte de cada semana. Son tareas que consumen horas y dejan espacio para errores.",
+            "Analizamos cómo trabaja tu equipo y automatizamos esos procesos para que sean más rápidos, más simples y no dependan de que alguien se acuerde de hacerlos. Conectamos las herramientas que ya usás para que la información llegue sola a donde tiene que llegar."
+          ],
+          "tags": [
+            "Flujos de trabajo",
+            "Notificaciones automáticas",
+            "Sincronización entre sistemas",
+            "Reportes"
+          ]
+        },
+        "systems": {
+          "lead": "Tu negocio, a la medida y en un solo lugar.",
+          "paragraphs": [
+            "Cuando las planillas y las herramientas genéricas ya no alcanzan, construimos sistemas de gestión pensados para tu forma de trabajar.",
+            "Nos conectamos a tu propia base de datos para que veas tus métricas en gráficos claros y edites la información desde un panel simple. Tu equipo accede a lo que necesita, con los permisos que necesita. Vos decidís qué se mide, qué se muestra y cómo se trabaja."
+          ],
+          "tags": [
+            "Paneles de gestión",
+            "Métricas y dashboards",
+            "Conexión con tu base de datos",
+            "Accesos por rol"
+          ]
+        }
       }
+    },
+    "cta": {
+      "title": "¿Tenés un proceso que te quita tiempo? Contanos y lo resolvemos.",
+      "link": "Hablemos"
     }
   },
   "About": {

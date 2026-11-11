@@ -17,8 +17,8 @@ export type FolderTab = {
 // Tamaños de pestaña
 const TAB_SIZES = {
   md: "px-[clamp(1rem,2.2vw,2.25rem)] text-[clamp(0.85rem,1vw,1.05rem)]",
-  // Mobile: las pestañas se reparten el ancho de la carpeta (el texto puede ir en dos renglones)
-  lg: "min-w-0 flex-1 px-3 text-left text-[0.85rem] leading-tight md:min-w-[clamp(8rem,12.5vw,14rem)] md:flex-none md:px-[clamp(1rem,2vw,2.25rem)] md:text-[clamp(0.9rem,1.05vw,1.15rem)] md:leading-normal",
+  // Mobile: las pestañas se reparten el ancho según su texto (una palabra larga no se corta)
+  lg: "min-w-0 flex-auto px-2.5 text-center text-[0.85rem] leading-tight md:text-left md:min-w-[clamp(8rem,12.5vw,14rem)] md:flex-none md:px-[clamp(1rem,2vw,2.25rem)] md:text-[clamp(0.9rem,1.05vw,1.15rem)] md:leading-normal",
 } as const;
 
 // Borde y sombra de la hoja por defecto (para fondos claros)
@@ -33,6 +33,9 @@ type FolderProps = {
   frameClassName?: string;
   /** Tamaño de las pestañas */
   size?: keyof typeof TAB_SIZES;
+  /** Pestaña activa controlada desde afuera (p. ej. un formulario que vuelve a la pestaña con un error) */
+  active?: number;
+  onActiveChange?: (index: number) => void;
 };
 
 /**
@@ -46,11 +49,18 @@ export default function Folder({
   panelClassName = "",
   frameClassName = DEFAULT_FRAME,
   size = "md",
+  active: controlledActive,
+  onActiveChange,
 }: FolderProps) {
   const id = useId();
   const rootRef = useRef<HTMLDivElement>(null);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const [active, setActive] = useState(0);
+  const [ownActive, setOwnActive] = useState(0);
+  const active = controlledActive ?? ownActive;
+  const setActive = (index: number) => {
+    setOwnActive(index);
+    onActiveChange?.(index);
+  };
   const hasMounted = useRef(false);
 
   useGsap((root) => createFolderTabs(root), rootRef);

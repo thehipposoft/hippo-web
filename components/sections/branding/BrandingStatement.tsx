@@ -18,13 +18,14 @@ const LINES = [
   "inset-x-0 bottom-14 h-px md:bottom-auto md:top-[85%]",
 ] as const;
 
-// Mobile: más grandes y cerca del texto (arriba a los costados y abajo a la derecha)
+// Mobile: más grandes y cerca del texto (arriba a los costados y abajo a la derecha).
+// Desktop: la "H" arriba a la izquierda, montada sobre la vertical y por encima del texto (no lo pisa)
 const STICKERS = [
   {
     src: "/assets/images/desing/h.png",
     width: 348,
     height: 339,
-    className: "left-[10%] top-[22%] w-[22vw] md:left-14 md:top-[12%] md:w-[clamp(4rem,8vw,8rem)]",
+    className: "left-[10%] top-[22%] w-[22vw] md:left-[2.5%] md:top-[5%] md:w-[clamp(4rem,8vw,8rem)]",
   },
   {
     src: "/assets/images/desing/desing-recurso.png",
@@ -46,10 +47,10 @@ export default function BrandingStatement() {
   const t = useTranslations("Branding");
 
   useGsap((root) => {
-    const tl = createBrandingStatement(root);
+    const removeEntrance = createBrandingStatement(root);
     const removeCharRoll = createCharRoll(root);
     return () => {
-      tl.kill();
+      removeEntrance();
       removeCharRoll();
     };
   }, rootRef);

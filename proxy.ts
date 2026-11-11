@@ -2,12 +2,17 @@ import { NextResponse, type NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 import { LOGOFOLIO_SECTION, LOGOFOLIO_SLUGS } from "./lib/logofolioSlugs";
+import { PORTFOLIO_SECTION, PORTFOLIO_SINGLE_SLUGS } from "./lib/portfolioSlugs";
 import { SECTIONS } from "./lib/sections";
 
 const intl = createMiddleware(routing);
 
 const SECTION_SLUGS = new Set<string>(SECTIONS.map(({ slug }) => slug));
-const FICHA_SLUGS = new Set<string>(LOGOFOLIO_SLUGS);
+// Subpáginas válidas por sección
+const SUBPAGES: Record<string, Set<string>> = {
+  [LOGOFOLIO_SECTION]: new Set<string>(LOGOFOLIO_SLUGS),
+  [PORTFOLIO_SECTION]: new Set<string>(PORTFOLIO_SINGLE_SLUGS),
+};
 
 /**
  * ¿La ruta (sin locale) existe? Con cacheComponents, un slug no listado se sirve con la página
@@ -19,7 +24,7 @@ function isKnownPath(segments: string[]): boolean {
   const [section, slug, ...rest] = segments;
   if (!SECTION_SLUGS.has(section)) return false;
   if (slug === undefined) return true;
-  return rest.length === 0 && section === LOGOFOLIO_SECTION && FICHA_SLUGS.has(slug);
+  return rest.length === 0 && Boolean(SUBPAGES[section]?.has(slug));
 }
 
 export default function proxy(request: NextRequest) {

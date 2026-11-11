@@ -2,6 +2,9 @@
 
 import { useRef } from "react";
 import { useTranslations, type Messages } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import { PORTFOLIO_SINGLE_BY_GRID_SLUG } from "@/lib/portfolioProjects";
+import { PORTFOLIO_SECTION } from "@/lib/portfolioSlugs";
 import { useBlobClip } from "@/lib/useBlobClip";
 import Image from "next/image";
 import { createPortfolioGridEntrance } from "@/animations/portfolio/grid";
@@ -26,13 +29,14 @@ const countryOf = (flag: string) => flag.match(/flag-([a-z]+)\./)?.[1] as Countr
  * La capa se agranda 6% por lado (-inset-[6%], ver OVERFLOW en animations/blob.ts): en reposo el
  * recorte coincide con la card y tiene margen para estirarse hacia el cursor.
  */
-function PortfolioCardLink({ data, seed }: { data: PortfolioItem; seed: number }) {
+function PortfolioCardLink({ data, seed, single }: { data: PortfolioItem; seed: number; single?: string }) {
   const t = useTranslations("Portfolio");
   const layerRef = useRef<HTMLDivElement>(null);
   const { clipId, pathRef, initialPath } = useBlobClip(layerRef, { seed });
 
-  return (
-    <a href={data.href} target="_blank" rel="noreferrer" className="group relative block aspect-[450/420] w-full">
+  const className = "group relative block aspect-[450/420] w-full";
+  const content = (
+    <>
       <svg aria-hidden width="0" height="0" className="absolute">
         <defs>
           <clipPath id={clipId} clipPathUnits="objectBoundingBox">
@@ -64,9 +68,49 @@ function PortfolioCardLink({ data, seed }: { data: PortfolioItem; seed: number }
       >
         <path d="M1.25 20H38.75M20 1.25V38.75" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="3 3" />
       </svg>
+    </>
+  );
+
+  // Con página propia lleva a /portfolio/[slug]; si no, abre el sitio del proyecto
+  return single ? (
+    <Link href={`/${PORTFOLIO_SECTION}/${single}`} className={className}>
+      {content}
+    </Link>
+  ) : (
+    <a href={data.href} target="_blank" rel="noreferrer" className={className}>
+      {content}
     </a>
   );
 }
+
+/** Card de la grilla: imagen + datos del proyecto */
+function PortfolioItemCard({ slug, data, seed }: { slug: string; data: PortfolioItem; seed: number }) {
+  const t = useTranslations("Portfolio");
+  return (
+    <li data-portfolio-item className="flex flex-col gap-4">
+      <PortfolioCardLink data={data} seed={seed} single={PORTFOLIO_SINGLE_BY_GRID_SLUG[slug]} />
+
+      <div className="flex flex-col">
+        <h3 className="font-display text-xl font-bold">{data.name}</h3>
+        <p className="pt-2 text-xs uppercase md:text-sm">{t(`projects.${slug as PortfolioSlug}.industry`)}</p>
+        <p className="text-xs uppercase md:text-sm">{t(`projects.${slug as PortfolioSlug}.work`)}</p>
+        <div className="flex items-center gap-4 pt-2">
+          <span className="font-display text-2xl">{data.year}</span>
+          <Image className="h-auto w-auto" src={data.flag} alt={t("flagAlt", { country: t(`countries.${countryOf(data.flag)}`) })} width={35} height={24} />
+          {"secondFlag" in data && data.secondFlag && (
+            <Image className="h-auto w-auto" src={data.secondFlag} alt={t("flagAlt", { country: t(`countries.${countryOf(data.secondFlag)}`) })} width={35} height={24} />
+          )}
+          {data.technologies_icons}
+        </div>
+      </div>
+    </li>
+  );
+}
+
+// Proyectos con página propia: van primero, en "Destacados"
+const FEATURED = PORTFOLIO_DATA.filter(({ slug }) => slug in PORTFOLIO_SINGLE_BY_GRID_SLUG);
+const GRID_LIST = "mx-auto grid w-[min(90%,78rem)] grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3";
+const LIST_TITLE = "mx-auto w-[min(90%,78rem)] pb-8 font-display text-[clamp(2rem,4vw,4rem)] font-bold leading-none";
 
 /** Portfolio · grilla de proyectos. */
 export default function PortfolioGrid() {
@@ -83,29 +127,26 @@ export default function PortfolioGrid() {
         <span key={className} aria-hidden className={`absolute inset-y-0 w-px bg-brand-blue/50 ${className}`} />
       ))}
 
-      <h2 className="sr-only">{t("title")}</h2>
+      <div className={`${GRID_CONTENT_PADDING} py-24`}>
+        {FEATURED.length > 0 && (
+          <div className="pb-24">
+            <h2 className={`${LIST_TITLE} flex items-center gap-[0.35em]`}>
+              {/* Recuadro de color a la izquierda del título */}
+              <span aria-hidden className="size-[0.45em] shrink-0 bg-brand-orange" />
+              {t("featured")}
+            </h2>
+            <ul className={GRID_LIST}>
+              {FEATURED.map(({ slug, data }, index) => (
+                <PortfolioItemCard key={slug} slug={slug} data={data} seed={index} />
+              ))}
+            </ul>
+          </div>
+        )}
 
-      <div className={GRID_CONTENT_PADDING}>
-        <ul className="mx-auto grid w-[min(90%,78rem)] grid-cols-1 gap-8 py-24 md:grid-cols-2 lg:grid-cols-3">
+        <h2 className={LIST_TITLE}>{t("title")}</h2>
+        <ul className={GRID_LIST}>
           {PORTFOLIO_DATA.map(({ slug, data }, index) => (
-            <li key={slug} data-portfolio-item className="flex flex-col gap-4">
-              {/* TODO: llevar a la ficha /portfolio/[slug] cuando exista; por ahora abre el sitio del proyecto */}
-              <PortfolioCardLink data={data} seed={index} />
-
-              <div className="flex flex-col">
-                <h3 className="font-display text-xl font-bold">{data.name}</h3>
-                <p className="pt-2 text-xs uppercase md:text-sm">{t(`projects.${slug as PortfolioSlug}.industry`)}</p>
-                <p className="text-xs uppercase md:text-sm">{t(`projects.${slug as PortfolioSlug}.work`)}</p>
-                <div className="flex items-center gap-4 pt-2">
-                  <span className="font-display text-2xl">{data.year}</span>
-                  <Image className="h-auto w-auto" src={data.flag} alt={t("flagAlt", { country: t(`countries.${countryOf(data.flag)}`) })} width={35} height={24} />
-                  {"secondFlag" in data && data.secondFlag && (
-                    <Image className="h-auto w-auto" src={data.secondFlag} alt={t("flagAlt", { country: t(`countries.${countryOf(data.secondFlag)}`) })} width={35} height={24} />
-                  )}
-                  {data.technologies_icons}
-                </div>
-              </div>
-            </li>
+            <PortfolioItemCard key={slug} slug={slug} data={data} seed={index} />
           ))}
         </ul>
       </div>

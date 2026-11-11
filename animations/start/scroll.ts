@@ -13,6 +13,8 @@ const WAVES = [
 ];
 const SHRINK_AT = 2.2; // la caja empieza a achicarse cuando llegan las 2 primeras tandas
 const SHRINK_DURATION = 1.6;
+// Cuánto antes del final del timeline (en unidades de pantalla) se habilitan los clicks
+const READY_MARGIN = 0.15;
 
 /**
  * Animación de <Start /> ligada al scroll (sección pineada).
@@ -75,7 +77,16 @@ export function createStartScroll(root: HTMLElement): gsap.core.Timeline {
     .to("[data-start-line]", { autoAlpha: 0, duration: 0.4 }, SHRINK_AT + 1.2);
 
   // ── Paso 5 ──────────────────────────────────────────────────────
-  tl.set(tiles, { pointerEvents: "auto" }, tl.duration());
+  // Los recuadros se vuelven clickeables cuando el scroll llega casi al final. Antes era un set en
+  // el último instante del timeline: si el scroll frenaba unos píxeles antes del final (pasa con
+  // trackpad/Lenis en desktop), quedaban en su lugar pero sin hover ni click.
+  const readyAt = (tl.duration() - READY_MARGIN) / tl.duration();
+  let ready = false;
+  const setReady = (value: boolean) => {
+    if (value === ready) return;
+    ready = value;
+    gsap.set(tiles, { pointerEvents: value ? "auto" : "none" });
+  };
 
   // El largo del scroll acompaña la duración del timeline
   ScrollTrigger.create({
@@ -86,6 +97,9 @@ export function createStartScroll(root: HTMLElement): gsap.core.Timeline {
     pin: true,
     scrub: 1,
     invalidateOnRefresh: true,
+    // Con el progreso del scroll (no del timeline, que llega con el retraso del scrub)
+    onUpdate: (self) => setReady(self.progress >= readyAt),
+    onRefresh: (self) => setReady(self.progress >= readyAt),
   });
 
   return tl;

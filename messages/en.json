@@ -2,7 +2,8 @@
   "Metadata": {
     "siteTitle": "Hippo",
     "description": "We design and build digital experiences: branding, web development, AI systems and consulting for companies that want to grow without adding complexity.",
-    "logofolio": "Logofolio"
+    "logofolio": "Logofolio",
+    "portfolio": "Portfolio"
   },
   "NotFound": {
     "title": "Page not found",
@@ -299,6 +300,7 @@
       "has more than one layer."
     ],
     "title": "Our Projects",
+    "featured": "Featured",
     "discover": "Discover",
     "flagAlt": "{country} flag",
     "imageAlt": "{name}: website",
@@ -371,6 +373,38 @@
       "ger": "Germany",
       "usa": "United States",
       "esp": "Spain"
+    },
+    "single": {
+      "scroll": "scroll",
+      "label": "Project layers",
+      "projects": {
+        "reynoso": {
+          "eyebrow": "Digital system",
+          "title": "Reynoso Real Estate",
+          "layers": [
+            {
+              "title": "Reynoso Bienes Raíces",
+              "work": "Web design + Code + SEO",
+              "imageAlt": "Reynoso Real Estate website on different devices"
+            },
+            {
+              "title": "Property site",
+              "work": "UX design + Code",
+              "imageAlt": "Reynoso property site on a laptop"
+            },
+            {
+              "title": "Business digital cards with NFC technology",
+              "work": "Digital design",
+              "imageAlt": "Reynoso digital card on a phone"
+            },
+            {
+              "title": "WhatsApp agent",
+              "work": "Automation",
+              "imageAlt": "Reynoso WhatsApp agent on a phone"
+            }
+          ]
+        }
+      }
     }
   },
   "Home": {
@@ -407,13 +441,13 @@
       "message": "Your message",
       "project": "Project",
       "interestedIn": "I'm interested in…",
-      "interests": [
-        "Web design",
-        "Web Development",
-        "Graphic design",
-        "Branding",
-        "Systems & AI"
-      ],
+      "interests": {
+        "web-design": "Web design",
+        "web-development": "Web development",
+        "graphic-design": "Graphic design",
+        "branding": "Branding",
+        "systems-ia": "Systems & AI"
+      },
       "whenLive": "When do you want to be live?",
       "timelines": [
         "ASAP",
@@ -430,6 +464,12 @@
         "interests": "Interested in",
         "timeline": "Timeline",
         "budget": "Budget"
+      },
+      "status": {
+        "sending": "Sending…",
+        "success": "Thanks! We got your message and will get back to you soon.",
+        "error": "We couldn't send your message. Try again or email us.",
+        "invalid": "Please fill in your name, a valid email and your message."
       }
     }
   },
@@ -488,19 +528,62 @@
   },
   "Systems": {
     "statement": {
-      "line1": "We connect people, tools",
-      "line2": "and processes so things",
-      "line3": "keep moving ",
-      "marked1": "without the",
-      "marked2": "busywork."
+      "line1": "We connect your tools, automate the repetitive work and put you in control of your information.",
+      "line2": "So your team spends its time on what truly ",
+      "marked": "makes the project grow."
     },
     "folder": {
       "title": "we take care",
       "tabs": {
-        "chatbots": "Chatbots",
         "agents": "Agents",
-        "workflows": "Workflows"
+        "automations": "Automations",
+        "systems": "Systems"
+      },
+      "items": {
+        "agents": {
+          "lead": "Instant support, 24 hours a day.",
+          "paragraphs": [
+            "Your customers message you on WhatsApp at any hour and expect a quick answer. We build AI agents that reply instantly, understand what they're asked and answer with your business information: prices, opening hours, availability, order status.",
+            "They're not bots with canned replies. They hold a natural conversation, collect details, book appointments, log orders and hand the conversation over to someone on your team when needed."
+          ],
+          "closing": "No message goes unanswered and no sale is lost for replying too late.",
+          "tags": [
+            "WhatsApp chatbots",
+            "Website assistants",
+            "Automated support and sales"
+          ]
+        },
+        "automations": {
+          "lead": "Let the repetitive work do itself.",
+          "paragraphs": [
+            "Copying data from one system to another, sending the same email every time, putting together the weekly report. These tasks eat up hours and leave room for mistakes.",
+            "We look at how your team works and automate those processes so they're faster, simpler and don't depend on someone remembering to do them. We connect the tools you already use so information gets where it needs to go on its own."
+          ],
+          "tags": [
+            "Workflows",
+            "Automatic notifications",
+            "Sync between systems",
+            "Reports"
+          ]
+        },
+        "systems": {
+          "lead": "Your business, tailor-made and in one place.",
+          "paragraphs": [
+            "When spreadsheets and generic tools no longer cut it, we build management systems designed around the way you work.",
+            "We connect to your own database so you can see your metrics in clear charts and edit information from a simple dashboard. Your team gets access to what they need, with the permissions they need. You decide what gets measured, what gets shown and how the work gets done."
+          ],
+          "tags": [
+            "Management dashboards",
+            "Metrics and dashboards",
+            "Connection to your database",
+            "Role-based access"
+          ]
+        }
       }
+    },
+    "cta": {
+      "title": "Got a process that eats up your time? Tell us and we'll solve it.",
+      "link": "Let's talk"
     }
   },
   "About": {

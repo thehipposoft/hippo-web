@@ -4,21 +4,38 @@ import type { Locale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import LogofolioSingleComp from "@/components/sections/Logofolio/LogofolioSingleComp";
 import NewLogofolioComp from "@/components/sections/Logofolio/NewLogofolioComp";
+import PortfolioSingleProyect from "@/components/sections/portfolio/PortfolioSingleProyect";
 import SectionMenu from "@/components/SectionMenu";
 import { LOGOFOLIO, getLogofolioProject } from "@/lib/logofolio";
 import { LOGOFOLIO_SECTION } from "@/lib/logofolioSlugs";
+import { getPortfolioSingleProject } from "@/lib/portfolioProjects";
+import { PORTFOLIO_SECTION, PORTFOLIO_SINGLE_SLUGS } from "@/lib/portfolioSlugs";
 import { getSection } from "@/lib/sections";
 import { localizedMetadata } from "@/lib/seo";
 
-// Por ahora solo Branding & Design tiene subpáginas: las fichas del logofolio
+// Subpáginas: las fichas del logofolio (Branding & Design) y los proyectos del portfolio con
+// página propia (<PortfolioSingleProyect />)
 const SECTION = LOGOFOLIO_SECTION;
 
 export function generateStaticParams() {
-  return LOGOFOLIO.map(({ slug }) => ({ section: SECTION, slug }));
+  return [
+    ...LOGOFOLIO.map(({ slug }) => ({ section: SECTION, slug })),
+    ...PORTFOLIO_SINGLE_SLUGS.map((slug) => ({ section: PORTFOLIO_SECTION, slug })),
+  ];
 }
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/[section]/[slug]">): Promise<Metadata> {
-  const { locale, slug } = await params;
+  const { locale, section, slug } = await params;
+  if (section === PORTFOLIO_SECTION) {
+    const single = getPortfolioSingleProject(slug);
+    if (!single) return { title: "Hippo" };
+    const tSingle = await getTranslations({ locale: locale as Locale, namespace: "Portfolio" });
+    const tMeta = await getTranslations({ locale: locale as Locale, namespace: "Metadata" });
+    return {
+      title: `${tSingle(`single.projects.${single.slug}.title`)} · ${tMeta("portfolio")} · Hippo`,
+      ...localizedMetadata(`/${PORTFOLIO_SECTION}/${single.slug}`, locale as Locale),
+    };
+  }
   const project = getLogofolioProject(slug);
   if (!project) return { title: "Hippo" };
   const t = await getTranslations({ locale: locale as Locale, namespace: "Metadata" });
@@ -28,8 +45,22 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/[section
   };
 }
 
-export default async function LogofolioProjectPage({ params }: PageProps<"/[locale]/[section]/[slug]">) {
+export default async function SectionSubpage({ params }: PageProps<"/[locale]/[section]/[slug]">) {
   const { locale, section, slug } = await params;
+
+  // Portfolio: proyecto con página propia
+  if (section === PORTFOLIO_SECTION) {
+    const single = getPortfolioSingleProject(slug);
+    const portfolio = getSection(section);
+    if (!single || !portfolio) notFound();
+    return (
+      <main>
+        <PortfolioSingleProyect project={single} />
+        <SectionMenu section={portfolio} atSectionRoot={false} />
+      </main>
+    );
+  }
+
   const project = section === SECTION ? getLogofolioProject(slug) : undefined;
   const parent = getSection(section);
   if (!project || !parent) notFound();

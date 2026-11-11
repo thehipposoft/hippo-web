@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { LOGOFOLIO_SECTION, LOGOFOLIO_SLUGS } from "@/lib/logofolioSlugs";
+import { PORTFOLIO_SECTION, PORTFOLIO_SINGLE_SLUGS } from "@/lib/portfolioSlugs";
 import { SECTIONS } from "@/lib/sections";
 import { SITE_URL, localizedPath } from "@/lib/seo";
 
@@ -10,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/",
     ...SECTIONS.map(({ slug }) => `/${slug}`),
     ...LOGOFOLIO_SLUGS.map((slug) => `/${LOGOFOLIO_SECTION}/${slug}`),
+    ...PORTFOLIO_SINGLE_SLUGS.map((slug) => `/${PORTFOLIO_SECTION}/${slug}`),
   ];
 
   return hrefs.flatMap((href) => {

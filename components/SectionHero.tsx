@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { useTranslations } from "next-intl";
 import SectionHeroLines from "@/components/SectionHeroLines";
 import SectionMenu from "@/components/SectionMenu";
@@ -16,6 +17,9 @@ type SectionHeroProps = {
  */
 export default function SectionHero({ section, intro = true }: SectionHeroProps) {
   const t = useTranslations("Sections");
+  // Renglones (cortes del texto) y palabras: en la transición desde el inicio cada palabra viaja
+  // desde su lugar en el recuadro (ahí el título puede ir en un solo renglón)
+  const lines = t(`${section.slug}.heroTitle`).split("\n");
   return (
     <div className="relative h-svh w-full overflow-hidden">
       <div data-hero-panel className="absolute inset-0 bg-brand-black">
@@ -26,9 +30,20 @@ export default function SectionHero({ section, intro = true }: SectionHeroProps)
       <div className="absolute left-[calc(5.5%_+_1.25rem)] top-[30%] flex h-[40%] items-center md:left-[7.5%] md:h-[30%]">
         <h1
           data-hero-title
-          className="origin-top-left whitespace-pre-line font-display text-[13vw] font-bold leading-[0.85] text-white md:text-[clamp(2.75rem,7.8vw,7.5rem)]"
+          className="origin-top-left font-display text-[13vw] font-bold leading-[0.85] text-white md:text-[clamp(2.75rem,7.8vw,7.5rem)]"
         >
-          {t(`${section.slug}.heroTitle`)}
+          {lines.map((line, i) => (
+            <span key={i} className="block">
+              {line.split(" ").map((word, j) => (
+                <Fragment key={j}>
+                  {j > 0 && " "}
+                  <span data-hero-word className="inline-block origin-top-left">
+                    {word}
+                  </span>
+                </Fragment>
+              ))}
+            </span>
+          ))}
         </h1>
       </div>
 
