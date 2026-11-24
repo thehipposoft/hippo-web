@@ -47,6 +47,7 @@
   "Logofolio": {
     "ui": {
       "label": "Logofolio",
+      "back": "Atrás",
       "concept": "Concepto:",
       "discover": "Ver sitio",
       "client": "Cliente:",
@@ -297,7 +298,8 @@
   "Portfolio": {
     "statement": [
       "Cada experiencia digital",
-      "tiene más de una capa."
+      "tiene más",
+      "de una capa"
     ],
     "title": "Nuestros proyectos",
     "featured": "Destacados",
@@ -412,7 +414,8 @@
     "description": "Convertimos ideas en experiencias digitales con diseño, tecnología y automatización inteligente.",
     "tagline": "Diseño · Tecnología · Automatización",
     "manifesto": "De la identidad a lo digital, de la web a la automatización: creamos los sistemas que ayudan a las empresas a conectar, crecer y trabajar mejor.",
-    "logoAlt": "Hippo"
+    "logoAlt": "Hippo",
+    "scroll": "scroll"
   },
   "Nav": {
     "sections": "Secciones",
@@ -457,6 +460,7 @@
       ],
       "budget": "¿Con qué presupuesto contás?",
       "send": "¡enviar!",
+      "next": "siguiente",
       "mail": {
         "subject": "Nuevo proyecto",
         "name": "Nombre",
@@ -533,7 +537,7 @@
       "marked": "crecer el proyecto."
     },
     "folder": {
-      "title": "nos ocupamos de",
+      "title": "Nos ocupamos de",
       "tabs": {
         "agents": "Agentes",
         "automations": "Automatizaciones",
@@ -642,6 +646,10 @@
           "title": "Empezamos a encontrarle la vuelta.",
           "text": "Más proyectos, más clientes, más preguntas. Pasamos de hacer cosas a pensar por qué las hacíamos, y desarrollamos nuestras habilidades, nuestro proceso y nuestra forma de trabajar."
         },
+        "2023": {
+          "title": "Refinamos nuestras habilidades.",
+          "text": "Llegando al nivel de calidad que queríamos con nuestro trabajo, pudimos empezar a apuntar a proyectos más grandes, integrando más que solo lo web."
+        },
         "2024": {
           "title": "Más que una software factory.",
           "text": "Empezamos a pensar en grande. La estrategia, la consultoría y las alianzas a largo plazo se volvieron parte de cómo trabajamos. Seguimos diseñando y desarrollando, pero con una idea más clara de hacia dónde queríamos ir."
@@ -655,12 +663,12 @@
   },
   "HippoLab": {
     "badge": "The Hippo Lab",
-    "line1": "Unas <idea>ideas</idea> piden un <plan>plan.</plan>",
+    "line1": "Algunas <idea>ideas</idea> necesitan un <plan>plan.</plan>",
     "line2": "Otras, un lugar para <play>jugar.</play>",
     "playground": {
       "lines": [
-        "Las ideas se ponen raras,",
-        "los hippos se ponen salvajes,",
+        "Ideas locas,",
+        "hippos salvajes,",
         "hacé click en este <button>hippo chiquito</button>",
         "y dejalo correr libre."
       ],

@@ -143,12 +143,12 @@ const NewLogofolioComp = ({
             <svg className='svg animate-float  w-24 ' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.70711 9.71069c-.39053.39051-.39053 1.02371 0 1.41421l4.89219 4.8874c.7812.7804 2.047.7801 2.8278-.0006l4.8903-4.8904c.3906-.3905.3906-1.0237 0-1.41422-.3905-.39053-1.0237-.39053-1.4142 0l-4.1856 4.18562c-.3905.3906-1.0237.3905-1.4142 0L7.12132 9.71069c-.39052-.39053-1.02369-.39053-1.41421 0Z" fill="#70FFE5"/></svg>
         </div>
         <div className='head min-h-44 flex items-end md:items-center pb-3 md:pb-0 justify-between mx-auto max-w-6xl w-full sticky top-0 bg-white rounded-b-xl px-6 z-30 backdrop-blur-md'>
-            <h1 className='text-5xl text-black title'>
+            <h1 className='title font-display text-5xl font-bold text-black'>
                 {data.name}
             </h1>
             <div className='flex items-center gap-8 title'>
-                <h4 className='text-base hidden md:block text-black'>
-                    <Link href={`/${LOGOFOLIO_SECTION}#${LOGOFOLIO_ANCHOR}`} className='hover:underline'>{t('label')}</Link>
+                <h4 className='hidden font-display text-base font-medium text-black md:block'>
+                    <Link href={`/${LOGOFOLIO_SECTION}#${LOGOFOLIO_ANCHOR}`} className='hover:underline'>{t('back')}</Link>
                 </h4>
             </div>
         </div>
@@ -197,7 +197,7 @@ const NewLogofolioComp = ({
                 <div className='flex lg:flex-row flex-col h-screen legend-container sticky top-0'>
                     <div style={{backgroundColor: data.backgroundLegend}} className='lg:w-1/2 flex justify-center items-center relative h-screen lg:h-auto'>
                         {data.backgroundLegendImage && <Image sizes='50vw' src={data.backgroundLegendImage} alt={t('legendBackgroundAlt', { name: data.name })} fill className='object-cover' />}
-                        <div className='flex flex-wrap justify-center gap-1 max-w-xl text-center text-2xl light relative z-20 px-8 md:px-0 w-3/5 text-white'>
+                        <div className='flex flex-wrap justify-center gap-1 max-w-xl text-center font-display text-2xl font-medium relative z-20 px-8 md:px-0 w-3/5 text-white'>
                             {
                                 data.legend.split(" ").map((char: string, index: number) => (
                                         <p className='reveal' key={index}>{char}</p>

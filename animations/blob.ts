@@ -7,14 +7,14 @@ const OVERFLOW = 0.06;
 
 export const BLOB = {
   /** Puntos sobre el contorno */
-  points: 48,
+  points: 96,
   /** Margen del rectángulo base dentro de la capa (coords 0–1 de la capa) */
   inset: OVERFLOW / (1 + OVERFLOW * 2),
   /** Amplitud de la irregularidad de la forma base (0 = rectángulo recto en reposo) */
   wobble: 0,
   /** Repulsión: cuánto se aparta el borde del cursor y radio de influencia (gaussiana), coords de la capa */
-  push: 0.09,
-  radius: 0.2,
+  push: 0.11,
+  radius: 0.25,
   /** Distancia del cursor a la card (coords de la capa) a partir de la cual empieza a reaccionar */
   reach: 0.35,
   /** Estiramiento hacia el centro con foco de teclado */

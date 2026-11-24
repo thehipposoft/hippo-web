@@ -47,6 +47,7 @@
   "Logofolio": {
     "ui": {
       "label": "Logofolio",
+      "back": "Back",
       "concept": "Concept:",
       "discover": "Discover Site",
       "client": "Client:",
@@ -296,8 +297,9 @@
   },
   "Portfolio": {
     "statement": [
-      "Every digital experience.",
-      "has more than one layer."
+      "Every digital experience",
+      "has more",
+      "than one layer"
     ],
     "title": "Our Projects",
     "featured": "Featured",
@@ -412,7 +414,8 @@
     "description": "We turn ideas into digital experiences through design, technology and intelligent automation.",
     "tagline": "Design · Technology · Automation",
     "manifesto": "From identity to digital experiences, from websites to automation, we create the systems that help businesses connect, evolve, and work better.",
-    "logoAlt": "Hippo"
+    "logoAlt": "Hippo",
+    "scroll": "scroll"
   },
   "Nav": {
     "sections": "Sections",
@@ -457,6 +460,7 @@
       ],
       "budget": "Working budget?",
       "send": "send!",
+      "next": "next",
       "mail": {
         "subject": "New project",
         "name": "Name",
@@ -533,7 +537,7 @@
       "marked": "makes the project grow."
     },
     "folder": {
-      "title": "we take care",
+      "title": "We take care",
       "tabs": {
         "agents": "Agents",
         "automations": "Automations",
@@ -641,6 +645,10 @@
         "2022": {
           "title": "We started figuring it out.",
           "text": "More projects, more clients, more questions. We grew from doing things to thinking about why we were doing them — developing our skills, our process and our way of working."
+        },
+        "2023": {
+          "title": "We refined our skills.",
+          "text": "Reaching the level of quality we wanted in our work, we were able to start aiming at bigger projects, integrating more than just the web."
         },
         "2024": {
           "title": "More than a software factory.",

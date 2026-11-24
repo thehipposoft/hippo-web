@@ -23,6 +23,23 @@ type Status = "idle" | "sending" | "success" | "error" | "invalid";
 const FIELD =
   "w-full border-b-2 border-(--field-line) bg-transparent pb-1 font-display text-[clamp(1rem,1.15vw,1.25rem)] text-black outline-none transition-colors duration-300 placeholder:text-(--field-line) focus:border-(--field-focus) aria-invalid:border-red-500";
 
+// Botón del formulario ("¡enviar!" y "siguiente" comparten el estilo)
+const FORM_BUTTON =
+  "cursor-pointer rounded-full border-2 border-brand-pink px-8 py-1.5 font-display text-[clamp(0.95rem,1.05vw,1.15rem)] font-bold shadow-[1px_2px_0_0_var(--color-brand-pink)] transition-colors duration-300 hover:bg-brand-pink/40 disabled:cursor-wait disabled:opacity-50";
+
+/** "Siguiente": esquina inferior derecha de la hoja del folder (que es la caja posicionada) */
+function NextButton({ label, onClick }: { label: string; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`absolute bottom-[clamp(1.25rem,2.2vw,2rem)] right-[clamp(1.25rem,3vw,3rem)] ${FORM_BUTTON}`}
+    >
+      {label}
+    </button>
+  );
+}
+
 /** Opción tipo "chip" (checkbox o radio nativo, oculto); seleccionada se pinta entera (fondo y borde) con --chip-accent */
 function Choice({ type, name, value, label }: { type: "checkbox" | "radio"; name: string; value: string; label: string }) {
   return (
@@ -102,6 +119,15 @@ export default function ContactForm({ className = "" }: { className?: string }) 
     }
   };
 
+  const goToTab = (index: number) => {
+    setActiveTab(index);
+    requestAnimationFrame(() => {
+      formRef.current
+        ?.querySelector<HTMLElement>(`[data-folder-panel="${index}"] :is(input, textarea, button)`)
+        ?.focus({ preventScroll: true });
+    });
+  };
+
   // Al editar un campo con error, se le quita la marca
   const clearInvalid = (name: string) => {
     if (invalid.includes(name)) setInvalid(invalid.filter((field) => field !== name));
@@ -122,7 +148,7 @@ export default function ContactForm({ className = "" }: { className?: string }) 
             label: t("tabs.contact"),
             className: "bg-brand-darkblue text-white",
             content: (
-              <div className="flex flex-col gap-[clamp(2rem,4vw,3.5rem)] px-[3.5%] py-[clamp(2rem,4vw,3.5rem)] [--field-focus:#6e56d8] [--field-line:var(--color-brand-pink)]">
+              <div className="flex flex-col gap-[clamp(2rem,4vw,3.5rem)] px-[3.5%] pb-[clamp(4.5rem,7vw,6rem)] pt-[clamp(2rem,4vw,3.5rem)] [--field-focus:#6e56d8] [--field-line:var(--color-brand-pink)]">
                 {status === "invalid" && (
                   <p role="alert" className="-mb-[clamp(1rem,2vw,1.75rem)] font-display text-[clamp(0.9rem,1vw,1.05rem)] text-red-600">
                     {statusText}
@@ -131,6 +157,7 @@ export default function ContactForm({ className = "" }: { className?: string }) 
                 <input name="name" required aria-invalid={invalid.includes("name") || undefined} onInput={() => clearInvalid("name")} type="text" placeholder={t("name")} autoComplete="name" className={`${FIELD} max-w-[80%]`} />
                 <input name="email" required aria-invalid={invalid.includes("email") || undefined} onInput={() => clearInvalid("email")} type="email" placeholder={t("email")} autoComplete="email" className={`${FIELD} max-w-[80%]`} />
                 <textarea name="message" required aria-invalid={invalid.includes("message") || undefined} onInput={() => clearInvalid("message")} rows={1} placeholder={t("message")} className={`${FIELD} max-w-[80%] resize-none field-sizing-content`} />
+                <NextButton label={t("next")} onClick={() => goToTab(1)} />
               </div>
             ),
           },
@@ -139,7 +166,7 @@ export default function ContactForm({ className = "" }: { className?: string }) 
             label: t("tabs.project"),
             className: "bg-brand-green text-brand-darkgreen",
             content: (
-              <fieldset className="px-[3.5%] py-[clamp(1.5rem,3vw,2.5rem)] [--chip-accent:var(--color-brand-green)]">
+              <fieldset className="px-[3.5%] pb-[clamp(4.5rem,7vw,6rem)] pt-[clamp(1.5rem,3vw,2.5rem)] [--chip-accent:var(--color-brand-green)]">
                 <legend className="sr-only">{t("project")}</legend>
                 <p className="mb-[clamp(1rem,1.6vw,1.5rem)] font-display text-[clamp(1rem,1.15vw,1.25rem)]">{t("interestedIn")}</p>
                 <div className="flex flex-wrap gap-[clamp(0.6rem,0.9vw,1rem)]">
@@ -147,6 +174,7 @@ export default function ContactForm({ className = "" }: { className?: string }) 
                     <Choice key={value} type="checkbox" name="interests" value={value} label={t(`interests.${value}`)} />
                   ))}
                 </div>
+                <NextButton label={t("next")} onClick={() => goToTab(2)} />
               </fieldset>
             ),
           },
@@ -173,7 +201,7 @@ export default function ContactForm({ className = "" }: { className?: string }) 
                 <button
                   type="submit"
                   disabled={status === "sending"}
-                  className="ml-auto mr-[12%] mt-[clamp(1rem,1.6vw,1.5rem)] cursor-pointer rounded-full border-2 border-brand-pink px-8 py-1.5 font-display text-[clamp(0.95rem,1.05vw,1.15rem)] font-bold shadow-[1px_2px_0_0_var(--color-brand-pink)] transition-colors duration-300 hover:bg-brand-pink/40 disabled:cursor-wait disabled:opacity-50"
+                  className={`ml-auto mr-[12%] mt-[clamp(1rem,1.6vw,1.5rem)] ${FORM_BUTTON}`}
                 >
                   {status === "sending" ? t("status.sending") : t("send")}
                 </button>

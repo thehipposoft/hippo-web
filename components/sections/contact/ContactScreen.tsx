@@ -104,7 +104,7 @@ export default function ContactScreen({ section, intro = true }: ContactScreenPr
         </ul>
 
         {/* Formulario (mobile: 2º) */}
-        <ContactForm className="order-2 w-full md:absolute md:left-[50.3%] md:top-[26.8%] md:w-[39.7%]" />
+        <ContactForm className="order-2 w-full md:absolute md:left-[50.3%] md:top-[17.4%] md:w-[39.7%]" />
       </div>
 
       <SectionMenu section={section} />

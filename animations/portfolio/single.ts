@@ -1,4 +1,5 @@
 import { gsap } from "gsap";
+import { createScrollCueFloat } from "@/animations/scrollCue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 // ScrollTrigger se registra una sola vez, en lib/useGsap.ts
 
@@ -20,7 +21,6 @@ export function createPortfolioSingle(root: HTMLElement): () => void {
   const intro = root.querySelectorAll("[data-single-intro]");
   const title = root.querySelector("[data-single-title]");
   const scrollCue = root.querySelector("[data-single-scroll]");
-  const scrollFloat = root.querySelector("[data-single-scroll-float]");
   const cards = gsap.utils.toArray<HTMLElement>(root.querySelectorAll("[data-single-card]"));
   const mm = gsap.matchMedia();
 
@@ -34,7 +34,7 @@ export function createPortfolioSingle(root: HTMLElement): () => void {
       .timeline({ delay: 0.3 })
       .fromTo(intro, { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.9, ease: "power3.out", stagger: 0.12 })
       .fromTo(scrollCue, { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4");
-    gsap.to(scrollFloat, { y: -8, duration: 1.3, ease: "sine.inOut", repeat: -1, yoyo: true });
+    createScrollCueFloat(scrollCue);
 
     if (!cards.length) return;
 

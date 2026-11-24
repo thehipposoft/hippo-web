@@ -3,9 +3,11 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { createScrollCueFloat } from "@/animations/scrollCue";
 import { createStartIntro } from "@/animations/start/intro";
 import { createStartScroll } from "@/animations/start/scroll";
 import { createTileHover } from "@/animations/start/tileHover";
+import ScrollCue from "@/components/ScrollCue";
 import SectionTiles, { SECTION_TILES_VARS } from "@/components/SectionTiles";
 import { useGsap } from "@/lib/useGsap";
 import { useTileTransition } from "@/lib/useTileTransition";
@@ -41,6 +43,7 @@ export default function Start() {
   useGsap((root) => {
     const intro = createStartIntro(root);
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) intro.progress(1);
+    else createScrollCueFloat(root.querySelector("[data-start-scroll]"));
     const scroll = createStartScroll(root);
     const removeTileHover = createTileHover(root);
     return () => {
@@ -126,6 +129,12 @@ export default function Start() {
               className="absolute inset-0 h-auto w-full opacity-0 brightness-0 invert"
             />
           </div>
+          {/* Cartel "scroll": a la altura del logo, en la esquina inferior derecha de la caja */}
+          <ScrollCue
+            data-start-scroll
+            label={t("scroll")}
+            className="absolute bottom-[calc(var(--start-box)*0.06)] right-[calc(var(--start-box)*0.08)] text-[max(0.75rem,calc(var(--start-box)*0.03))] text-brand-darkblue"
+          />
           <Image
           data-start-mark
           src="/assets/images/hippo-small.svg"

@@ -48,5 +48,13 @@ export function createStartIntro(root: HTMLElement): gsap.core.Timeline {
     // Las líneas bajan de intensidad y quedan como grilla de fondo
     .to("[data-start-line]", { opacity: restOpacity, duration: 0.8, ease: "power1.out" }, ">-0.3");
 
+  // Cartel "scroll": aparece 1s después de que termina toda la entrada
+  tl.fromTo(
+    "[data-start-scroll]",
+    { autoAlpha: 0, y: 12 },
+    { autoAlpha: 1, y: 0, duration: 0.6, ease: "power2.out" },
+    tl.duration() + 1,
+  );
+
   return tl;
 }

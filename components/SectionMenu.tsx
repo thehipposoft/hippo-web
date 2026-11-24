@@ -49,17 +49,21 @@ export default function SectionMenu({ section, atSectionRoot = true }: SectionMe
     };
   }, menuRef);
 
-  const openMenu = () => {
+  // Crea el timeline midiendo el botón en su lugar (antes revierte el anterior, así el botón vuelve a reposo)
+  const buildTimeline = () => {
     const menu = menuRef.current;
     const button = buttonRef.current;
-    if (!menu || !button) return;
+    if (!menu || !button) return null;
+    menuCtxRef.current?.revert();
+    menuCtxRef.current = gsap.context(() => {
+      tlRef.current = createMenuToggle({ menu, button });
+    });
+    return tlRef.current;
+  };
+
+  const openMenu = () => {
     // Se mide de nuevo solo con el menú completamente cerrado (puede haber cambiado el viewport)
-    if (!tlRef.current || tlRef.current.progress() === 0) {
-      menuCtxRef.current?.revert();
-      menuCtxRef.current = gsap.context(() => {
-        tlRef.current = createMenuToggle({ menu, button });
-      });
-    }
+    if (!tlRef.current || tlRef.current.progress() === 0) buildTimeline();
     tlRef.current?.timeScale(1).play();
     getLenis()?.stop(); // la página no se desplaza detrás del menú
     setOpen(true);
@@ -70,6 +74,25 @@ export default function SectionMenu({ section, atSectionRoot = true }: SectionMe
     getLenis()?.start();
     setOpen(false);
   };
+
+  // Con el menú abierto, si cambia el tamaño de la pantalla (ventana, zoom, DevTools, rotación),
+  // el botón tiene que seguir en la celda central: se vuelve a medir y se salta al estado abierto.
+  useEffect(() => {
+    if (!open) return;
+    let timer: ReturnType<typeof setTimeout>;
+    const onResize = () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        if (tlRef.current?.reversed()) return; // cerrándose: el próximo open vuelve a medir
+        buildTimeline()?.progress(1);
+      }, 150);
+    };
+    window.addEventListener("resize", onResize);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [open]);
 
   // Escape cierra el menú
   useEffect(() => {

@@ -122,7 +122,9 @@ export default function Folder({
       </div>
 
       <div
-        className={`relative rounded-md bg-white ${frameClassName} ${panelClassName}`}
+        // grid: la hoja visible se estira al alto del marco (min-h incluido) y es `relative`, así lo
+        // posicionado adentro (p. ej. botones en una esquina) se ubica igual esté animada o no
+        className={`relative grid rounded-md bg-white ${frameClassName} ${panelClassName}`}
       >
         {tabs.map((tab, i) => (
           <div
@@ -132,6 +134,7 @@ export default function Folder({
             aria-labelledby={`${id}-tab-${tab.id}`}
             hidden={i !== active}
             data-folder-panel={i}
+            className="relative"
           >
             {tab.content}
           </div>

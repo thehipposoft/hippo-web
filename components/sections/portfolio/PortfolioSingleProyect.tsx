@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { createPortfolioSingle } from "@/animations/portfolio/single";
+import ScrollCue from "@/components/ScrollCue";
 import type { PortfolioSingleProject } from "@/lib/portfolioProjects";
 import { useGsap } from "@/lib/useGsap";
 import { PORTFOLIO_DATA } from "./constants";
@@ -88,31 +89,11 @@ export default function PortfolioSingleProyect({
       </div>
 
       {/* Cartel "scroll": flotando (mobile abajo al centro; desktop en la franja, a la derecha) */}
-      <div
+      <ScrollCue
         data-single-scroll
-        aria-hidden
-        className="invisible absolute bottom-[12%] left-1/2 -translate-x-1/2 md:bottom-auto md:left-auto md:right-[4%] md:top-1/2 md:translate-x-0 md:-translate-y-1/2"
-      >
-        <span
-          data-single-scroll-float
-          className="flex flex-col items-center gap-1 font-display text-[clamp(1rem,1.3vw,1.4rem)] font-bold"
-        >
-          {t("single.scroll")}
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            className="h-[0.7em] w-auto"
-          >
-            <path
-              d="M4 8l8 8 8-8"
-              stroke="currentColor"
-              strokeWidth={1.5}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </span>
-      </div>
+        label={t("single.scroll")}
+        className="absolute bottom-[12%] left-1/2 -translate-x-1/2 text-[clamp(1rem,1.3vw,1.4rem)] md:bottom-auto md:left-auto md:right-[4%] md:top-1/2 md:translate-x-0 md:-translate-y-1/2"
+      />
 
       {/* Capas: cards apiladas (el orden del DOM apila cada una sobre la anterior) */}
       <ol aria-label={t("single.label")}>

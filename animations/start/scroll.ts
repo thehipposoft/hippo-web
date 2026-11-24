@@ -39,6 +39,8 @@ export function createStartScroll(root: HTMLElement): gsap.core.Timeline {
   // ── Paso 2 ──────────────────────────────────────────────────────
   tl
     .fromTo(root, { "--start-scale": 1 }, { "--start-scale": endScale, duration: 1, ease: "power2.inOut" }, 0)
+    // El cartel "scroll" se va apenas empieza el scroll
+    .to("[data-start-scroll]", { autoAlpha: 0, duration: 0.2 }, 0)
     .fromTo("[data-start-fill]", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 0.3)
     .fromTo("[data-start-logo-inverse]", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 0.3)
     .to("[data-start-copy]", { color: inkFilled, autoAlpha: 0, duration: 0.3 }, 0.3)

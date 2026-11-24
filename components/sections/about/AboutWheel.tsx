@@ -11,8 +11,8 @@ import { useTranslations } from "next-intl";
 // Año activo al cargar (2026)
 const INITIAL = 4;
 
-// Años de la rueda. Con `hasContent` el año tiene título y texto en About.wheel.years.<year>
-// (por ahora 2023 no). TODO: ilustración dentro del recuadro activo de cada año
+// Años de la rueda. Con `hasContent` el año tiene título y texto en About.wheel.years.<year>.
+// TODO: ilustración dentro del recuadro activo de cada año
 const YEARS: {
   year: "2021" | "2022" | "2023" | "2024" | "2026";
   color: string;
@@ -21,7 +21,7 @@ const YEARS: {
 }[] = [
   { year: "2021", color: "bg-brand-blue", hasContent: true },
   { year: "2022", color: "bg-brand-pink", hasContent: true },
-  { year: "2023", color: "bg-brand-orange" },
+  { year: "2023", color: "bg-brand-orange", hasContent: true },
   { year: "2024", color: "bg-brand-green", hasContent: true },
   {
     year: "2026",
@@ -114,12 +114,12 @@ export default function AboutWheel() {
         {YEARS.map((item) => (
           <div key={item.year} data-wheel-content aria-live="polite" className="col-start-1 row-start-1">
             <p className="font-display text-[2.25rem] font-bold leading-none md:text-[clamp(1.5rem,2.3vw,2.6rem)]">{item.year}</p>
-            {item.hasContent && item.year !== "2023" && (
+            {item.hasContent && (
               <h3 className="mt-2 font-display text-[1.1rem] font-bold uppercase leading-tight md:text-[clamp(0.9rem,1.1vw,1.2rem)]">
                 {t(`years.${item.year}.title`)}
               </h3>
             )}
-            {item.hasContent && item.year !== "2023" && (
+            {item.hasContent && (
               <p className="mt-3 text-[0.95rem] leading-relaxed md:mt-1.5 md:text-[clamp(0.75rem,0.8vw,0.9rem)] md:leading-snug">
                 {t.rich(`years.${item.year}.text`, { strong: (chunks) => <strong>{chunks}</strong> })}
               </p>

@@ -25,7 +25,7 @@ const countryOf = (flag: string) => flag.match(/flag-([a-z]+)\./)?.[1] as Countr
 
 /**
  * Imagen de la card con recorte "blob" (lib/useBlobClip.ts): solo la capa visual (imagen + overlay)
- * va recortada; el logo y el "+" quedan afuera para que el borde no los corte.
+ * va recortada; el logo queda afuera para que el borde no los corte.
  * La capa se agranda 6% por lado (-inset-[6%], ver OVERFLOW en animations/blob.ts): en reposo el
  * recorte coincide con la card y tiene margen para estirarse hacia el cursor.
  */
@@ -54,20 +54,12 @@ function PortfolioCardLink({ data, seed, single }: { data: PortfolioItem; seed: 
           sizes="(max-width: 768px) 90vw, (max-width: 1024px) 45vw, 28vw"
           className={`object-cover ${"objectPosition" in data ? data.objectPosition : ""}`}
         />
-        <span className="absolute inset-0 z-10 flex items-center justify-center bg-black/40 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100">
+        <span className="absolute inset-0 z-10 flex items-center justify-center bg-black/60 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100">
           <span className="px-8 py-3 text-2xl font-medium uppercase tracking-[0.2em] text-white">{t("discover")}</span>
         </span>
       </div>
 
       {"logo_content" in data && <span className="absolute bottom-4 left-4">{data.logo_content}</span>}
-      <svg
-        aria-hidden
-        viewBox="0 0 40 40"
-        fill="none"
-        className="absolute bottom-4 right-4 z-10 hidden size-11 text-black transition duration-500 group-hover:rotate-180 group-hover:scale-110 group-hover:text-white lg:block"
-      >
-        <path d="M1.25 20H38.75M20 1.25V38.75" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="3 3" />
-      </svg>
     </>
   );
 

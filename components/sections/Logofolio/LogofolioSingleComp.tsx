@@ -31,23 +31,23 @@ const LogofolioSingleComp = ({ data }: { data: LogofolioSingleData }) => {
         <div className='flex flex-col lg:h-screen text-black lg:gap-12 relative bg-white z-20'>
             <div className='flex justify-between pt-20 lg:pt-12 2xl:pt-16 lg:w-[1300px] w-[85vw] mx-auto'>
                 {
-                    data.category && <h2 className='lg:text-[54px] w-3/4 text-4xl'>{data.name}</h2>
+                    data.category && <h2 className='w-3/4 font-display text-4xl font-bold lg:text-[54px]'>{data.name}</h2>
                 }
                 {
-                    data.isOld && <h2 className='lg:text-[54px] w-3/4 text-4xl'>{data.name}</h2>
+                    data.isOld && <h2 className='w-3/4 font-display text-4xl font-bold lg:text-[54px]'>{data.name}</h2>
                 }
                 {
                     data.isOld &&
                             <div className='flex items-center gap-8'>
-                                <h4 className='text-base hidden md:block'>
-                    <LocaleLink href={`/${LOGOFOLIO_SECTION}#${LOGOFOLIO_ANCHOR}`} className='hover:underline'>{t('label')}</LocaleLink>
+                                <h4 className='hidden font-display text-base font-medium md:block'>
+                    <LocaleLink href={`/${LOGOFOLIO_SECTION}#${LOGOFOLIO_ANCHOR}`} className='hover:underline'>{t('back')}</LocaleLink>
                 </h4>
                             </div>
                 }
                 {
                     data.category &&
                     <div className='flex items-center gap-4'>
-                        <p className='hidden md:block'>{t('socialMedia')}</p>
+                        <p className='hidden font-display font-medium md:block'>{t('socialMedia')}</p>
                     </div>
                 }
             </div>
@@ -62,17 +62,17 @@ const LogofolioSingleComp = ({ data }: { data: LogofolioSingleData }) => {
                         <p>{data.description?.[2]}</p>
                     </div>
                     <div>
-                        <div className='font-black md:w-[460px] text-sm pt-6'>
+                        <div className='pt-6 text-sm md:w-[460px]'>
                             {
                                 data.client ?
                                 <div>
                                     <p>{t('client')}</p>
                                     <p>{data.client}</p>
-                                    <p>{t.rich('instagram', { link: (chunks) => <Link href={data.instagram ?? ''} target='_blank' rel='noreferrer' className='underline bold'>{chunks}</Link> })}</p>
+                                    <p>{t.rich('instagram', { link: (chunks) => <Link href={data.instagram ?? ''} target='_blank' rel='noreferrer' className='underline font-bold'>{chunks}</Link> })}</p>
                                 </div>
                                 :
                                 <div>
-                                    <h4>{t('concept')}</h4>
+                                    <h4 className='mb-1 font-display font-bold'>{t('concept')}</h4>
                                     {
                                         data.concept && data.concept.length > 1 ?
                                         <div>
@@ -94,10 +94,10 @@ const LogofolioSingleComp = ({ data }: { data: LogofolioSingleData }) => {
                 </div>
                 <div className='flex lg:flex-col flex-col-reverse gap-6 justify-between lg:h-[350px] mt-8 md:mb-8 lg:my-0'>
                     <div className='uppercase text-[15px] flex flex-col lg:items-end md:gap-1 gap-4'>
-                        <h3 className='light uppercase'>{data.name}</h3>
-                        <h3 className='light uppercase'>{data.country}</h3>
-                        <h3 className='light uppercase'>{data.date}</h3>
-                        <Link href={data.href ?? ''} target='_blank' rel='noreferrer' className={`${data.href === '' ? 'hidden' : ''} relative z-10 mt-2 overflow-hidden duration-500 px-4 tracking-[0.2em] text-xs py-2 border-cyan border-2 text-black w-fit rounded-3xl hover:bg-cyan hover:scale-x-105 uppercase`}>
+                        <h3 className='font-display font-light uppercase'>{data.name}</h3>
+                        <h3 className='font-display font-light uppercase'>{data.country}</h3>
+                        <h3 className='font-display font-light uppercase'>{data.date}</h3>
+                        <Link href={data.href ?? ''} target='_blank' rel='noreferrer' className={`${data.href === '' ? 'hidden' : ''} relative z-10 mt-2 overflow-hidden duration-500 px-4 font-display text-xs font-bold py-2 border-brand-blue border-2 text-black w-fit rounded-3xl hover:bg-brand-blue hover:scale-x-105 uppercase`}>
                                {t('discover')}
                         </Link>
                         {

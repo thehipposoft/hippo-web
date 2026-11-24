@@ -116,11 +116,13 @@ export default function HippoLabScreen({ section, intro = true }: HippoLabScreen
 
         {/* Centrado en el espacio entre el badge y la línea de abajo: si el texto se parte en más
             renglones (otro idioma, pantallas angostas) sigue dentro de la pantalla */}
+        {/* Desktop: siempre dos renglones (nowrap); el tope de 4.8vw hace entrar la línea más larga
+            ("Algunas ideas necesitan un plan.", ~15.7em) en el ancho del contenedor (82.5vw) */}
         {/* Mobile: más ancho y más alto (líneas pegadas a los bordes), con el padding de las demás secciones */}
         <div className="absolute bottom-[8%] left-[calc(5.5%_+_1.25rem)] right-[calc(5.5%_+_1.25rem)] top-[32%] flex items-center md:bottom-[19%] md:left-[7.5%] md:right-[10%] md:top-[35%]">
           <h1
             data-lab-statement
-            className={`${intro ? "invisible" : ""} font-display text-[11vw] font-bold leading-[1.25] md:text-statement`}
+            className={`${intro ? "invisible" : ""} font-display text-[11vw] font-bold leading-[1.25] md:whitespace-nowrap md:text-[length:min(var(--text-statement),4.8vw)]`}
           >
             <span className="block">{t.rich("line1", rich)}</span>
             <span className="block">{t.rich("line2", rich)}</span>
